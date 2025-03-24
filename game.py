@@ -46,7 +46,7 @@ def make_character():  # REDO DIALOGUE
     :postcondition: return a dictionary with keys: "Name", "Stamina", "Fishing Power", "X-coordinate", "Y-coordinate"
     :return: a dictionary containing character information
     """
-    character_profile = {"X-coordinate": 0, "Y-coordinate": 0}
+    character_profile = {"X-coordinate": 0, "Y-coordinate": 0, "Level": 1, "Character": "Beginner Fisher"}
 
     user_name = input("Enter your name: ")
     character_profile["Name"] = user_name
@@ -73,8 +73,29 @@ def make_character():  # REDO DIALOGUE
     return character_profile
 
 
+def make_fish_collection():
+    """
+    Creates a dictionary of the fish you can catch in each area.
+
+    :return:
+    """
+    fish_collection_area_one = {"1. fish": "fish desc", "2. fish": "fish desc", "3. fish": "fish desc"}
+    fish_collection_area_two = {"4. fish": "fish desc", "5. fish": "fish desc", "6. fish": "fish desc"}
+    fish_collection_area_three = {"7. fish7": "fish desc", "8. fish": "fish desc", "9. fish": "fish desc",
+                                  "10. fish": "fish desc"}
+
+    return fish_collection_area_one, fish_collection_area_two, fish_collection_area_three
 
 
+def make_player_fish_collection():
+    """
+    Create a dictionary representing the fish the player has caught.
+
+    :return:
+    """
+    fish_collection = {"1. ???": "???", "2. ???": "???", "3. ???": "???", "4. ???": "???", "5. ???": "???",
+                       "6. ???": "???", "7. ???": "???", "8. ???": "???", "9. ???": "???", "10. ???": "???", }
+    return fish_collection
 
 def game():
     """
