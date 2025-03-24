@@ -39,6 +39,43 @@ def make_board(rows, columns, level=1):
     return coordinates
 
 
+def make_character():  # REDO DIALOGUE
+    """
+    Return a dictionary containing a character's starting coordinates and HP.
+
+    :postcondition: return a dictionary with keys: "Name", "Stamina", "Fishing Power", "X-coordinate", "Y-coordinate"
+    :return: a dictionary containing character information
+    """
+    character_profile = {"X-coordinate": 0, "Y-coordinate": 0}
+
+    user_name = input("Enter your name: ")
+    character_profile["Name"] = user_name
+
+    print("Which rod would you like to start with: ")
+    user_rod = False
+    while user_rod is False:
+        user_rod = input("1. Stamina Rod\n2. Power Rod\n")
+        if user_rod == "1":
+            user_rod = 1
+        elif user_rod == "2":
+            user_rod = 2
+        elif user_rod != "1" or user_rod != "2":
+            print("Please enter 1 or 2 to select your fishing rod")
+            user_rod = False
+
+    if user_rod == 1:
+        character_profile["Stamina"] = 6
+        character_profile["Fishing Power"] = 4
+    if user_rod == 2:
+        character_profile["Stamina"] = 4
+        character_profile["Fishing Power"] = 6
+
+    return character_profile
+
+
+
+
+
 def game():
     """
     Drive the game.
