@@ -3,6 +3,7 @@ Module info
 """
 
 import random
+import time
 from table2ascii import table2ascii, PresetStyle
 
 
@@ -41,7 +42,12 @@ def make_board(rows, columns, level=1):
     return coordinates
 
 
-def make_character():  # REDO DIALOGUE
+def intro_scene():
+    print("You wake up, excited. Today is the day you will begin your journey.")
+    name = input("Enter your name: ")
+    print("something about going to the fishing ")
+
+def make_character(name, rod):  # REDO DIALOGUE
     """
     Return a dictionary containing a character's starting coordinates and HP.
 
@@ -50,7 +56,7 @@ def make_character():  # REDO DIALOGUE
     """
     character_profile = {"X-coordinate": 0, "Y-coordinate": 0, "Level": 1, "Character": "Beginner Fisher"}
 
-    user_name = input("Enter your name: ")
+    user_name = name
     character_profile["Name"] = user_name
 
     print("Which rod would you like to start with: ")
@@ -159,6 +165,39 @@ def describe_current_location(board, character):
     print(message)
 
 
+def fishing_game(character):
+    """
+    """
+    wait_time = random.randint(1, 3)
+    # The amount of times you have to do it is determined by fishing power
+    # The higher your fishing power, the fewer times you have to reel
+    fish_reel = random.randint(1, 3)
+    hooked_wait_time = random.randint(0, 3)
+    win_count = 0
+    wait_message = "..."
+    print("You cast your rod.")
+
+    for _ in range(wait_time):
+        time.sleep(1)
+        print(wait_message)
+    time.sleep(1)
+    print()
+    print("Something hooks! Press 1 within 3 seconds when prompted!")
+    for _ in range(fish_reel):
+        start_time = time.time()
+        input("><(((º> Press 1!\n")
+        if time.time() - start_time > 3.0:
+            print("You were too slow. The fish gets away...")
+            print("Disheartened, your stamina decreases by 1")
+            break
+        else:
+            time.sleep(hooked_wait_time)
+            win_count += 1
+            continue
+    if win_count == fish_reel:
+        print("You caught the fish!")
+
+
 def game():
     """
     Drive the game.
@@ -179,7 +218,7 @@ def game():
             ascii_board(board, character)
             there_is_a_challenger = check_for_foes(board, character)
             if there_is_a_challenger:
-                guessing_game(character)
+                fishing_game(character)
             achieved_goal = check_if_goal_attained(board, character)
         else:
             print(rgb(255, 175, 175) + "You can't move there! Pick another direction." + constants.RESET)
