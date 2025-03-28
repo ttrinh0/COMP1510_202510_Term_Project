@@ -165,30 +165,30 @@ def describe_current_location(board, character):
     print(message)
 
 
-def fishing_game(character):
+def fishing_game():  # Have to add character stats
     """
     """
     wait_time = random.randint(1, 3)
+    fish_reel = random.randint(2, 4)
     # The amount of times you have to do it is determined by fishing power
     # The higher your fishing power, the fewer times you have to reel
-    fish_reel = random.randint(1, 3)
     hooked_wait_time = random.randint(0, 3)
     win_count = 0
-    wait_message = "..."
     print("You cast your rod.")
 
     for _ in range(wait_time):
         time.sleep(1)
-        print(wait_message)
+        print("...")
     time.sleep(1)
     print()
-    print("Something hooks! Press 1 within 3 seconds when prompted!")
+    print("Something hooks! Input the specified key within 3 seconds when prompted!")
     for _ in range(fish_reel):
+        key = random.randint(1, 2)
         start_time = time.time()
-        input("><(((º> Press 1!\n")
-        if time.time() - start_time > 3.0:
-            print("You were too slow. The fish gets away...")
-            print("Disheartened, your stamina decreases by 1")
+        user_input = input(f"><(((º> Press {key}!\n")
+        if time.time() - start_time > 3.0 or user_input != str(key):
+            print("The fish breaks free and gets away...")
+            print("Your stamina decreases by 1")
             break
         else:
             time.sleep(hooked_wait_time)
