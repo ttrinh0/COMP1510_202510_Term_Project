@@ -46,35 +46,33 @@ def intro_scene():
     print("You wake up, excited. Today is the day you will begin your journey.")
     name = input("Enter your name: ")
     print("something about going to the fishing ")
+    print("Which rod would you like to start with: ")
+    user_rod = False
+    while user_rod is False:
+        user_rod = input("1. Stamina Rod\n2. Power Rod\n")
+        if user_rod == "1":
+            user_rod = "Stamina Rod"
+        elif user_rod == "2":
+            user_rod = "Power Rod"
+        elif user_rod != "1" or user_rod != "2":
+            print("Please enter 1 or 2 to select your fishing rod")
+            user_rod = False
+    return name, user_rod
 
-def make_character(name, rod):  # REDO DIALOGUE
+
+def make_character(name, user_rod):  # REDO DIALOGUE
     """
     Return a dictionary containing a character's starting coordinates and HP.
 
     :postcondition: return a dictionary with keys: "Name", "Stamina", "Fishing Power", "X-coordinate", "Y-coordinate"
     :return: a dictionary containing character information
     """
-    character_profile = {"X-coordinate": 0, "Y-coordinate": 0, "Level": 1, "Character": "Beginner Fisher"}
+    character_profile = {"X-coordinate": 0, "Y-coordinate": 0, "Level": 1, "Character": "Beginner Fisher", "Name": name}
 
-    user_name = name
-    character_profile["Name"] = user_name
-
-    print("Which rod would you like to start with: ")
-    user_rod = False
-    while user_rod is False:
-        user_rod = input("1. Stamina Rod\n2. Power Rod\n")
-        if user_rod == "1":
-            user_rod = 1
-        elif user_rod == "2":
-            user_rod = 2
-        elif user_rod != "1" or user_rod != "2":
-            print("Please enter 1 or 2 to select your fishing rod")
-            user_rod = False
-
-    if user_rod == 1:
+    if user_rod == "Stamina Rod":
         character_profile["Stamina"] = 6
         character_profile["Fishing Power"] = 4
-    if user_rod == 2:
+    if user_rod == "Power Rod":
         character_profile["Stamina"] = 4
         character_profile["Fishing Power"] = 6
 
@@ -170,7 +168,7 @@ def fishing_game():  # Have to add character stats
     """
     wait_time = random.randint(1, 3)
     fish_reel = random.randint(2, 4)
-    # The amount of times you have to do it is determined by fishing power
+    # The amount of times you have to do it is determined by the level base - fishing power
     # The higher your fishing power, the fewer times you have to reel
     hooked_wait_time = random.randint(0, 3)
     win_count = 0
@@ -183,9 +181,11 @@ def fishing_game():  # Have to add character stats
     print()
     print("Something hooks! Input the specified key within 3 seconds when prompted!")
     for _ in range(fish_reel):
+        # The keys you need to press will be from 1 to your level + 1
         key = random.randint(1, 2)
         start_time = time.time()
         user_input = input(f"><(((º> Press {key}!\n")
+        # the time you have to press the key will decrease depending on your level
         if time.time() - start_time > 3.0 or user_input != str(key):
             print("The fish breaks free and gets away...")
             print("Your stamina decreases by 1")
@@ -202,10 +202,11 @@ def game():
     """
     Drive the game.
     """
+    name, user_rod = intro_scene()
     rows = 5
     columns = 5
     board = make_board(rows, columns)
-    character = make_character()
+    character = make_character(name, user_rod)
     achieved_goal = False
     describe_current_location(board, character)
     ascii_board(board, character)
