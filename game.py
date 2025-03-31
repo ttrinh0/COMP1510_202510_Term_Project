@@ -5,6 +5,7 @@ Module info
 import random
 import time
 from table2ascii import table2ascii, PresetStyle
+from color50 import rgb, constants
 
 
 def make_board(rows, columns, level=1):
@@ -43,6 +44,10 @@ def make_board(rows, columns, level=1):
 
 
 def intro_scene():
+    """
+
+
+    """
     print("You wake up, excited. Today is the day you will begin your journey.")
     name = input("Enter your name: ")
     print("something about going to the fishing ")
@@ -163,6 +168,159 @@ def describe_current_location(board, character):
     print(message)
 
 
+def get_user_choice():
+    """
+    Ask the user which direction they would like to move and return the corresponding direction.
+
+    :postcondition: return a string representing the direction the user's input corresponds to
+    :return direction: a string representing the direction the user's input corresponds to
+    """
+    direction = False
+    while direction is False:
+        print("Which direction would you like to move? \nW - North\nA - West\nS - South\nD - East")
+        user_input = input(rgb(0, 255, 255) + "Type your command here: " + constants.RESET)
+        if user_input.strip().lower() == "w":
+            direction = "North"
+        elif user_input.strip().lower() == "a":
+            direction = "West"
+        elif user_input.strip().lower() == "s":
+            direction = "South"
+        elif user_input.strip().lower() == "d":
+            direction = "East"
+        else:
+            direction = False
+    return direction
+
+
+def validate_move(board, character, direction):
+    """
+    Check the direction to see if it is a valid move.
+
+    :param board: a dictionary containing the game board coordinates
+    :param character: a dictionary containing the character information
+    :param direction: a string containing the direction the user wants to move
+    :precondition: board must be a dictionary
+    :precondition: board must contain keys containing the game board coordinates
+    :precondition: character must be a dictionary
+    :precondition: character must contain keys-value pairs of the coordinates
+    :precondition: direction must be a string with a value of either "East", "West", "South", "North"
+    :postcondition: return True if the direction is valid, else return False
+    :return True: a Boolean with the value of True if the direction is valid
+    :return False: a Boolean with the value of False if the direction is valid
+
+    >>> board_test = make_board(3, 3)
+    >>> character_test = {"X-coordinate": 0, "Y-coordinate": 0, "Current HP": 5}
+    >>> direction_test = "South"
+    >>> validate_move(board_test, character_test, direction_test)
+    True
+
+    >>> board_test = make_board(3, 3)
+    >>> character_test = {"X-coordinate": 0, "Y-coordinate": 0, "Current HP": 5}
+    >>> direction_test = "West"
+    >>> validate_move(board_test, character_test, direction_test)
+    False
+    """
+    character_position = (character["X-coordinate"], character["Y-coordinate"])
+    if character_position[0] < max(board)[0] and direction == "East":
+        return True
+    elif character_position[0] > min(board)[0] and direction == "West":
+        return True
+    elif character_position[1] < max(board)[1] and direction == "South":
+        return True
+    elif character_position[1] > min(board)[1] and direction == "North":
+        return True
+    else:
+        return False
+
+def move_character(character, direction):
+    """
+    Change the character's coordinates depending on direction value.
+
+    :param character: a dictionary containing the character information
+    :param direction: a string containing the direction the user wants to move
+    :precondition: character must be a dictionary
+    :precondition: character must contain keys-value pairs of the coordinates
+    :precondition: direction must be a string with a value of either "East", "West", "South", "North"
+    :postcondition: changes the user coordinates depending on direction
+
+    >>> character_test = {"X-coordinate": 0, "Y-coordinate": 0, "Current HP": 5}
+    >>> direction_test = "South"
+    >>> move_character(character_test, direction_test)
+    >>> print(character_test)
+    {'X-coordinate': 0, 'Y-coordinate': 1, 'Current HP': 5}
+
+    >>> character_test = {"X-coordinate": 1, "Y-coordinate": 1, "Current HP": 5}
+    >>> direction_test = "North"
+    >>> move_character(character_test, direction_test)
+    >>> print(character_test)
+    {'X-coordinate': 1, 'Y-coordinate': 0, 'Current HP': 5}
+    """
+    if direction == "North":
+        character["Y-coordinate"] -= 1
+    elif direction == "South":
+        character["Y-coordinate"] += 1
+    elif direction == "East":
+        character["X-coordinate"] += 1
+    elif direction == "West":
+        character["X-coordinate"] -= 1
+
+
+def check_if_goal_attained(board, character):
+    """
+    Check to see if the goal is attained.
+
+    The goal is attained when the character is at the end goal location and their HP is above zero.
+
+    :param board: a dictionary containing the game board coordinates
+    :param character: a dictionary containing the character information
+    :precondition: board must be a dictionary
+    :precondition: board must contain keys containing the game board coordinates
+    :precondition: character must be a dictionary
+    :precondition: character must contain keys-value pairs of the coordinates and the current HP
+    :postcondition: return True if the goal is attained, else return False
+    :return True: a Boolean with the value of True if the goal is attained
+    :return False: a Boolean with the value of False if the direction is valid
+
+    >>> board_test = make_board(3, 3)
+    >>> character_test = {"X-coordinate": 1, "Y-coordinate": 1, "Current HP": 5}
+    >>> check_if_goal_attained(board_test, character_test)
+    False
+
+    >>> board_test = make_board(3, 3)
+    >>> character_test = {"X-coordinate": 2, "Y-coordinate": 2, "Current HP": 5}
+    >>> check_if_goal_attained(board_test, character_test)
+    True
+    """
+    if (character["X-coordinate"], character["Y-coordinate"]) == max(board) and character["Current HP"] > 0:
+        return True
+    else:
+        return False
+
+
+def check_for_foes(board, character):
+    """
+    Check to see if an enemy is on a space.
+
+    :param board: a dictionary containing the game board coordinates
+    :param character: a dictionary containing the character information
+    :precondition: board must be a dictionary
+    :precondition: board must contain keys containing the game board coordinates
+    :precondition: character must be a dictionary
+    :precondition: character must contain keys-value pairs of the coordinates
+    :postcondition: return True if there is an enemy encounter, else return False
+    :return True: a Boolean with the value of True if there is an enemy encounter
+    :return False: a Boolean with the value of False if there is not an enemy encounter
+    """
+    enemy_encounter = random.randint(1, 4)
+    if (character['X-coordinate'], character['Y-coordinate']) != max(board):
+        if enemy_encounter == 1:
+            return True
+        else:
+            return False
+
+
+
+
 def fishing_game():  # Have to add character stats
     """
     """
@@ -196,6 +354,30 @@ def fishing_game():  # Have to add character stats
             continue
     if win_count == fish_reel:
         print("You caught the fish!")
+
+
+def is_alive(character):
+    """
+    Return a Boolean signifying whether the character's HP is greater than zero.
+
+    :param character: a dictionary containing the character information
+    :precondition: character contains a key called "Current HP" with an integer value of zero or greater
+    :postcondition: returns True if the character's current HP is greater than 0, else returns False
+    :return True: a Boolean with the value of True if the character's "Current HP" is greater than 0
+    :return False: a Boolean with the value of False if the character's "Current HP" is 0
+
+    >>> character_test = {"X-coordinate": 0, "Y-coordinate": 0, "Current HP": 5}
+    >>> is_alive(character_test)
+    True
+
+    >>> character_test = {"X-coordinate": 0, "Y-coordinate": 0, "Current HP": 0}
+    >>> is_alive(character_test)
+    False
+    """
+    if character["Stamina"] > 0:
+        return True
+    else:
+        return False
 
 
 def game():
