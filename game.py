@@ -130,8 +130,8 @@ def ascii_board(board, character):
     for number in range(rows):
         board_rows.append(board_spaces.copy())
         for element in range(columns):
-            board_rows[number].append(" ")
-    board_rows[character_position_y][character_position_x] = "x"
+            board_rows[number].append("  ")
+    board_rows[character_position_y][character_position_x] = "⛵"
 
     output = table2ascii(
         body=board_rows,
