@@ -175,21 +175,34 @@ def get_user_choice():
     :postcondition: return a string representing the direction the user's input corresponds to
     :return direction: a string representing the direction the user's input corresponds to
     """
-    direction = False
-    while direction is False:
-        print("Which direction would you like to move? \nW - North\nA - West\nS - South\nD - East")
+    choice = False
+    while choice is False:
+        print("Enter a Command!\n"
+              "Movement\t\tAction:\t\t\tCharacter:\n"
+              "W - North\t\t1 - Fish\t\t3 - Character Profile\n"
+              "A - West\t\t2 - Interact\t4 - Fish Collection\n"
+              "S - South\n"
+              "D - East")
         user_input = input(rgb(0, 255, 255) + "Type your command here: " + constants.RESET)
         if user_input.strip().lower() == "w":
-            direction = "North"
+            choice = "North"
         elif user_input.strip().lower() == "a":
-            direction = "West"
+            choice = "West"
         elif user_input.strip().lower() == "s":
-            direction = "South"
+            choice = "South"
         elif user_input.strip().lower() == "d":
-            direction = "East"
+            choice = "East"
+        elif user_input.strip() == "1":
+            choice = "Fish"
+        elif user_input.strip() == "2":
+            choice = "Interact"
+        elif user_input.strip() == "3":
+            choice = "Profile"
+        elif user_input.strip() == "4":
+            choice = "Collection"
         else:
-            direction = False
-    return direction
+            choice = False
+    return choice
 
 
 def validate_move(board, character, direction):
@@ -231,6 +244,7 @@ def validate_move(board, character, direction):
         return True
     else:
         return False
+
 
 def move_character(character, direction):
     """
@@ -317,8 +331,6 @@ def check_for_foes(board, character):
             return True
         else:
             return False
-
-
 
 
 def fishing_game():  # Have to add character stats
