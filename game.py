@@ -311,15 +311,16 @@ def check_for_fish():
     :return True: a Boolean with the value of True if there is an enemy encounter
     :return False: a Boolean with the value of False if there is not an enemy encounter
     """
-    enemy_encounter = random.randint(1, 4)
-    if enemy_encounter != 1:
+    enemy_encounter = random.randint(1, 2)
+    if enemy_encounter == 1:
         return True
     else:
         print("Seems like nothing's biting.")
+        time.sleep(0.2)
         return False
 
 
-def fishing_game():  # Have to add character stats
+def fishing_game(character):  # Have to add character stats
     """
     """
     wait_time = random.randint(1, 3)
@@ -329,29 +330,32 @@ def fishing_game():  # Have to add character stats
     hooked_wait_time = random.randint(0, 3)
     win_count = 0
     print("You cast your rod.")
+    print("Input the specified key within 3 seconds when prompted!")
 
     for _ in range(wait_time):
         time.sleep(1)
         print("...")
     time.sleep(1)
     print()
-    print("Something hooks! Input the specified key within 3 seconds when prompted!")
+    print("Something hooks!")
     for _ in range(fish_reel):
         # The keys you need to press will be from 1 to your level + 1
         key = random.randint(1, 2)
         start_time = time.time()
-        user_input = input(f"><(((º> Press {key}!\n")
+        user_input = input(f"><(((º> Input {key}!")
         # the time you have to press the key will decrease depending on your level
-        if time.time() - start_time > 3.0 or user_input != str(key):
-            print("The fish breaks free and gets away...")
+        if time.time() - start_time > 3.0 and user_input != key:
+            character["Stamina"] -= 1
+            print("\nThe fish breaks free and gets away...")
             print("Your stamina decreases by 1")
             break
         else:
+            print("\tHIT!")
             time.sleep(hooked_wait_time)
             win_count += 1
             continue
     if win_count == fish_reel:
-        print("You caught the fish!")
+        character["Fish Caught"] += 1
 
 
 def is_alive(character):
@@ -389,8 +393,8 @@ def game():
     character = make_character(name, user_rod)
     achieved_goal = False
     describe_current_location(board, character)
-    ascii_board(board, character)
     while is_alive(character) and not achieved_goal:
+        ascii_board(board, character)
         choice = get_user_choice()
         action = process_choice(choice)
         if action == "Movement":
@@ -398,14 +402,9 @@ def game():
             if valid_move:
                 move_character(character, choice)
                 describe_current_location(board, character)
-                ascii_board(board, character)
                 achieved_goal = check_if_goal_attained(character)
             else:
                 print(rgb(255, 175, 175) + "You can't move there! Pick another direction." + constants.RESET)
-        elif action == "Fish":
-            there_is_a_fish = check_for_fish()
-            if there_is_a_fish:
-                fishing_game(character)
         elif action == "Interact":
             pass
         # Create function to check if there's something on the map
@@ -414,6 +413,14 @@ def game():
             just_print.print_player_info(character)
         elif action == "Collection":
             just_print.print_fish_collection(character)
+        elif action == "Fish":
+            there_is_a_fish = check_for_fish()
+            if there_is_a_fish:
+                fishing_game(character)
+                print("\nYou caught the fish!\n")
+                just_print.print_fish_collection(character)
+                print()
+                time.sleep(0.5)
     if achieved_goal:
         print(rgb(255, 255, 0) + "You made it to the end! Congratulations!" + constants.RESET)
     else:
