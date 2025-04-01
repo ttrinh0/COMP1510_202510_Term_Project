@@ -65,12 +65,13 @@ def check_for_fish():
     :return True: a Boolean with the value of True if there is an enemy encounter
     :return False: a Boolean with the value of False if there is not an enemy encounter
     """
-    enemy_encounter = random.randint(1, 2)
-    if enemy_encounter == 1:
+    enemy_encounter = random.randint(1, 3)
+    if enemy_encounter != 1:
         return True
     else:
-        print("Seems like nothing's biting.")
+        print("Nothing's biting.")
         return False
+
 
 def check_fish_type(character, complete_fish_collection):
     """
@@ -82,6 +83,20 @@ def check_fish_type(character, complete_fish_collection):
     fish_pool = list(complete_fish_collection[level - 1].items())
     fish = random.choice(fish_pool)
     return fish
+
+
+def check_fish_in_collection(character, fish):
+    """
+    Check to see if fish caught is in the player's fish collection.
+
+    :return:
+    """
+    fish_number = fish[0]
+    character_collection = character["Fish Collection"][fish_number]
+    if character_collection == fish[1]:
+        return False
+    else:
+        return True
 
 
 def check_if_goal_attained(character):

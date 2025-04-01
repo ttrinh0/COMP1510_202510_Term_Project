@@ -116,6 +116,19 @@ def fishing_game(character, fish):  # Have to add character stats
         character["Fish Caught"] += 1
 
 
+def add_fish_to_collection(character, fish):
+    """
+    Add fish into player collection.
+
+    :param character:
+    :param fish:
+    :return:
+    """
+    fish_number = fish[0]
+    player_collection = character["Fish Collection"]
+    player_collection[fish_number] = fish[1]
+
+
 def game():
     """
     Drive the game.
