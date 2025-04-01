@@ -68,11 +68,11 @@ def print_fish_collection(character):
     Print the player's fish collection.
     :param character:
     """
-    fish_list = sorted(character["Fish Collection"].values())
+    fish_list = sorted(character["Fish Collection"].items())
     print("\tFish Collection")
     print("-" * 23)
     for number, fish in enumerate(fish_list, 1):
-        print(f"{number}: {fish[0]}")
+        print(f"{number}: {fish[1][0]}")
     print("-" * 23)
 
 

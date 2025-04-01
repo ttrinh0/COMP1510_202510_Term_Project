@@ -80,7 +80,7 @@ def move_character(character, direction):
         character["X-coordinate"] -= 1
 
 
-def fishing_game(character, fish):  # Have to add character stats
+def fishing_game(character):  # Have to add character stats
     """
     """
     level = character["Level"]
@@ -106,7 +106,7 @@ def fishing_game(character, fish):  # Have to add character stats
         if time.time() - start_time > 3.0 and user_input != key:
             character["Stamina"] -= 1
             print("\nThe fish breaks free and gets away...\nYour stamina decreases by 1")
-            break
+            return False
         else:
             print("\tHIT!")
             time.sleep(hooked_wait_time)
@@ -114,6 +114,7 @@ def fishing_game(character, fish):  # Have to add character stats
             continue
     if win_count == fish_reel:
         character["Fish Caught"] += 1
+        return True
 
 
 def add_fish_to_collection(character, fish):
@@ -163,8 +164,11 @@ def game():
         elif action == "Fish":
             there_is_a_fish = check.check_for_fish()
             if there_is_a_fish:
-                fishing_game(character)
-                print("\nYou caught the fish!\n")
+                win = fishing_game(character)
+                if win:
+                    fish = check.check_fish_type(character, complete_fish_collection)
+                    if check.check_fish_in_collection(character, fish):
+                        add_fish_to_collection(character, fish)
                 just_print.print_fish_collection(character)
                 print()
                 time.sleep(1)
