@@ -72,6 +72,18 @@ def check_for_fish():
         print("Seems like nothing's biting.")
         return False
 
+def check_fish_type(character, complete_fish_collection):
+    """
+    Return a fish randomly picked from the player's level pool.
+
+    :return:
+    """
+    level = character["Level"]
+    fish_pool = list(complete_fish_collection[level - 1].items())
+    fish = random.choice(fish_pool)
+    return fish
+
+
 def check_if_goal_attained(character):
     """
     Check to see if the goal is attained.

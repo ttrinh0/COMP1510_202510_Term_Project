@@ -68,7 +68,7 @@ def make_character(name, user_rod):  # REDO DIALOGUE
     :postcondition: return a dictionary with keys: "Name", "Stamina", "Fishing Power", "X-coordinate", "Y-coordinate"
     :return: a dictionary containing character information
     """
-    character_profile = {"X-coordinate": 0, "Y-coordinate": 0, "Level": (1, "Beginner Fisher"), "Name": name,
+    character_profile = {"X-coordinate": 0, "Y-coordinate": 0, "Level": 1, "Title": "Beginner Fisher", "Name": name,
                          "Fish Caught": 0, "Fish Collection": {1: ("???", "???"), 2: ("???", "???"), 3: ("???", "???"),
                                                                4: ("???", "???"),
                                                                5: ("???", "???"), 6: ("???", "???"), 7: ("???", "???"),
@@ -76,9 +76,11 @@ def make_character(name, user_rod):  # REDO DIALOGUE
                                                                9: ("???", "???"), 10: ("???", "???")}}
     if user_rod == "Stamina Rod":
         character_profile["Stamina"] = 6
+        character_profile["Max Stamina"] = 6
         character_profile["Fishing Power"] = 4
     if user_rod == "Power Rod":
         character_profile["Stamina"] = 4
+        character_profile["Max Stamina"] = 4
         character_profile["Fishing Power"] = 6
 
     return character_profile
@@ -90,8 +92,8 @@ def make_fish_collection():  # REVISE FISH NAMES AND DESC
 
     :return:
     """
-    fish_collection_area_one = {1: "fish desc", 2: "fish desc", 3: "fish desc"}
-    fish_collection_area_two = {4: "fish desc", 5: "fish desc", 6: "fish desc"}
-    fish_collection_area_three = {7: "fish desc", 8: "fish desc", 9: "fish desc", 10: "fish desc"}
+    fish_collection_area_one = {1: ('fish name', 'fish desc'), 2: ('fish name', 'fish desc'), 3: ('fish name', 'fish desc')}
+    fish_collection_area_two = {4: ('fish name', 'fish desc'), 5: ('fish name', 'fish desc'), 6: ('fish name', 'fish desc')}
+    fish_collection_area_three = {7: ('fish name', 'fish desc'), 8: ('fish name', 'fish desc'), 9: ('fish name', 'fish desc'), 10: ('fish name', 'fish desc')}
 
     return fish_collection_area_one, fish_collection_area_two, fish_collection_area_three

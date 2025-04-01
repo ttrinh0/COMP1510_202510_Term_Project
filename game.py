@@ -80,34 +80,32 @@ def move_character(character, direction):
         character["X-coordinate"] -= 1
 
 
-def fishing_game(character):  # Have to add character stats
+def fishing_game(character, fish):  # Have to add character stats
     """
     """
+    level = character["Level"]
+    fishing_power = character["Fishing Power"]
     wait_time = random.randint(1, 3)
     fish_reel = random.randint(2, 4)
     # The amount of times you have to do it is determined by the level base - fishing power
     # The higher your fishing power, the fewer times you have to reel
     hooked_wait_time = random.randint(0, 3)
     win_count = 0
-    print("You cast your rod.")
-    print("Input the specified key within 3 seconds when prompted!")
-
+    print("You cast your rod.\nInput the specified key within 3 seconds when prompted!")
     for _ in range(wait_time):
         time.sleep(1)
         print("...")
     time.sleep(1)
-    print()
-    print("Something hooks!")
+    print("\nSomething hooks!")
     for _ in range(fish_reel):
         # The keys you need to press will be from 1 to your level + 1
-        key = random.randint(1, 2)
+        key = random.randint(1, level + 1)
         start_time = time.time()
         user_input = input(f"><(((º> Input {key}!\n")
         # the time you have to press the key will decrease depending on your level
         if time.time() - start_time > 3.0 and user_input != key:
             character["Stamina"] -= 1
-            print("\nThe fish breaks free and gets away...")
-            print("Your stamina decreases by 1")
+            print("\nThe fish breaks free and gets away...\nYour stamina decreases by 1")
             break
         else:
             print("\tHIT!")
@@ -127,7 +125,7 @@ def game():
     columns = 5
     board = setup.make_board(rows, columns)
     character = setup.make_character(name, user_rod)
-    finished_fish_collection = setup.make_fish_collection()
+    complete_fish_collection = setup.make_fish_collection()
     achieved_goal = False
     while check.is_alive(character) and not achieved_goal:
         just_print.ascii_board(board, character)
