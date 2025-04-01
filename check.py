@@ -164,7 +164,8 @@ def level_up(character, complete_fish_collection):
         character["Title"] = "Expert Fisher"
     if character["Level"] == 4:
         character["Title"] = "Legendary Fisher"
-    print(character)
+    print("Congratulations! You leveled up!\nYou are now level " + str(character["Level"]) + ", " +
+          character["Title"] + ".")
     return True
 
 

@@ -103,7 +103,7 @@ def fishing_game(character):  # Have to add character stats
         start_time = time.time()
         user_input = input(f"><(((º> Input {key}!\n")
         # the time you have to press the key will decrease depending on your level
-        if time.time() - start_time > 3.0 and user_input != key:
+        if time.time() - start_time > 3.0 or user_input != str(key):
             character["Stamina"] -= 1
             print("\nThe fish breaks free and gets away...\nYour stamina decreases by 1")
             return False
@@ -114,6 +114,7 @@ def fishing_game(character):  # Have to add character stats
             continue
     if win_count == fish_reel:
         character["Fish Caught"] += 1
+        print("Gotcha!")
         return True
 
 
@@ -169,6 +170,8 @@ def game():
                     fish = check.check_fish_type(character, complete_fish_collection)
                     if check.check_fish_in_collection(character, fish):
                         add_fish_to_collection(character, fish)
+                        check.level_up(character, complete_fish_collection)
+                        check.final_conditions(character)
                 just_print.print_fish_collection(character)
                 print()
                 time.sleep(1)

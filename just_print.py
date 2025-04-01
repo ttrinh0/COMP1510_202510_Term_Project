@@ -84,9 +84,9 @@ def print_player_info(character):
     print("\tPlayer Information")
     print("-" * 26)
     print("Name: " + character["Name"] +
-          "\nTitle: " + str(character["Level"][1]) +
-          "\nLevel: " + str(character["Level"][0]) +
-          "\nStamina: " + str(character["Stamina"]) +
+          "\nTitle: " + character["Title"] +
+          "\nLevel: " + str(character["Level"]) +
+          "\nStamina: " + str(character["Stamina"]) + "/" + str(character["Max Stamina"]) +
           "\nFishing Power: " + str(character["Fishing Power"]) +
           "\nFish Caught: " + str(character["Fish Caught"]))
     print("-" * 26)
