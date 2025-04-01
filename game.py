@@ -2,6 +2,7 @@
 Module info
 """
 
+import just_print
 import random
 import time
 from table2ascii import table2ascii, PresetStyle
@@ -72,8 +73,12 @@ def make_character(name, user_rod):  # REDO DIALOGUE
     :postcondition: return a dictionary with keys: "Name", "Stamina", "Fishing Power", "X-coordinate", "Y-coordinate"
     :return: a dictionary containing character information
     """
-    character_profile = {"X-coordinate": 0, "Y-coordinate": 0, "Level": 1, "Character": "Beginner Fisher", "Name": name}
-
+    character_profile = {"X-coordinate": 0, "Y-coordinate": 0, "Level": (1, "Beginner Fisher"), "Name": name,
+                         "Fish Caught": 0, "Fish Collection": {1: ("???", "???"), 2: ("???", "???"), 3: ("???", "???"),
+                                                               4: ("???", "???"),
+                                                               5: ("???", "???"), 6: ("???", "???"), 7: ("???", "???"),
+                                                               8: ("???", "???"),
+                                                               9: ("???", "???"), 10: ("???", "???")}}
     if user_rod == "Stamina Rod":
         character_profile["Stamina"] = 6
         character_profile["Fishing Power"] = 4
@@ -90,23 +95,11 @@ def make_fish_collection():  # REVISE FISH NAMES AND DESC
 
     :return:
     """
-    fish_collection_area_one = {"1. fish": "fish desc", "2. fish": "fish desc", "3. fish": "fish desc"}
-    fish_collection_area_two = {"4. fish": "fish desc", "5. fish": "fish desc", "6. fish": "fish desc"}
-    fish_collection_area_three = {"7. fish7": "fish desc", "8. fish": "fish desc", "9. fish": "fish desc",
-                                  "10. fish": "fish desc"}
+    fish_collection_area_one = {1: "fish desc", 2: "fish desc", 3: "fish desc"}
+    fish_collection_area_two = {4: "fish desc", 5: "fish desc", 6: "fish desc"}
+    fish_collection_area_three = {7: "fish desc", 8: "fish desc", 9: "fish desc", 10: "fish desc"}
 
     return fish_collection_area_one, fish_collection_area_two, fish_collection_area_three
-
-
-def make_player_fish_collection():
-    """
-    Create a dictionary representing the fish the player has caught.
-
-    :return:
-    """
-    fish_collection = {"1. ???": "???", "2. ???": "???", "3. ???": "???", "4. ???": "???", "5. ???": "???",
-                       "6. ???": "???", "7. ???": "???", "8. ???": "???", "9. ???": "???", "10. ???": "???", }
-    return fish_collection
 
 
 def ascii_board(board, character):
@@ -213,14 +206,8 @@ def process_choice(choice):
     """
     if choice in {"North", "West", "South", "East"}:
         return "Movement"
-    elif choice == "Fish":
+    else:
         return choice
-    elif choice == "Interact":
-        return choice
-    elif choice == "Profile":
-        return "Account"
-    elif choice == "Collection":
-        return "Account"
 
 
 def validate_move(board, character, direction):
@@ -297,58 +284,39 @@ def move_character(character, direction):
         character["X-coordinate"] -= 1
 
 
-def check_if_goal_attained(board, character):
+def check_if_goal_attained(character):
     """
     Check to see if the goal is attained.
 
     The goal is attained when the character is at the end goal location and their HP is above zero.
 
-    :param board: a dictionary containing the game board coordinates
     :param character: a dictionary containing the character information
-    :precondition: board must be a dictionary
-    :precondition: board must contain keys containing the game board coordinates
     :precondition: character must be a dictionary
     :precondition: character must contain keys-value pairs of the coordinates and the current HP
     :postcondition: return True if the goal is attained, else return False
     :return True: a Boolean with the value of True if the goal is attained
     :return False: a Boolean with the value of False if the direction is valid
-
-    >>> board_test = make_board(3, 3)
-    >>> character_test = {"X-coordinate": 1, "Y-coordinate": 1, "Current HP": 5}
-    >>> check_if_goal_attained(board_test, character_test)
-    False
-
-    >>> board_test = make_board(3, 3)
-    >>> character_test = {"X-coordinate": 2, "Y-coordinate": 2, "Current HP": 5}
-    >>> check_if_goal_attained(board_test, character_test)
-    True
     """
-    if (character["X-coordinate"], character["Y-coordinate"]) == max(board) and character["Current HP"] > 0:
+    if ('Final Fish', '???') in character["Fish Collection"].values() and character["Stamina"] > 0:
         return True
     else:
         return False
 
 
-def check_for_foes(board, character):
+def check_for_fish():
     """
-    Check to see if an enemy is on a space.
+    Check to see if a fish is on a space.
 
-    :param board: a dictionary containing the game board coordinates
-    :param character: a dictionary containing the character information
-    :precondition: board must be a dictionary
-    :precondition: board must contain keys containing the game board coordinates
-    :precondition: character must be a dictionary
-    :precondition: character must contain keys-value pairs of the coordinates
     :postcondition: return True if there is an enemy encounter, else return False
     :return True: a Boolean with the value of True if there is an enemy encounter
     :return False: a Boolean with the value of False if there is not an enemy encounter
     """
     enemy_encounter = random.randint(1, 4)
-    if (character['X-coordinate'], character['Y-coordinate']) != max(board):
-        if enemy_encounter == 1:
-            return True
-        else:
-            return False
+    if enemy_encounter != 1:
+        return True
+    else:
+        print("Seems like nothing's biting.")
+        return False
 
 
 def fishing_game():  # Have to add character stats
@@ -431,12 +399,21 @@ def game():
                 move_character(character, choice)
                 describe_current_location(board, character)
                 ascii_board(board, character)
-                there_is_a_challenger = check_for_foes(board, character)
-                if there_is_a_challenger:
-                    fishing_game(character)
-                achieved_goal = check_if_goal_attained(board, character)
+                achieved_goal = check_if_goal_attained(character)
             else:
                 print(rgb(255, 175, 175) + "You can't move there! Pick another direction." + constants.RESET)
+        elif action == "Fish":
+            there_is_a_fish = check_for_fish()
+            if there_is_a_fish:
+                fishing_game(character)
+        elif action == "Interact":
+            pass
+        # Create function to check if there's something on the map
+        # If yes, print text/dialogue
+        elif action == "Profile":
+            just_print.print_player_info(character)
+        elif action == "Collection":
+            just_print.print_fish_collection(character)
     if achieved_goal:
         print(rgb(255, 255, 0) + "You made it to the end! Congratulations!" + constants.RESET)
     else:
