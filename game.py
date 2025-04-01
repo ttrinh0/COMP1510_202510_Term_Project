@@ -178,7 +178,7 @@ def get_user_choice():
     choice = False
     while choice is False:
         print("Enter a Command!\n"
-              "Movement\t\tAction:\t\t\tCharacter:\n"
+              "Movement:\t\tAction:\t\t\tCharacter:\n"
               "W - North\t\t1 - Fish\t\t3 - Character Profile\n"
               "A - West\t\t2 - Interact\t4 - Fish Collection\n"
               "S - South\n"
@@ -203,6 +203,24 @@ def get_user_choice():
         else:
             choice = False
     return choice
+
+
+def process_choice(choice):
+    """
+
+    :param choice:
+    :return:
+    """
+    if choice in {"North", "West", "South", "East"}:
+        return "Movement"
+    elif choice == "Fish":
+        return choice
+    elif choice == "Interact":
+        return choice
+    elif choice == "Profile":
+        return "Account"
+    elif choice == "Collection":
+        return "Account"
 
 
 def validate_move(board, character, direction):
@@ -405,18 +423,20 @@ def game():
     describe_current_location(board, character)
     ascii_board(board, character)
     while is_alive(character) and not achieved_goal:
-        direction = get_user_choice()
-        valid_move = validate_move(board, character, direction)
-        if valid_move:
-            move_character(character, direction)
-            describe_current_location(board, character)
-            ascii_board(board, character)
-            there_is_a_challenger = check_for_foes(board, character)
-            if there_is_a_challenger:
-                fishing_game(character)
-            achieved_goal = check_if_goal_attained(board, character)
-        else:
-            print(rgb(255, 175, 175) + "You can't move there! Pick another direction." + constants.RESET)
+        choice = get_user_choice()
+        action = process_choice(choice)
+        if action == "Movement":
+            valid_move = validate_move(board, character, choice)
+            if valid_move:
+                move_character(character, choice)
+                describe_current_location(board, character)
+                ascii_board(board, character)
+                there_is_a_challenger = check_for_foes(board, character)
+                if there_is_a_challenger:
+                    fishing_game(character)
+                achieved_goal = check_if_goal_attained(board, character)
+            else:
+                print(rgb(255, 175, 175) + "You can't move there! Pick another direction." + constants.RESET)
     if achieved_goal:
         print(rgb(255, 255, 0) + "You made it to the end! Congratulations!" + constants.RESET)
     else:
