@@ -112,3 +112,40 @@ def is_alive(character):
         return True
     else:
         return False
+
+
+def level_up(character, complete_fish_collection):
+    """
+
+    :param character:
+    :param complete_fish_collection:
+    :return:
+    """
+    level = character["Level"]
+    collection_check = complete_fish_collection[level - 1]
+    player_collection = character["Fish Collection"]
+    fish_numbers = list(collection_check)
+    for fish in fish_numbers:
+        if player_collection[fish] != collection_check[fish]:
+            return False
+    character["Level"] += 1
+    if character["Level"] == 2:
+        character["Title"] = "Adept Fisher"
+    if character["Level"] == 3:
+        character["Title"] = "Expert Fisher"
+    if character["Level"] == 4:
+        character["Title"] = "Legendary Fisher"
+    print(character)
+    return True
+
+
+def final_conditions(character):
+    """
+
+    :param character:
+    :return:
+    """
+    if character["Level"] == 4:
+        return True
+    else:
+        return False
