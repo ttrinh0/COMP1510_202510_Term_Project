@@ -80,12 +80,13 @@ def move_character(character, direction):
         character["X-coordinate"] -= 1
 
 
-def fishing_game(character):  # Have to add character stats
+def fishing_game(character, game_parameters):  # Have to add character stats
     """
     Execute a fishing mini-game.
 
     The user inputs the specified key a randomly determined amount of times.
 
+    :param game_parameters: a dictionary containing the game parameters
     :param character: a dictionary containing the character information
     :precondition: user input must input a key
     :precondition: character must be a dictionary
@@ -102,12 +103,12 @@ def fishing_game(character):  # Have to add character stats
     :return True: a Boolean with the value of True if character wins the mini-game
     """
     level = character["Level"]
-    fishing_power = character["Fishing Power"]
+    # fishing_power = character["Fishing Power"]
+    input_time = game_parameters["Input Time"][level]
     wait_time = random.randint(1, 3)
     fish_reel = random.randint(2, 4)
     # The amount of times you have to do it is determined by the level base - fishing power
     # The higher your fishing power, the fewer times you have to reel
-    hooked_wait_time = random.randint(0, 3)
     win_count = 0
     print(f"You cast your rod.\nInput the specified key within {input_time} seconds when prompted!")
     for _ in range(wait_time):
@@ -129,7 +130,7 @@ def fishing_game(character):  # Have to add character stats
             return False
         else:
             print("\tHIT!")
-            time.sleep(hooked_wait_time)
+            time.sleep(random.randint(0, 3))
             win_count += 1
             continue
     if win_count == fish_reel:
@@ -155,13 +156,15 @@ def game():
     """
     Drive the game.
     """
-    name, user_rod = setup.intro_scene()
     rows = 5
     columns = 5
+    name, user_rod = setup.intro_scene()
     board = setup.make_board(rows, columns)
     character = setup.make_character(name, user_rod)
     complete_fish_collection = setup.make_fish_collection()
+    game_parameters = setup.create_game_parameters()
     achieved_goal = False
+    just_print.first_area(character)
     while check.is_alive(character) and not achieved_goal:
         just_print.ascii_board(board, character)
         just_print.describe_current_location(board, character)
@@ -185,7 +188,7 @@ def game():
         elif action == "Fish":
             there_is_a_fish = check.check_for_fish()
             if there_is_a_fish:
-                win = fishing_game(character)
+                win = fishing_game(character, game_parameters)
                 if win:
                     fish = check.check_fish_type(character, complete_fish_collection)
                     if check.check_fish_in_collection(character, fish):

@@ -90,3 +90,13 @@ def print_player_info(character):
           "\nFishing Power: " + str(character["Fishing Power"]) +
           "\nFish Caught: " + str(character["Fish Caught"]))
     print("-" * 26)
+
+def first_area(character):
+    """
+    Prints a scene of the player moving to the first area.
+
+    :param character:
+    :return:
+    """
+    print("Good luck, " + character["Name"] + ", and enjoy your journey.")
+    print("cool ascii art of level 1 area name")
