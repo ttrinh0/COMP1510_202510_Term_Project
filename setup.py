@@ -97,3 +97,12 @@ def make_fish_collection():  # REVISE FISH NAMES AND DESC
     fish_collection_area_three = {7: ('fish name', 'fish desc'), 8: ('fish name', 'fish desc'), 9: ('fish name', 'fish desc'), 10: ('fish name', 'fish desc')}
 
     return fish_collection_area_one, fish_collection_area_two, fish_collection_area_three
+
+def create_game_parameters():
+    """
+
+    :return:
+    """
+    game_parameters = {"Input Time": {1: 3.0, 2: 2.5, 3: 2.0, 4: 1.5}}
+
+    return game_parameters

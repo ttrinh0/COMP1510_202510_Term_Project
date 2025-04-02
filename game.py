@@ -82,6 +82,24 @@ def move_character(character, direction):
 
 def fishing_game(character):  # Have to add character stats
     """
+    Execute a fishing mini-game.
+
+    The user inputs the specified key a randomly determined amount of times.
+
+    :param character: a dictionary containing the character information
+    :precondition: user input must input a key
+    :precondition: character must be a dictionary
+    :precondition: character must contain the keys "Stamina", "Fishing Power", "Level", and "Fish Caught", all with
+                   values of integers
+    :postcondition: decreases the character's stamina by one if the user loses the game
+    :postcondition: does not alter character's stamina if the user wins the game
+    :postcondition: increases the character's Fish Caught count if the user wins the game
+    :postcondition: prints "HIT!" when the user correctly inputs a key
+    :postcondition: prints a statement that the fish gets away and the character's stamina decreases if the user loses
+                    the game
+    :postcondition: prints "Gotcha!" if the user wins the game
+    :return False: a Boolean with the value of False if character loses the mini-game
+    :return True: a Boolean with the value of True if character wins the mini-game
     """
     level = character["Level"]
     fishing_power = character["Fishing Power"]
@@ -91,7 +109,7 @@ def fishing_game(character):  # Have to add character stats
     # The higher your fishing power, the fewer times you have to reel
     hooked_wait_time = random.randint(0, 3)
     win_count = 0
-    print("You cast your rod.\nInput the specified key within 3 seconds when prompted!")
+    print(f"You cast your rod.\nInput the specified key within {input_time} seconds when prompted!")
     for _ in range(wait_time):
         time.sleep(1)
         print("...")
@@ -105,7 +123,9 @@ def fishing_game(character):  # Have to add character stats
         # the time you have to press the key will decrease depending on your level
         if time.time() - start_time > 3.0 or user_input != str(key):
             character["Stamina"] -= 1
-            print("\nThe fish breaks free and gets away...\nYour stamina decreases by 1")
+            print("\nThe fish breaks free and gets away...\n"
+                  "Your stamina decreases by 1\n"
+                  "Current stamina:", character["Stamina"])
             return False
         else:
             print("\tHIT!")
