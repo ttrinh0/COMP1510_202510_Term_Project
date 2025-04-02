@@ -92,9 +92,9 @@ def make_fish_collection():  # REVISE FISH NAMES AND DESC
 
     :return:
     """
-    fish_collection_area_one = {1: ('fish name', 'fish desc'), 2: ('fish name', 'fish desc'), 3: ('fish name', 'fish desc')}
-    fish_collection_area_two = {4: ('fish name', 'fish desc'), 5: ('fish name', 'fish desc'), 6: ('fish name', 'fish desc')}
-    fish_collection_area_three = {7: ('fish name', 'fish desc'), 8: ('fish name', 'fish desc'), 9: ('fish name', 'fish desc'), 10: ('fish name', 'fish desc')}
+    fish_collection_area_one = {1: ('Catfish', 'fish desc'), 2: ('fish name', 'fish desc'), 3: ('Neon Tetra', 'fish desc')}
+    fish_collection_area_two = {4: ('Dogfish', 'Weird dog, er-- fish.'), 5: ('fish name', 'fish desc'), 6: ('fish name', 'fish desc')}
+    fish_collection_area_three = {7: ('Tuna', "Can't piano a tuna, but you can tuna piano! Hey, what's this glue doing here?"), 8: ('Bigfish', "It's big, it's blue, it's... incredibly shiny"), 9: ('fish name', 'fish desc'), 10: ('fish name', 'fish desc')}
 
     return fish_collection_area_one, fish_collection_area_two, fish_collection_area_three
 
