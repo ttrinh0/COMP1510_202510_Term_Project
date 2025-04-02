@@ -164,7 +164,7 @@ def game():
     complete_fish_collection = setup.make_fish_collection()
     game_parameters = setup.create_game_parameters()
     achieved_goal = False
-    just_print.first_area(character)
+    just_print.print_area_scene(character)
     while check.is_alive(character) and not achieved_goal:
         just_print.ascii_board(board, character)
         just_print.describe_current_location(board, character)

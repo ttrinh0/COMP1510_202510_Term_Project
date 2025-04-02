@@ -1,6 +1,8 @@
 """
 A collection of functions used to simply print scenes and information to the player.
 """
+import time
+
 from table2ascii import table2ascii, PresetStyle
 
 
@@ -72,7 +74,7 @@ def print_fish_collection(character):
     print("\tFish Collection")
     print("-" * 23)
     for number, fish in enumerate(fish_list, 1):
-        print(f"{number}: {fish[1][0]}")
+        print(f"{number}: {fish[1][0].capitalize()}")
     print("-" * 23)
 
 
@@ -91,12 +93,47 @@ def print_player_info(character):
           "\nFish Caught: " + str(character["Fish Caught"]))
     print("-" * 26)
 
-def first_area(character):
+
+def starting_scene(character):
+    """
+    Prints out a scene when the player gets to the first area.
+
+    :param character:
+    :return:
+    """
+    name = character["Name"]
+    print('"Hey!"')
+    time.sleep(1)
+    print('"You!"')
+    time.sleep(1)
+    print("You look around and see a man fully geared up to fish. You are amazed at his outfit and how many fish "
+          "related accessories he has attached to his belt.")
+    time.sleep(1)
+    print('"Bahahaha! You\'re new here, aren\'tcha."')
+    print('"What\'s your name, newbie?"')
+    time.sleep(1)
+    print(f'"{name}? A fine name!"')
+    time.sleep(1)
+    print(f'So, "{name}, have you fished before?"')
+
+
+
+def print_area_scene(character):
     """
     Prints a scene of the player moving to the first area.
 
     :param character:
     :return:
     """
-    print("Good luck, " + character["Name"] + ", and enjoy your journey.")
-    print("cool ascii art of level 1 area name")
+    if character["Level"] == 1:
+        print("Good luck, " + character["Name"] + ", and enjoy your journey.")
+        print("cool ascii art of level 1 area name")
+    elif character["Level"] == 2:
+        print("Good luck, " + character["Name"] + ", and enjoy your journey.")
+        print("cool ascii art of level 2 area name")
+    elif character["Level"] == 3:
+        print("Good luck, " + character["Name"] + ", and enjoy your journey.")
+        print("cool ascii art of level 3 area name")
+    elif character["Level"] == 4:
+        print("Good luck, " + character["Name"] + ", and enjoy your journey.")
+        print("cool ascii art of level 4 area name")
