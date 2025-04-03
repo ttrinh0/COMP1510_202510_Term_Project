@@ -102,15 +102,21 @@ def choose_rod(character):
 
 def make_fish_collection():  # REVISE FISH NAMES AND DESC
     """
-    Creates a dictionary for the collection of fish you can catch in each area.
+    Create a tuple containing a dictionary of the collection of fish you can catch in each area.
 
-    :return:
+    :precondition: player has started the game
+    :postcondition: creates a dictionary contain the available fish you can catch for each area of the game
+    :postcondition: each dictionary contains a key that is an integer and a tuple containing a string of the fish name
+                    and another string of the fish's description
+    :postcondition: creates a tuple containing the dictionaries of the collection of fish you can catch in each area
+    :return fish_collection_area_one, fish_collection_area_two, fish_collection_area_three, final_fish: four
+                    dictionaries contained within a tuple
     """
     fish_collection_area_one = {1: ('Goldfish', 'BUY GOLD!'),
                                 2: ('Guppy', 'A tiny little fella. A little, little fish.'),
                                 3: ('Neon Tetra', 'A small fish with a bright line to light up your life.')}
     fish_collection_area_two = {4: ('Dogfish', 'Weird dog, er-- fish.'),
-                                5: ('Catfish', 'It\'s hissing at you'),
+                                5: ('Catfish', 'It\'s hissing at you...'),
                                 6: ('River Trout', 'How does this affect the trout population?')}
     fish_collection_area_three = {7: ('Tuna', "Can't piano a tuna, but you can tuna piano! Hey, what's this glue doing"
                                               " here?"),
@@ -119,7 +125,6 @@ def make_fish_collection():  # REVISE FISH NAMES AND DESC
                                   9: ('Flying Fish', 'It practically flew into your boat!'),
                                   10: ('Shark', 'Doo doo doo, doo doo doo doo doo.')}
     final_fish = {11: ('Final Fishasy', 'The legendary fish... and now it\'s in your bucket.')}
-
     return fish_collection_area_one, fish_collection_area_two, fish_collection_area_three, final_fish
 
 
