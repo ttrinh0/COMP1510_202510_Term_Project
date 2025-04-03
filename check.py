@@ -63,9 +63,9 @@ def check_for_fish():
     """
     Check to see if a fish is on a space.
 
-    :postcondition: return True if there is an enemy encounter, else return False
-    :return True: a Boolean with the value of True if there is an enemy encounter
-    :return False: a Boolean with the value of False if there is not an enemy encounter
+    :postcondition: return True if there is a fish encounter, else return False
+    :return True: a Boolean with the value of True if there is a fish encounter
+    :return False: a Boolean with the value of False if there is not a fish encounter
     """
     enemy_encounter = random.randint(1, 3)
     if enemy_encounter != 1:
@@ -77,6 +77,22 @@ def check_for_fish():
             time.sleep(1)
         print("Nothing's biting.")
         time.sleep(1)
+        return False
+
+
+def check_for_flying_fish(character):
+    """
+    Check to see if a flying fish is on a space.
+
+    :postcondition: return True if there is a flying fish encounter, else return False
+    :return True: a Boolean with the value of True if there is a flying fish encounter
+    :return False: a Boolean with the value of False if there is not a flying fish encounter
+    """
+    enemy_encounter = random.randint(1, 10)
+    level = character["Level"]
+    if enemy_encounter == 1 and level == 3:
+        return True
+    else:
         return False
 
 

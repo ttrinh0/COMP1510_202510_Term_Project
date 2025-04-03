@@ -149,20 +149,23 @@ def add_fish_to_collection(character, fish):
     player_collection[fish_number] = fish[1]
 
 
-def get_response(message, options):
+def get_response(message, options, option_quit=False):
     """
 
     :param message: a string
     :param options: a positive integer
+    :param option_quit:
     :return user_input: a string containing the number that represents the player's choice
     """
     response = False
     user_options = []
     for number in range(1, options + 1):
         user_options.append(str(number))
+    if option_quit:
+        user_options.append("q")
     while response is False:
         user_input = input(message)
-        if user_input in user_options:
+        if user_input.lower().strip() in user_options:
             response = user_input
             return response
         else:

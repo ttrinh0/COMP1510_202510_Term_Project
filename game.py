@@ -14,31 +14,34 @@ def game():
     """
     Drive the game.
     """
-    game_parameters = setup.create_game_parameters()
     rows = 5
     columns = 5
+    game_parameters = setup.create_game_parameters()
     board = setup.make_board(rows, columns)
     character = setup.make_character()
     complete_fish_collection = setup.make_fish_collection()
     achieved_goal = False
+
     print_or_scene.print_area_scene(character)
     print_or_scene.area_one_scene(character)
+
     while check.is_alive(character) and not achieved_goal:
         print_or_scene.ascii_board(board, character)
         print_or_scene.describe_current_location(board, character)
         choice = user_action.get_user_choice()
         action = check.process_choice(choice)
+
         if action == "Movement":
             valid_move = check.validate_move(board, character, choice)
             if valid_move:
                 user_action.move_character(character, choice)
+                check.check_for_flying_fish(character)
                 achieved_goal = check.check_if_goal_attained(character)
             else:
                 print(rgb(255, 175, 175) + "You can't move there! Pick another direction." + constants.RESET)
+
         elif action == "Interact":
-            pass
-        # Create function to check if there's something on the map
-        # If yes, print text/dialogue
+            print_or_scene.print_interact()
         elif action == "Profile":
             print_or_scene.print_player_info(character)
         elif action == "Collection":
@@ -46,8 +49,7 @@ def game():
         elif action == "Fish":
             there_is_a_fish = check.check_for_fish()
             if there_is_a_fish:
-                win = user_action.fishing_game(character, game_parameters)
-                if win:
+                if user_action.fishing_game(character, game_parameters):
                     fish = check.check_fish_type(character, complete_fish_collection)
                     if check.check_fish_in_collection(character, fish):
                         user_action.add_fish_to_collection(character, fish)

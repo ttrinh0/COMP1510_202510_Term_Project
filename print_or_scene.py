@@ -1,6 +1,7 @@
 """
 A collection of functions used to simply print scenes and information to the player.
 """
+import random
 import time
 import setup
 import user_action
@@ -22,15 +23,13 @@ def ascii_board(board, character):
     """
     board_rows = []
     board_spaces = []
-    character_position_x = character["X-coordinate"]
-    character_position_y = character["Y-coordinate"]
     rows = max(board)[0] + 1
     columns = max(board)[1] + 1
     for number in range(rows):
         board_rows.append(board_spaces.copy())
         for element in range(columns):
             board_rows[number].append("  ")
-    board_rows[character_position_y][character_position_x] = "⛵"
+    board_rows[character["Y-coordinate"]][character["X-coordinate"]] = "⛵"
 
     output = table2ascii(
         body=board_rows,
@@ -78,6 +77,20 @@ def print_fish_collection(character):
     for number, fish in enumerate(fish_list, 1):
         print(f"{number}: {fish[1][0].capitalize()}")
     print("-" * 23)
+    user_message = "Enter the number of a fish to view or q to go back.\n"
+    user_continue = False
+    while not user_continue:
+        user_input = user_action.get_response(user_message, 11, True)
+        if user_input == "q":
+            user_continue = True
+        else:
+            fish_name = character["Fish Collection"][int(user_input)][0]
+            if fish_name == "???":
+                fish_description = "You have not unlocked this fish yet!"
+            else:
+                fish_description = character["Fish Collection"][int(user_input)][1]
+            print(fish_name + ": " + fish_description)
+
 
 
 def print_player_info(character):
@@ -94,6 +107,8 @@ def print_player_info(character):
           "\nFishing Power: " + str(character["Fishing Power"]) +
           "\nFish Caught: " + str(character["Fish Caught"]))
     print("-" * 26)
+    user_continue = "Enter 1 to go back."
+    user_action.get_response(user_continue, 1)
 
 
 def area_one_scene(character):
@@ -142,7 +157,7 @@ def area_one_scene(character):
               + constants.RESET)
         print_fishing_demo()
     elif answer_fish == "2":
-        print(rgb(240, 230, 150) + 'Well, don\'t let me hold you up then. Best of luck,", name + "!"'
+        print(rgb(240, 230, 150) + '"Well, don\'t let me hold you up then. Best of luck,', name + '!"'
               + constants.RESET)
 
 
@@ -197,6 +212,21 @@ def print_fishing_demo():
             print('"Best of luck, my friend!"' + constants.RESET)
             print("࿔･ﾟ﹏𓊝﹏༄.°\n\n")
             repeat = True
+
+
+def print_interact():
+    """
+
+    :return:
+    """
+    regular_message_bank = {"The breeze is nice.",
+                            "You see other fishers fishing",
+                            "It's such a nice day today.",
+                            "You look into the water below you. It looks back are you"}
+    message = random.choice(list(regular_message_bank))
+    print(message)
+    user_continue = "Enter 1 to continue."
+    user_action.get_response(user_continue, 1)
 
 
 def print_area_scene(character):
