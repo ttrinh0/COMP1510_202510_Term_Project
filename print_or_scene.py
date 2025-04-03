@@ -136,6 +136,7 @@ def area_one_scene(character):
     answer_fish = user_action.get_response(message_fish, 2)
     if answer_fish == 1:
         print('"Bahahaha! Don\'t fret, little guppy, I\'ll show you the ropes."')
+        print_fishing_demo()
     elif answer_fish == 2:
         print('Well, don\'t let me hold you up then. Best of luck,", name + "!"')
 
@@ -148,7 +149,44 @@ def print_fishing_demo():
     """
     repeat = False
     while not repeat:
-        print("Hey! I know that that brand, which version did you get?")
+        time.sleep(1)
+        print('"Listen here and pay attention, my friend"')
+        time.sleep(2)
+        print('He takes his fishing rod and gracefully casts it into the lake.')
+        time.sleep(1)
+        print("...")
+        time.sleep(1)
+        print("...")
+        time.sleep(1)
+        print("\nSomething hooks!")
+        time.sleep(1)
+        print('"This is where the challenge really begins!"')
+        time.sleep(2)
+        print('"You\'ll feel a tug, each time you feel it. You\'re gonna wanna reel and pull it back!"')
+        print("[A message will pop up, prompting you to input a key.]")
+        print('[><(((º> Input 2!]')
+        time.sleep(1)
+        print('[When you see this message, input the number you see. In this case, enter 2.]')
+        print('"And don\'t let your mind wander! If you\'re too slow, the fish will get away!"')
+        print('[If you\'re successful, you\'ll get a "HIT!" message]')
+        time.sleep(1)
+        print("\tHIT!")
+        time.sleep(2)
+        print('"You\'ll have to do this a couple times before you\'re able to catch the fish."')
+        print('"I think that\'s about all from me. Do you need me to go over it again?"')
+        repeat_message = """
+        Would you like to see the tutorial again?:
+        1 - No
+        2 - Yes"""
+        repeat = user_action.get_response(repeat_message, 2)
+        if repeat == 1:
+            print("He nods.")
+            print("You'll run into some more challenging fish as you go on your fisher journey.\n"
+                  "Bet you're also looking to catch the Final Fishtasy, eh?")
+            repeat = True
+        elif repeat == 2:
+            print('"You need to hear it again? Alrighty."')
+            repeat = False
 
 
 def print_area_scene(character):
