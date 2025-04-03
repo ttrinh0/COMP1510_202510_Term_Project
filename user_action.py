@@ -84,7 +84,7 @@ def fishing_game(character, game_parameters):  # Have to add character stats
         # The keys you need to press will be from 1 to your level + 1
         key = random.randint(1, level + 1)
         start_time = time.time()
-        user_input = input(f"><(((º> Input {key}!\n")
+        user_input = input(rgb(0, 255, 255) + f"><(((º> Input {key}!\n" + constants.RESET)
         # the time you have to press the key will decrease depending on your level
         if time.time() - start_time > input_time or user_input != str(key):
             character["Stamina"] -= 1
@@ -93,7 +93,7 @@ def fishing_game(character, game_parameters):  # Have to add character stats
                   "Current stamina:", character["Stamina"])
             return False
         else:
-            print("\tHIT!")
+            print(rgb(255, 255, 0) + "\tHIT!" + constants.RESET)
             time.sleep(random.randint(0, 3))
             win_count += 1
             continue

@@ -3,6 +3,7 @@ Module of functions that do checks and validations.
 """
 import random
 import print_or_scene
+from color50 import rgb, constants
 import time
 
 
@@ -181,18 +182,22 @@ def level_up(character, complete_fish_collection):
     for fish in fish_numbers:
         if player_collection[fish] != collection_check[fish]:
             return False
-    character["Level"] += 1
-    character["Stamina"] += 1
-    character["Max Stamina"] += 1
-    character["Fishing Power"] += 1
-    if character["Level"] == 2:
-        character["Title"] = "Adept Fisher"
-    if character["Level"] == 3:
-        character["Title"] = "Expert Fisher"
+    if character["Level"] < 4:
+        character["Level"] += 1
+        character["Stamina"] += 1
+        character["Max Stamina"] += 1
+        character["Fishing Power"] += 1
+        if character["Level"] == 2:
+            character["Title"] = "Adept Fisher"
+        if character["Level"] == 3:
+            character["Title"] = "Expert Fisher"
+        if character["Level"] == 4:
+            character["Title"] = "Legendary Fisher"
+        print("Congratulations! You leveled up!\nYou are now level " + str(character["Level"]) + ", " +
+              character["Title"] + ".")
     if character["Level"] == 4:
-        character["Title"] = "Legendary Fisher"
-    print("Congratulations! You leveled up!\nYou are now level " + str(character["Level"]) + ", " +
-          character["Title"] + ".")
+        print("You did it!")
+    input(rgb(150, 195, 215) + "♦ Press enter to continue ♦" + constants.RESET)
     print_or_scene.print_area_scene(character)
     return True
 
