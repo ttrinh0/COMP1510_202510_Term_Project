@@ -107,6 +107,7 @@ def check_fish_type(character, complete_fish_collection):
     fish = random.choice(fish_pool)
     fish_name = fish[1][0]
     print("You caught a(n) " + fish_name + "!")
+    print(fish[1][1])
     return fish
 
 

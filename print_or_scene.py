@@ -66,9 +66,11 @@ def describe_current_location(board, character):
     print(message)
 
 
-def print_fish_collection(character):
+def print_fish_collection(character, collection=False):
     """
     Print the player's fish collection.
+
+    :param collection:
     :param character:
     """
     fish_list = sorted(character["Fish Collection"].items())
@@ -77,19 +79,22 @@ def print_fish_collection(character):
     for number, fish in enumerate(fish_list, 1):
         print(f"{number}: {fish[1][0].capitalize()}")
     print("-" * 23)
-    user_message = "Enter the number of a fish to view or q to go back.\n"
-    user_continue = False
-    while not user_continue:
-        user_input = user_action.get_response(user_message, 11, True)
-        if user_input == "q":
-            user_continue = True
-        else:
-            fish_name = character["Fish Collection"][int(user_input)][0]
-            if fish_name == "???":
-                fish_description = "You have not unlocked this fish yet!"
+    if not collection:
+        input(rgb(125, 170, 190) + "♦ Press enter to continue ♦" + constants.RESET)
+    else:
+        user_message = "Enter the number of a fish to view or q to go back.\n"
+        user_continue = False
+        while not user_continue:
+            user_input = user_action.get_response(user_message, 11, True)
+            if user_input == "q":
+                user_continue = True
             else:
-                fish_description = character["Fish Collection"][int(user_input)][1]
-            print(fish_name + ": " + fish_description)
+                fish_name = character["Fish Collection"][int(user_input)][0]
+                if fish_name == "???":
+                    fish_description = "You have not unlocked this fish yet!"
+                else:
+                    fish_description = character["Fish Collection"][int(user_input)][1]
+                print(fish_name + ": " + fish_description)
 
 
 
@@ -107,8 +112,7 @@ def print_player_info(character):
           "\nFishing Power: " + str(character["Fishing Power"]) +
           "\nFish Caught: " + str(character["Fish Caught"]))
     print("-" * 26)
-    user_continue = "Enter 1 to go back."
-    user_action.get_response(user_continue, 1)
+    input(rgb(125, 170, 190) + "♦ Press enter to continue ♦" + constants.RESET)
 
 
 def area_one_scene(character):
@@ -120,12 +124,12 @@ def area_one_scene(character):
     """
     print(rgb(240, 230, 150) + '"Hey!"')
     time.sleep(1)
-    print('"You!"' + constants.RESET)
-    time.sleep(2)
+    print('"You!"\n' + constants.RESET)
+    input(rgb(125, 170, 190) + "♦ Press enter to continue ♦" + constants.RESET)
     print(
         "\nYou look around and a man fully decked out in fish gear catches your eye. You are amazed at just how many \n"
-        "fish related accessories he has attached to his belt.")
-    time.sleep(2)
+        "fish related accessories he has attached to his belt.\n")
+    input(rgb(150, 195, 215) + "♦ Press enter to continue ♦" + constants.RESET)
     print("\nHe enthusiastically waves at you as he drives his boat next to yours.")
     time.sleep(1)
     print(rgb(240, 230, 150) + '\n"Bahahaha! You\'re new here, aren\'tcha."')
@@ -171,7 +175,7 @@ def print_fishing_demo():
     while not repeat:
         time.sleep(1)
         print(rgb(240, 230, 150) + '"Listen here and pay attention, my friend"\n' + constants.RESET)
-        time.sleep(2)
+        input(rgb(150, 195, 215) + "♦ Press enter to continue ♦" + constants.RESET)
         print('He takes his fishing rod and gracefully casts it into the lake.')
         time.sleep(1)
         print("...")
@@ -181,22 +185,22 @@ def print_fishing_demo():
         print("Something hooks!\n")
         time.sleep(1)
         print(rgb(240, 230, 150) + '"This is where the challenge really begins!"\n')
-        time.sleep(2)
+        input(rgb(150, 195, 215) + "♦ Press enter to continue ♦" + constants.RESET)
         print('"You\'ll feel a tug, each time you feel it. You\'re gonna wanna reel and pull it back!"'
               + constants.RESET)
         print("[A message will pop up, prompting you to input a key.]")
         time.sleep(1)
         print('[><(((º> Input 2!]\n')
-        time.sleep(2)
+        input(rgb(150, 195, 215) + "♦ Press enter to continue ♦" + constants.RESET)
         print('[When you see this message, input the number you see. In this case, enter 2.]\n')
         print(rgb(240, 230, 150) + '"And don\'t let your mind wander! If you\'re too slow, '
                                    'the fish will get away!"' + constants.RESET)
         print('[If you\'re successful, you\'ll get a "HIT!" message]\n')
         time.sleep(1)
         print(rgb(255, 255, 0) + "\tHIT!\n" + constants.RESET)
-        time.sleep(2)
+        input(rgb(150, 195, 215) + "♦ Press enter to continue ♦" + constants.RESET)
         print(rgb(240, 230, 150) + '"You\'ll have to do this a couple times before you\'re able to catch the fish."\n')
-        print('"I think that\'s about all from me. Do you need me to go over it again?"' + constants.RESET)
+        print('"I think that\'s about all from me. Do you need me to go over it again?"\n' + constants.RESET)
         repeat_message = rgb(0, 255, 255) + """Would you like to see the tutorial again?:
     1 - Yes, I need to hear it again!
     2 - No, I got it!
@@ -206,11 +210,11 @@ def print_fishing_demo():
             print(rgb(240, 230, 150) + '\n"You need to hear it again? Alrighty."' + constants.RESET)
             repeat = False
         elif repeat == "2":
-            print("\tHe nods.\n")
-            print(rgb(240, 230, 150) + "You'll run into some more challenging fish as you go on your fisher journey.\n"
-                                       "Bet you're also looking to catch the Final Fishtasy, eh?")
-            print('"Best of luck, my friend!"' + constants.RESET)
-            print("࿔･ﾟ﹏𓊝﹏༄.°\n\n")
+            print("\nHe nods.\n")
+            print(rgb(240, 230, 150) + '"You\'ll run into some more challenging fish as you go on your '
+                                       'fisher journey.\nBet you\'re also looking to catch the Final Fishtasy, eh?')
+            print('Best of luck, my friend!"' + constants.RESET)
+            print("\n\n࿔･ﾟ﹏𓊝﹏༄.°\n\n")
             repeat = True
 
 
@@ -225,13 +229,35 @@ def print_interact():
                             "You look into the water below you. It looks back are you"}
     message = random.choice(list(regular_message_bank))
     print(message)
-    user_continue = "Enter 1 to continue."
-    user_action.get_response(user_continue, 1)
+    input(rgb(125, 170, 190) + "♦ Press enter to continue ♦" + constants.RESET)
+
+
+def start_up():
+    """
+    Print a start-up screen.
+    :return:
+    """
+    print(r"""
+███████╗██╗███╗   ██╗ █████╗ ██╗                             
+██╔════╝██║████╗  ██║██╔══██╗██║                             
+█████╗  ██║██╔██╗ ██║███████║██║                             
+██╔══╝  ██║██║╚██╗██║██╔══██║██║                             
+██║     ██║██║ ╚████║██║  ██║███████╗                        
+╚═╝     ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝                        
+███████╗██╗███████╗██╗  ██╗████████╗ █████╗ ███████╗██╗   ██╗      /`·.¸
+██╔════╝██║██╔════╝██║  ██║╚══██╔══╝██╔══██╗██╔════╝╚██╗ ██╔╝     /¸...¸`:·  
+█████╗  ██║███████╗███████║   ██║   ███████║███████╗ ╚████╔╝   ¸.·´  ¸   `·.¸.·´)  
+██╔══╝  ██║╚════██║██╔══██║   ██║   ██╔══██║╚════██║  ╚██╔╝   : © ):´;      ¸  {   
+██║     ██║███████║██║  ██║   ██║   ██║  ██║███████║   ██║     `·.¸ `·  ¸.·´\`·¸)
+╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚══════╝   ╚═╝         `\\´´\¸.·´
+Final Fishtasy
+""")
+    input(rgb(255, 255, 255) + "♦ Press enter to continue ♦" + constants.RESET)
 
 
 def print_area_scene(character):
     """
-    Prints a scene of the player moving to the first area.
+    Print a scene of the player moving to the first area.
 
     :param character:
     :return:

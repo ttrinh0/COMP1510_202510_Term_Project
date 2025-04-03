@@ -149,7 +149,7 @@ def add_fish_to_collection(character, fish):
     player_collection[fish_number] = fish[1]
 
 
-def get_response(message, options, option_quit=False):
+def get_response(message: str, options: int, option_quit=False):
     """
 
     :param message: a string

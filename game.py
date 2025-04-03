@@ -14,6 +14,7 @@ def game():
     """
     Drive the game.
     """
+    print_or_scene.start_up()
     rows = 5
     columns = 5
     game_parameters = setup.create_game_parameters()
@@ -45,7 +46,7 @@ def game():
         elif action == "Profile":
             print_or_scene.print_player_info(character)
         elif action == "Collection":
-            print_or_scene.print_fish_collection(character)
+            print_or_scene.print_fish_collection(character, True)
         elif action == "Fish":
             there_is_a_fish = check.check_for_fish()
             if there_is_a_fish:
@@ -55,9 +56,7 @@ def game():
                         user_action.add_fish_to_collection(character, fish)
                         check.level_up(character, complete_fish_collection)
                         check.final_conditions(character)
-                print_or_scene.print_fish_collection(character)
-                print()
-                time.sleep(1)
+                    print_or_scene.print_fish_collection(character)
     if achieved_goal:
         print(rgb(255, 255, 0) + "You made it to the end! Congratulations!" + constants.RESET)
     else:
