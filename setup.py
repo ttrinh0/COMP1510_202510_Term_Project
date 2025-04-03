@@ -118,7 +118,7 @@ def make_fish_collection():  # REVISE FISH NAMES AND DESC
                                       "Small in size, but big in heart. It's blue, and it's... incredibly shiny"),
                                   9: ('Flying Fish', 'It practically flew into your boat!'),
                                   10: ('Shark', 'Doo doo doo, doo doo doo doo doo.')}
-    final_fish = {11: ('Final Fishtasy', 'The legendary fish... and now it\'s in your bucket.')}
+    final_fish = {11: ('Final Fishasy', 'The legendary fish... and now it\'s in your bucket.')}
 
     return fish_collection_area_one, fish_collection_area_two, fish_collection_area_three, final_fish
 

@@ -77,7 +77,7 @@ def print_fish_collection(character, collection=False):
     print("\tFish Collection")
     print("-" * 23)
     for number, fish in enumerate(fish_list, 1):
-        print(f"{number}: {fish[1][0].capitalize()}")
+        print(f"{number}: {fish[1][0]}")
     print("-" * 23)
     if not collection:
         input(rgb(125, 170, 190) + "♦ Press enter to continue ♦" + constants.RESET)

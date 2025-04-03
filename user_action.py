@@ -158,9 +158,7 @@ def get_response(message: str, options: int, option_quit=False):
     :return user_input: a string containing the number that represents the player's choice
     """
     response = False
-    user_options = []
-    for number in range(1, options + 1):
-        user_options.append(str(number))
+    user_options = [str(number) for number in range(1, options + 1)]
     if option_quit:
         user_options.append("q")
     while response is False:

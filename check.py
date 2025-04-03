@@ -139,7 +139,8 @@ def check_if_goal_attained(character):
     :return True: a Boolean with the value of True if the goal is attained
     :return False: a Boolean with the value of False if the direction is valid
     """
-    if ('Final Fish', '???') in character["Fish Collection"].values() and character["Stamina"] > 0:
+    if (('Final Fishasy', 'The legendary fish... and now it\'s in your bucket.') in character["Fish Collection"].values()
+            and character["Stamina"] > 0):
         return True
     else:
         return False
