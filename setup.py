@@ -41,6 +41,16 @@ def make_board(rows, columns, level=1):
     return coordinates
 
 
+def add_on_board(character):
+    """
+    Place NPCs and other visible objects onto the board depending on the player's level.
+
+    :param character: a dictionary containing the player's information
+    :return:
+    """
+    pass
+
+
 def make_character():  # REDO DIALOGUE
     """
     Return a dictionary containing a character's starting coordinates and HP.
