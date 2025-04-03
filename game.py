@@ -14,15 +14,15 @@ def game():
     """
     Drive the game.
     """
+    game_parameters = setup.create_game_parameters()
     rows = 5
     columns = 5
     board = setup.make_board(rows, columns)
     character = setup.make_character()
     complete_fish_collection = setup.make_fish_collection()
-    game_parameters = setup.create_game_parameters()
     achieved_goal = False
     print_or_scene.print_area_scene(character)
-    print_or_scene.starting_scene(character)
+    print_or_scene.area_one_scene(character)
     while check.is_alive(character) and not achieved_goal:
         print_or_scene.ascii_board(board, character)
         print_or_scene.describe_current_location(board, character)
