@@ -103,6 +103,52 @@ def fishing_game(character, game_parameters):  # Have to add character stats
         return True
 
 
+def move_character(character, direction):
+    """
+    Change the character's coordinates depending on direction value.
+
+    :param character: a dictionary containing the character information
+    :param direction: a string containing the direction the user wants to move
+    :precondition: character must be a dictionary
+    :precondition: character must contain keys-value pairs of the coordinates
+    :precondition: direction must be a string with a value of either "East", "West", "South", "North"
+    :postcondition: changes the user coordinates depending on direction
+
+    >>> character_test = {"X-coordinate": 0, "Y-coordinate": 0, "Current HP": 5}
+    >>> direction_test = "South"
+    >>> move_character(character_test, direction_test)
+    >>> print(character_test)
+    {'X-coordinate': 0, 'Y-coordinate': 1, 'Current HP': 5}
+
+    >>> character_test = {"X-coordinate": 1, "Y-coordinate": 1, "Current HP": 5}
+    >>> direction_test = "North"
+    >>> move_character(character_test, direction_test)
+    >>> print(character_test)
+    {'X-coordinate': 1, 'Y-coordinate': 0, 'Current HP': 5}
+    """
+    if direction == "North":
+        character["Y-coordinate"] -= 1
+    elif direction == "South":
+        character["Y-coordinate"] += 1
+    elif direction == "East":
+        character["X-coordinate"] += 1
+    elif direction == "West":
+        character["X-coordinate"] -= 1
+
+
+def add_fish_to_collection(character, fish):
+    """
+    Add fish into player collection.
+
+    :param character:
+    :param fish:
+    :return:
+    """
+    fish_number = fish[0]
+    player_collection = character["Fish Collection"]
+    player_collection[fish_number] = fish[1]
+
+
 def get_response(message, options):
     """
 

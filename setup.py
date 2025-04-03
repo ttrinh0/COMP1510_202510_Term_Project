@@ -1,5 +1,5 @@
 """
-Module of functions that set up the game.
+Module of functions that set up the game and initial character stats.
 """
 import random
 
@@ -40,51 +40,62 @@ def make_board(rows, columns, level=1):
     return coordinates
 
 
-def intro_scene():
-    """
-    Print an intro scene and return the inputted name and chosen fishing rod of the player.
-
-    """
-    print("You wake up, excited. Today is the day you will begin your journey.")
-    name = input("Enter your name: ")
-    print("something about going to the fishing ")
-    print("Which rod would you like to start with: ")
-    user_rod = False
-    while user_rod is False:
-        user_rod = input("1. Stamina Rod\n2. Power Rod\n")
-        if user_rod == "1":
-            user_rod = "Stamina Rod"
-        elif user_rod == "2":
-            user_rod = "Power Rod"
-        elif user_rod != "1" or user_rod != "2":
-            print("Please enter 1 or 2 to select your fishing rod")
-            user_rod = False
-    return name, user_rod
-
-
-def make_character(name, user_rod):  # REDO DIALOGUE
+def make_character():  # REDO DIALOGUE
     """
     Return a dictionary containing a character's starting coordinates and HP.
 
     :postcondition: return a dictionary with keys: "Name", "Stamina", "Fishing Power", "X-coordinate", "Y-coordinate"
     :return: a dictionary containing character information
     """
-    character_profile = {"X-coordinate": 0, "Y-coordinate": 0, "Level": 1, "Title": "Beginner Fisher", "Name": name,
-                         "Fish Caught": 0, "Fish Collection": {1: ("???", "???"), 2: ("???", "???"), 3: ("???", "???"),
-                                                               4: ("???", "???"),
-                                                               5: ("???", "???"), 6: ("???", "???"), 7: ("???", "???"),
-                                                               8: ("???", "???"),
-                                                               9: ("???", "???"), 10: ("???", "???")}}
-    if user_rod == "Stamina Rod":
-        character_profile["Stamina"] = 6
-        character_profile["Max Stamina"] = 6
-        character_profile["Fishing Power"] = 4
-    if user_rod == "Power Rod":
-        character_profile["Stamina"] = 4
-        character_profile["Max Stamina"] = 4
-        character_profile["Fishing Power"] = 6
-
+    character_profile = {"X-coordinate": 0, "Y-coordinate": 0, "Level": 1, "Title": "Beginner Fisher", "Name": "",
+                         "Stamina": 1, "Max Stamina": 1, "Fishing Power": 1, "Fish Caught": 0,
+                         "Fish Collection": {1: ("???", "???"), 2: ("???", "???"), 3: ("???", "???"), 4: ("???", "???"),
+                                             5: ("???", "???"), 6: ("???", "???"), 7: ("???", "???"), 8: ("???", "???"),
+                                             9: ("???", "???"), 10: ("???", "???")}}
     return character_profile
+
+
+def get_name(character):
+    """
+    Ask the player for their name.
+
+    :param character: a dictionary with the character information
+    :precondition: the player inputs a name (or any string/value)
+    :precondition: character has the key "Name"
+    :postcondition: the "Name" key in character has a value of the inputted string
+    :return name: a string of the player's inputted name
+    """
+    name = input("What's your name?: ")
+    character["Name"] = name
+    return name
+
+
+def choose_rod(character):
+    """
+    Ask the player which fishing rod they want to use.
+
+    :precondition: the player inputs 1 or 2
+    :postcondition:
+    :return rod: a string of either "Stamina Rod" or "Power Rod" depending on which the player picked
+    """
+    print("Which rod did you pick?: ")
+    rod = False
+    while rod is False:
+        rod = input("1. Stamina Rod\n2. Power Rod\n")
+        if rod == "1":
+            rod = "Stamina Rod"
+            character["Stamina"] = 6
+            character["Max Stamina"] = 6
+            character["Fishing Power"] = 4
+        elif rod == "2":
+            rod = "Power Rod"
+            character["Stamina"] = 4
+            character["Max Stamina"] = 4
+            character["Fishing Power"] = 6
+        elif rod != "1" or rod != "2":
+            print('"Sorry, I didn\'t quite catch that!" (Please enter 1 or 2 to select your fishing rod)')
+            rod = False
+    return rod
 
 
 def make_fish_collection():  # REVISE FISH NAMES AND DESC

@@ -2,7 +2,8 @@
 A collection of functions used to simply print scenes and information to the player.
 """
 import time
-import check
+import setup
+import user_action
 from table2ascii import table2ascii, PresetStyle
 
 
@@ -49,12 +50,12 @@ def describe_current_location(board, character):
     :precondition: character must contain keys-value pairs of the coordinates
     :postcondition: prints the character's current coordinates and the ascii game board
 
-    >>> board_test = make_board(3, 3)
+    >>> board_test = setup.make_board(3, 3)
     >>> character_test = {"X-coordinate": 0, "Y-coordinate": 0, "Current HP": 5}
     >>> describe_current_location(board_test, character_test)
     You are currently at (0, 0), Calm Field.
 
-    >>> board_test = make_board(3, 3)
+    >>> board_test = setup.make_board(3, 3)
     >>> character_test = {"X-coordinate": 2, "Y-coordinate": 2, "Current HP": 5}
     >>> describe_current_location(board_test, character_test)
     You are currently at (2, 2), The End.
@@ -101,24 +102,46 @@ def starting_scene(character):
     :param character:
     :return:
     """
-    name = character["Name"]
     print('"Hey!"')
     time.sleep(1)
     print('"You!"')
-    time.sleep(1)
-    print("You look around and see a man fully geared up to fish. You are amazed at his outfit and how many fish "
-          "related accessories he has attached to his belt.")
-    time.sleep(1)
+    time.sleep(2)
+    print("You look around and a man fully decked out in fish gear catches your eye. You are amazed at his complete "
+          "fisher outfit and just how many fish related accessories he has attached to his belt. He enthusiastically "
+          "waves at you as he drives his boat next to yours.")
+    time.sleep(3)
     print('"Bahahaha! You\'re new here, aren\'tcha."')
     print('"What\'s your name, newbie?"')
+    name = setup.get_name(character)
+    print(f'"{name}? That\'s a fine name! They call me Marlin."')
     time.sleep(1)
-    print(f'"{name}? A fine name!"')
-    time.sleep(1)
+    print("Is that a new fishing rod? It's got that new rod smell. Hey! I know that that brand, which version did you "
+          "get?")
+    rod = setup.choose_rod(character)
+    print(f"The {rod}, eh?")
+    if rod == "Stamina Rod":
+        print("Good choice! That rod is light and easy on the body. Might not be as powerful but you'll be able to fish"
+              " for longer\n[Stamina: 6, Fishing Power: 4]")
+    elif rod == "Power Rod":
+        print("Good choice! That rod is quite powerful. It's a little heavy, but I'd say catching fish will be a bit "
+              "easier.\n[Stamina: 4, Fishing Power: 6]")
+    time.sleep(2)
     print(f'So, "{name}, have you fished before?"')
-    message_fish = """Input your response
-    1 - Yes
-    2 - No"""
-    check.check_response(message_fish, 2)
+    message_fish = """Input your response:
+    1 - No, I'm completely new!
+    2 - Yes, but I'm a bit rusty!
+    3 - Yes, I'm a pro!
+    """
+    answer_fish = user_action.get_response(message_fish, 3)
+    if answer_fish == 1:
+        print('"Bahahaha! A real treat! Don\'t fret, little guppy, I\'ll show you the ropes."')
+    elif answer_fish == 2:
+        print('"No need to fret, we all need a refresher from time to time!"')
+    elif answer_fish == 3:
+        print("A pro, eh? Forgive me for assuming yer new! Don't let me hold you up then. Best of luck,", name + "!")
+    if answer_fish in {1, 2}:
+        # tutorial
+        pass
 
 
 def print_area_scene(character):
@@ -140,7 +163,8 @@ def print_area_scene(character):
 ██║██║╚██╗██║██║   ██║   ██║██║   ██║██║╚██╔╝██║    ██║     ██╔══██║██╔═██╗ ██╔══╝  
 ██║██║ ╚████║██║   ██║   ██║╚██████╔╝██║ ╚═╝ ██║    ███████╗██║  ██║██║  ██╗███████╗
 ╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝     ╚═╝    ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
-⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖""")
+⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖
+""")
     elif character["Level"] == 2:
         print("Good luck, " + character["Name"] + ", and enjoy your journey.")
         print("cool ascii art of level 2 area name")
