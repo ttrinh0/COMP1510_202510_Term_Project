@@ -2,49 +2,12 @@
 Module info
 """
 
-import just_print
+import print_or_scene
 import setup
 import check
-import random
+import user_action
 import time
 from color50 import rgb, constants
-
-
-def get_user_choice():
-    """
-    Ask the user which direction they would like to move and return the corresponding direction.
-
-    :postcondition: return a string representing the direction the user's input corresponds to
-    :return direction: a string representing the direction the user's input corresponds to
-    """
-    choice = False
-    while choice is False:
-        print("Enter a Command!\n"
-              "Movement:\t\tAction:\t\t\tCharacter:\n"
-              "W - North\t\t1 - Fish\t\t3 - Character Profile\n"
-              "A - West\t\t2 - Interact\t4 - Fish Collection\n"
-              "S - South\n"
-              "D - East")
-        user_input = input(rgb(0, 255, 255) + "Type your command here: " + constants.RESET)
-        if user_input.strip().lower() == "w":
-            choice = "North"
-        elif user_input.strip().lower() == "a":
-            choice = "West"
-        elif user_input.strip().lower() == "s":
-            choice = "South"
-        elif user_input.strip().lower() == "d":
-            choice = "East"
-        elif user_input.strip() == "1":
-            choice = "Fish"
-        elif user_input.strip() == "2":
-            choice = "Interact"
-        elif user_input.strip() == "3":
-            choice = "Profile"
-        elif user_input.strip() == "4":
-            choice = "Collection"
-        else:
-            choice = False
-    return choice
 
 
 def move_character(character, direction):
@@ -80,65 +43,6 @@ def move_character(character, direction):
         character["X-coordinate"] -= 1
 
 
-def fishing_game(character, game_parameters):  # Have to add character stats
-    """
-    Execute a fishing mini-game.
-
-    The user inputs the specified key a randomly determined amount of times.
-
-    :param game_parameters: a dictionary containing the game parameters
-    :param character: a dictionary containing the character information
-    :precondition: user input must input a key
-    :precondition: character must be a dictionary
-    :precondition: character must contain the keys "Stamina", "Fishing Power", "Level", and "Fish Caught", all with
-                   values of integers
-    :postcondition: decreases the character's stamina by one if the user loses the game
-    :postcondition: does not alter character's stamina if the user wins the game
-    :postcondition: increases the character's Fish Caught count if the user wins the game
-    :postcondition: prints "HIT!" when the user correctly inputs a key
-    :postcondition: prints a statement that the fish gets away and the character's stamina decreases if the user loses
-                    the game
-    :postcondition: prints "Gotcha!" if the user wins the game
-    :return False: a Boolean with the value of False if character loses the mini-game
-    :return True: a Boolean with the value of True if character wins the mini-game
-    """
-    level = character["Level"]
-    # fishing_power = character["Fishing Power"]
-    input_time = game_parameters["Input Time"][level]
-    wait_time = random.randint(1, 3)
-    fish_reel = random.randint(2, 4)
-    # The amount of times you have to do it is determined by the level base - fishing power
-    # The higher your fishing power, the fewer times you have to reel
-    win_count = 0
-    print(f"You cast your rod.\nInput the specified key within {input_time} seconds when prompted!")
-    for _ in range(wait_time):
-        time.sleep(1)
-        print("...")
-    time.sleep(1)
-    print("\nSomething hooks!")
-    for _ in range(fish_reel):
-        # The keys you need to press will be from 1 to your level + 1
-        key = random.randint(1, level + 1)
-        start_time = time.time()
-        user_input = input(f"><(((º> Input {key}!\n")
-        # the time you have to press the key will decrease depending on your level
-        if time.time() - start_time > 3.0 or user_input != str(key):
-            character["Stamina"] -= 1
-            print("\nThe fish breaks free and gets away...\n"
-                  "Your stamina decreases by 1\n"
-                  "Current stamina:", character["Stamina"])
-            return False
-        else:
-            print("\tHIT!")
-            time.sleep(random.randint(0, 3))
-            win_count += 1
-            continue
-    if win_count == fish_reel:
-        character["Fish Caught"] += 1
-        print("Gotcha!")
-        return True
-
-
 def add_fish_to_collection(character, fish):
     """
     Add fish into player collection.
@@ -164,11 +68,12 @@ def game():
     complete_fish_collection = setup.make_fish_collection()
     game_parameters = setup.create_game_parameters()
     achieved_goal = False
-    just_print.print_area_scene(character)
+    print_or_scene.print_area_scene(character)
+    print_or_scene.starting_scene(character)
     while check.is_alive(character) and not achieved_goal:
-        just_print.ascii_board(board, character)
-        just_print.describe_current_location(board, character)
-        choice = get_user_choice()
+        print_or_scene.ascii_board(board, character)
+        print_or_scene.describe_current_location(board, character)
+        choice = user_action.get_user_choice()
         action = check.process_choice(choice)
         if action == "Movement":
             valid_move = check.validate_move(board, character, choice)
@@ -182,20 +87,20 @@ def game():
         # Create function to check if there's something on the map
         # If yes, print text/dialogue
         elif action == "Profile":
-            just_print.print_player_info(character)
+            print_or_scene.print_player_info(character)
         elif action == "Collection":
-            just_print.print_fish_collection(character)
+            print_or_scene.print_fish_collection(character)
         elif action == "Fish":
             there_is_a_fish = check.check_for_fish()
             if there_is_a_fish:
-                win = fishing_game(character, game_parameters)
+                win = user_action.fishing_game(character, game_parameters)
                 if win:
                     fish = check.check_fish_type(character, complete_fish_collection)
                     if check.check_fish_in_collection(character, fish):
                         add_fish_to_collection(character, fish)
                         check.level_up(character, complete_fish_collection)
                         check.final_conditions(character)
-                just_print.print_fish_collection(character)
+                print_or_scene.print_fish_collection(character)
                 print()
                 time.sleep(1)
     if achieved_goal:

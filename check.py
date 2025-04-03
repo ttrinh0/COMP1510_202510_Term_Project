@@ -2,7 +2,7 @@
 Module of functions that do checks and validations.
 """
 import random
-import just_print
+import print_or_scene
 import time
 
 
@@ -71,33 +71,13 @@ def check_for_fish():
     if enemy_encounter != 1:
         return True
     else:
+        print("You cast your rod.")
         for _ in range(2):
             print("...")
             time.sleep(1)
         print("Nothing's biting.")
         time.sleep(1)
         return False
-
-
-def check_response(message, options):
-    """
-
-    :param message: a string
-    :param options: a positive integer
-    :return user_input: a string containing the number that represents the player's choice
-    """
-    response = False
-
-    while response is False:
-        user_input = input(message)
-        user_options = []
-        for number in range(1, options + 1):
-            user_options.append(str(number))
-        if user_input in user_options:
-            return user_input
-        else:
-            print("Please enter a valid option!")
-
 
 
 def check_fish_type(character, complete_fish_collection):
@@ -185,6 +165,9 @@ def level_up(character, complete_fish_collection):
         if player_collection[fish] != collection_check[fish]:
             return False
     character["Level"] += 1
+    character["Stamina"] += 1
+    character["Max Stamina"] += 1
+    character["Fishing Power"] += 1
     if character["Level"] == 2:
         character["Title"] = "Adept Fisher"
     if character["Level"] == 3:
@@ -193,7 +176,7 @@ def level_up(character, complete_fish_collection):
         character["Title"] = "Legendary Fisher"
     print("Congratulations! You leveled up!\nYou are now level " + str(character["Level"]) + ", " +
           character["Title"] + ".")
-    just_print.print_area_scene(character)
+    print_or_scene.print_area_scene(character)
     return True
 
 

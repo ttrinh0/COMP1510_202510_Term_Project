@@ -1,5 +1,5 @@
 """
-
+Module of functions that set up the game.
 """
 import random
 
@@ -17,7 +17,8 @@ def make_board(rows, columns, level=1):
     :precondition: either rows or columns must be greater than one
     :postcondition: a dictionary with keys that are tuples containing the coordinates of the board
     :postcondition: a dictionary with values containing a string representing the name of a game location
-    :return coordinates: a dictionary containing key-value pairs that represent the coordinate and name of the game location
+    :return coordinates: a dictionary containing key-value pairs that represent the coordinate and name of the game
+    location
     """
     coordinates = {}
     room_description = ["", ""]  # random generated square names/descriptions
@@ -92,17 +93,22 @@ def make_fish_collection():  # REVISE FISH NAMES AND DESC
 
     :return:
     """
-    fish_collection_area_one = {1: ('Catfish', 'fish desc'), 2: ('fish name', 'fish desc'), 3: ('Neon Tetra', 'fish desc')}
-    fish_collection_area_two = {4: ('Dogfish', 'Weird dog, er-- fish.'), 5: ('fish name', 'fish desc'), 6: ('fish name', 'fish desc')}
-    fish_collection_area_three = {7: ('Tuna', "Can't piano a tuna, but you can tuna piano! Hey, what's this glue doing here?"), 8: ('Bigfish', "It's big, it's blue, it's... incredibly shiny"), 9: ('fish name', 'fish desc'), 10: ('fish name', 'fish desc')}
+    fish_collection_area_one = {1: ('Catfish', 'fish desc'), 2: ('fish name', 'fish desc'),
+                                3: ('Neon Tetra', 'fish desc')}
+    fish_collection_area_two = {4: ('Dogfish', 'Weird dog, er-- fish.'), 5: ('fish name', 'fish desc'),
+                                6: ('fish name', 'fish desc')}
+    fish_collection_area_three = {7: ('Tuna', "Can't piano a tuna, but you can tuna piano! Hey, what's this glue doing "
+                                              "here?"), 8: ('Bigfish', "It's big, it's blue, it's... incredibly shiny"),
+                                  9: ('fish name', 'fish desc'), 10: ('fish name', 'fish desc')}
 
     return fish_collection_area_one, fish_collection_area_two, fish_collection_area_three
+
 
 def create_game_parameters():
     """
 
     :return:
     """
-    game_parameters = {"Input Time": {1: 3.0, 2: 2.5, 3: 2.0, 4: 1.5}}
+    game_parameters = {"Input Time": {1: 3.0, 2: 2.5, 3: 2.0, 4: 1.0}, "Fish Reel": {1: 8, 2: 10, 3: 15, 4: 20}}
 
     return game_parameters
