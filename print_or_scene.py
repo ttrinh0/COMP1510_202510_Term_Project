@@ -5,6 +5,7 @@ import time
 import setup
 import user_action
 from table2ascii import table2ascii, PresetStyle
+from color50 import rgb, constants
 
 
 def ascii_board(board, character):
@@ -102,43 +103,47 @@ def area_one_scene(character):
     :param character:
     :return:
     """
-    print('"Hey!"')
+    print(rgb(240, 230, 150) + '"Hey!"')
     time.sleep(1)
-    print('"You!"')
+    print('"You!"' + constants.RESET)
     time.sleep(2)
-    print("You look around and a man fully decked out in fish gear catches your eye.You are amazed at his complete\n"
-          "fisher outfit and just how many fish related accessories he has attached to his belt.")
+    print(
+        "\nYou look around and a man fully decked out in fish gear catches your eye. You are amazed at just how many \n"
+        "fish related accessories he has attached to his belt.")
+    time.sleep(2)
+    print("\nHe enthusiastically waves at you as he drives his boat next to yours.")
     time.sleep(1)
-    print("He enthusiastically waves at you as he drives his boat next to yours.")
-    time.sleep(3)
-    print('"Bahahaha! You\'re new here, aren\'tcha."')
-    print('"What\'s your name, newbie?"')
+    print(rgb(240, 230, 150) + '\n"Bahahaha! You\'re new here, aren\'tcha."')
+    print('"What\'s your name, newbie?"\n' + constants.RESET)
     name = setup.get_name(character)
-    print(f'"{name}? That\'s a fine name! They call me Marlin."')
+    print(rgb(240, 230, 150) + f'\n"{name}? That\'s a fine name! They call me Marlin."')
     time.sleep(1)
-    print("Is that a new fishing rod? It's got that new rod smell.")
+    print('\n"Is that a new fishing rod? It\'s got that new rod smell."')
     time.sleep(1)
-    print("Hey! I know that that brand, which version did you get?")
+    print('"Hey! I know that that brand, which version did you get?"\n' + constants.RESET)
+    time.sleep(1)
     rod = setup.choose_rod(character)
-    print(f"The {rod}, eh?")
+    print(rgb(240, 230, 150) + f"\nThe {rod}, eh?")
     if rod == "Stamina Rod":
-        print("Good choice! That rod is light and easy on the body. Might not be as powerful but you'll be able to fish"
-              " for longer\n[Stamina: 6, Fishing Power: 4]")
+        print('"Good choice! That rod is light and easy on the body. Might not be as powerful but you\'ll be able to '
+              'fish for longer.' + constants.RESET + '\n[Stamina: 6, Fishing Power: 4]\n')
     elif rod == "Power Rod":
-        print("Good choice! That rod is quite powerful. It's a little heavy, but I'd say catching fish will be a bit "
-              "easier.\n[Stamina: 4, Fishing Power: 6]")
-    time.sleep(2)
-    print(f'So, "{name}, you need some pointers?"')
-    message_fish = """Input your response:
+        print('"Good choice! That rod is quite powerful. It\'s a little heavy, but I\'d say catching fish will be a bit'
+              ' easier."' + constants.RESET + '\n[Stamina: 4, Fishing Power: 6]\n')
+    time.sleep(1)
+    print(rgb(240, 230, 150) + f'"So, {name}, you need some pointers on how to fish?"\n' + constants.RESET)
+    message_fish = rgb(0, 255, 255) + """Do you want to hear the tutorial?:
     1 - Yes please!
     2 - No thanks! I can figure it out!
-    """
+""" + constants.RESET
     answer_fish = user_action.get_response(message_fish, 2)
-    if answer_fish == 1:
-        print('"Bahahaha! Don\'t fret, little guppy, I\'ll show you the ropes."')
+    if answer_fish == "1":
+        print(rgb(240, 230, 150) + '\n"Bahahaha! Don\'t fret, little guppy, I\'ll show you the ropes."'
+              + constants.RESET)
         print_fishing_demo()
-    elif answer_fish == 2:
-        print('Well, don\'t let me hold you up then. Best of luck,", name + "!"')
+    elif answer_fish == "2":
+        print(rgb(240, 230, 150) + 'Well, don\'t let me hold you up then. Best of luck,", name + "!"'
+              + constants.RESET)
 
 
 def print_fishing_demo():
@@ -150,7 +155,7 @@ def print_fishing_demo():
     repeat = False
     while not repeat:
         time.sleep(1)
-        print('"Listen here and pay attention, my friend"')
+        print(rgb(240, 230, 150) + '"Listen here and pay attention, my friend"\n' + constants.RESET)
         time.sleep(2)
         print('He takes his fishing rod and gracefully casts it into the lake.')
         time.sleep(1)
@@ -158,35 +163,40 @@ def print_fishing_demo():
         time.sleep(1)
         print("...")
         time.sleep(1)
-        print("\nSomething hooks!")
+        print("Something hooks!\n")
         time.sleep(1)
-        print('"This is where the challenge really begins!"')
+        print(rgb(240, 230, 150) + '"This is where the challenge really begins!"\n')
         time.sleep(2)
-        print('"You\'ll feel a tug, each time you feel it. You\'re gonna wanna reel and pull it back!"')
+        print('"You\'ll feel a tug, each time you feel it. You\'re gonna wanna reel and pull it back!"'
+              + constants.RESET)
         print("[A message will pop up, prompting you to input a key.]")
-        print('[><(((º> Input 2!]')
         time.sleep(1)
-        print('[When you see this message, input the number you see. In this case, enter 2.]')
-        print('"And don\'t let your mind wander! If you\'re too slow, the fish will get away!"')
-        print('[If you\'re successful, you\'ll get a "HIT!" message]')
-        time.sleep(1)
-        print("\tHIT!")
+        print('[><(((º> Input 2!]\n')
         time.sleep(2)
-        print('"You\'ll have to do this a couple times before you\'re able to catch the fish."')
-        print('"I think that\'s about all from me. Do you need me to go over it again?"')
-        repeat_message = """
-        Would you like to see the tutorial again?:
-        1 - No
-        2 - Yes"""
+        print('[When you see this message, input the number you see. In this case, enter 2.]\n')
+        print(rgb(240, 230, 150) + '"And don\'t let your mind wander! If you\'re too slow, '
+                                   'the fish will get away!"' + constants.RESET)
+        print('[If you\'re successful, you\'ll get a "HIT!" message]\n')
+        time.sleep(1)
+        print(rgb(255, 255, 0) + "\tHIT!\n" + constants.RESET)
+        time.sleep(2)
+        print(rgb(240, 230, 150) + '"You\'ll have to do this a couple times before you\'re able to catch the fish."\n')
+        print('"I think that\'s about all from me. Do you need me to go over it again?"' + constants.RESET)
+        repeat_message = rgb(0, 255, 255) + """Would you like to see the tutorial again?:
+    1 - Yes, I need to hear it again!
+    2 - No, I got it!
+    """ + constants.RESET
         repeat = user_action.get_response(repeat_message, 2)
-        if repeat == 1:
-            print("He nods.")
-            print("You'll run into some more challenging fish as you go on your fisher journey.\n"
-                  "Bet you're also looking to catch the Final Fishtasy, eh?")
-            repeat = True
-        elif repeat == 2:
-            print('"You need to hear it again? Alrighty."')
+        if repeat == "1":
+            print(rgb(240, 230, 150) + '\n"You need to hear it again? Alrighty."' + constants.RESET)
             repeat = False
+        elif repeat == "2":
+            print("\tHe nods.\n")
+            print(rgb(240, 230, 150) + "You'll run into some more challenging fish as you go on your fisher journey.\n"
+                                       "Bet you're also looking to catch the Final Fishtasy, eh?")
+            print('"Best of luck, my friend!"' + constants.RESET)
+            print("࿔･ﾟ﹏𓊝﹏༄.°\n\n")
+            repeat = True
 
 
 def print_area_scene(character):

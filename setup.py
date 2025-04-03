@@ -2,6 +2,7 @@
 Module of functions that set up the game and initial character stats.
 """
 import random
+from color50 import rgb, constants
 
 
 def make_board(rows, columns, level=1):
@@ -65,7 +66,7 @@ def get_name(character):
     :postcondition: the "Name" key in character has a value of the inputted string
     :return name: a string of the player's inputted name
     """
-    name = input("What's your name?: ")
+    name = input(rgb(0, 255, 255) + "What's your name?: " + constants.RESET)
     character["Name"] = name
     return name
 
@@ -78,10 +79,10 @@ def choose_rod(character):
     :postcondition:
     :return rod: a string of either "Stamina Rod" or "Power Rod" depending on which the player picked
     """
-    print("Which rod did you pick?: ")
+    print(rgb(0, 255, 255) + "Which rod did you pick?: ")
     rod = False
     while rod is False:
-        rod = input("1. Stamina Rod\n2. Power Rod\n")
+        rod = input("\t1 - Stamina Rod\n\t2 - Power Rod\n" + constants.RESET)
         if rod == "1":
             rod = "Stamina Rod"
             character["Stamina"] = 6
@@ -93,7 +94,8 @@ def choose_rod(character):
             character["Max Stamina"] = 4
             character["Fishing Power"] = 6
         elif rod != "1" or rod != "2":
-            print('"Sorry, I didn\'t quite catch that!" (Please enter 1 or 2 to select your fishing rod)')
+            print(rgb(240, 230, 150) + '"Sorry, I didn\'t quite catch that!"')
+            print(rgb(255, 175, 175) + '(Please enter 1 or 2 to select your fishing rod)' + constants.RESET)
             rod = False
     return rod
 

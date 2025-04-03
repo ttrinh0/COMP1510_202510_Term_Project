@@ -157,13 +157,13 @@ def get_response(message, options):
     :return user_input: a string containing the number that represents the player's choice
     """
     response = False
-
+    user_options = []
+    for number in range(1, options + 1):
+        user_options.append(str(number))
     while response is False:
         user_input = input(message)
-        user_options = []
-        for number in range(1, options + 1):
-            user_options.append(str(number))
         if user_input in user_options:
-            return user_input
+            response = user_input
+            return response
         else:
-            print("Please enter a valid option!")
+            print(rgb(255, 175, 175) + "Please enter a valid option!" + constants.RESET)
