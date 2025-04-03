@@ -97,7 +97,6 @@ def print_fish_collection(character, collection=False):
                 print(fish_name + ": " + fish_description)
 
 
-
 def print_player_info(character):
     """
     Print the player's information.
@@ -186,8 +185,8 @@ def print_fishing_demo():
         time.sleep(1)
         print(rgb(240, 230, 150) + '"This is where the challenge really begins!"\n')
         input(rgb(150, 195, 215) + "♦ Press enter to continue ♦" + constants.RESET)
-        print('"You\'ll feel a tug, each time you feel it. You\'re gonna wanna reel and pull it back!"'
-              + constants.RESET)
+        print(rgb(240, 230, 150) + '"You\'ll feel a tug, each time you feel it. You\'re gonna wanna reel'
+                                   ' and pull it back!"' + constants.RESET)
         print("[A message will pop up, prompting you to input a key.]")
         time.sleep(1)
         print('[><(((º> Input 2!]\n')
@@ -212,8 +211,9 @@ def print_fishing_demo():
         elif repeat == "2":
             print("\nHe nods.\n")
             print(rgb(240, 230, 150) + '"You\'ll run into some more challenging fish as you go on your '
-                                       'fisher journey.\nBet you\'re also looking to catch the Final Fishtasy, eh?')
-            print('Best of luck, my friend!"' + constants.RESET)
+                                       'fisher journey.\nBet you\'re also looking to catch the Final Fishasy, eh?')
+            print('Best of luck, my friend!"\n' + constants.RESET)
+            input(rgb(150, 195, 215) + "♦ Press enter to continue ♦" + constants.RESET)
             print("\n\n࿔･ﾟ﹏𓊝﹏༄.°\n\n")
             repeat = True
 
@@ -244,15 +244,24 @@ def start_up():
 ██╔══╝  ██║██║╚██╗██║██╔══██║██║                             
 ██║     ██║██║ ╚████║██║  ██║███████╗                        
 ╚═╝     ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝                        
-███████╗██╗███████╗██╗  ██╗████████╗ █████╗ ███████╗██╗   ██╗      /`·.¸
-██╔════╝██║██╔════╝██║  ██║╚══██╔══╝██╔══██╗██╔════╝╚██╗ ██╔╝     /¸...¸`:·  
-█████╗  ██║███████╗███████║   ██║   ███████║███████╗ ╚████╔╝   ¸.·´  ¸   `·.¸.·´)  
-██╔══╝  ██║╚════██║██╔══██║   ██║   ██╔══██║╚════██║  ╚██╔╝   : © ):´;      ¸  {   
-██║     ██║███████║██║  ██║   ██║   ██║  ██║███████║   ██║     `·.¸ `·  ¸.·´\`·¸)
-╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚══════╝   ╚═╝         `\\´´\¸.·´
-Final Fishtasy
+███████╗██╗███████╗██╗  ██╗ █████╗ ███████╗██╗   ██╗      /`·.¸
+██╔════╝██║██╔════╝██║  ██║██╔══██╗██╔════╝╚██╗ ██╔╝     /¸...¸`:·  
+█████╗  ██║███████╗███████║███████║███████╗ ╚████╔╝   ¸.·´  ¸   `·.¸.·´)  
+██╔══╝  ██║╚════██║██╔══██║██╔══██║╚════██║  ╚██╔╝   : © ):´;      ¸  {   
+██║     ██║███████║██║  ██║██║  ██║███████║   ██║     `·.¸ `·  ¸.·´\`·¸)
+╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝   ╚═╝         `\\´´\¸.·´
+Final Fishasy
 """)
     input(rgb(255, 255, 255) + "♦ Press enter to continue ♦" + constants.RESET)
+    print("Today is the day.\n"
+          "T"
+          "he day you're going to start your fishing journey!")
+    input(rgb(150, 195, 215) + "♦ Press enter to continue ♦" + constants.RESET)
+    print("Recently, a story had been popping up around town about a legendary fish called\n\n"
+          "\tThe Final Fishasy"
+          "\n\nAnd you're gonna be the one who will catch it!\n"
+          "You gather you equipment and make your way out the door.")
+    input(rgb(150, 195, 215) + "♦ Press enter to continue ♦" + constants.RESET)
 
 
 def print_area_scene(character):
@@ -303,7 +312,7 @@ def print_area_scene(character):
   ⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖
     """)
     elif character["Level"] == 4:
-        print("\nThis is it. You go to Ultimo Lake. Home of the Final Fishtasy")
+        print("\nThis is it. You go to Ultimo Lake. Home of the Final Fishasy")
         print("""
 ⊹࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪˖
 ██╗   ██╗██╗  ████████╗██╗███╗   ███╗ ██████╗     ██╗      █████╗ ██╗  ██╗███████╗
