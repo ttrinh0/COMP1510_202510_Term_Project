@@ -40,6 +40,7 @@ def get_user_choice():
             choice = "Collection"
         else:
             choice = False
+            print(rgb(255, 175, 175) + "Please enter a valid option!" + constants.RESET)
     return choice
 
 

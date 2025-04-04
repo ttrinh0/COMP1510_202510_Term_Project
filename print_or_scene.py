@@ -5,6 +5,7 @@ import random
 import time
 import setup
 import user_action
+import itertools
 from table2ascii import table2ascii, PresetStyle
 from color50 import rgb, constants
 
@@ -66,12 +67,43 @@ def describe_current_location(board, character):
     print(message)
 
 
-def print_fish_collection(character, collection=False):
-    """
-    Print the player's fish collection.
+# def print_fish_collection(character, collection=False):
+#     """
+#     Print the player's fish collection.
+#
+#     :param collection:
+#     :param character:
+#     """
+#     fish_list = sorted(character["Fish Collection"].items())
+#     print("\tFish Collection")
+#     print("-" * 23)
+#     for number, fish in enumerate(fish_list, 1):
+#         print(f"{number}: {fish[1][0]}")
+#     print("-" * 23)
+#     if not collection:
+#         input(rgb(125, 170, 190) + "♦ Press enter to continue ♦" + constants.RESET)
+#     else:
+#         user_message = rgb(0, 255, 255) + "Enter the number of a fish to view or q to go back.\n" + constants.RESET
+#         user_continue = False
+#         while not user_continue:
+#             user_input = user_action.get_response(user_message, 11, True)
+#             if user_input == "q":
+#                 user_continue = True
+#             else:
+#                 fish_name = character["Fish Collection"][int(user_input)][0]
+#                 if fish_name == "???":
+#                     fish_description = "You have not unlocked this fish yet!"
+#                 else:
+#                     fish_description = character["Fish Collection"][int(user_input)][1]
+#                 print(fish_name + ": " + fish_description)
 
-    :param collection:
+
+def print_fish_list(character, collection=False):
+    """
+
     :param character:
+    :param collection:
+    :return:
     """
     fish_list = sorted(character["Fish Collection"].items())
     print("\tFish Collection")
@@ -82,19 +114,35 @@ def print_fish_collection(character, collection=False):
     if not collection:
         input(rgb(125, 170, 190) + "♦ Press enter to continue ♦" + constants.RESET)
     else:
-        user_message = "Enter the number of a fish to view or q to go back.\n"
-        user_continue = False
-        while not user_continue:
-            user_input = user_action.get_response(user_message, 11, True)
-            if user_input == "q":
-                user_continue = True
-            else:
-                fish_name = character["Fish Collection"][int(user_input)][0]
-                if fish_name == "???":
-                    fish_description = "You have not unlocked this fish yet!"
-                else:
-                    fish_description = character["Fish Collection"][int(user_input)][1]
-                print(fish_name + ": " + fish_description)
+        cycle_fish(character)
+
+def cycle_fish(character):
+    """
+
+    :param character:
+    :return:
+    """
+    fish_list = [fish for fish in character["Fish Collection"].values()]
+    fish_generator = itertools.cycle(fish_list)
+    user_message = rgb(0, 255, 255) + "Enter the number of a fish to view or q to go back.\n" + constants.RESET
+    fish_start = user_action.get_response(user_message, 11, True)
+    if fish_start == "q":
+        return False
+    fish_generator = itertools.islice(fish_generator, int(fish_start) - 1, None)
+    user_input = False
+    while not user_input:
+        name = next(fish_generator)
+        if name == ('???', '???'):
+            name = ("???", "You have not unlocked this fish yet!")
+        print(rgb(255, 255, 255) + name[0] + constants.RESET + ": " + name[1])
+        user_input = input(rgb(0, 255, 255) + "press d to view the next fish, q to quit\n" + constants.RESET)
+        if user_input == "q":
+            user_input = True
+        elif user_input == "d":
+            user_input = False
+        else:
+            print(rgb(255, 175, 175) + "Please enter a valid option!" + constants.RESET)
+            user_input = False
 
 
 def print_player_info(character):

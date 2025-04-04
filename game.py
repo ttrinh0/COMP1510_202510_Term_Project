@@ -6,7 +6,6 @@ import print_or_scene
 import setup
 import check
 import user_action
-import time
 from color50 import rgb, constants
 
 
@@ -43,10 +42,13 @@ def game():
 
         elif action == "Interact":
             print_or_scene.print_interact()
+
         elif action == "Profile":
             print_or_scene.print_player_info(character)
+
         elif action == "Collection":
-            print_or_scene.print_fish_collection(character, True)
+            print_or_scene.print_fish_list(character, True)
+
         elif action == "Fish":
             there_is_a_fish = check.check_for_fish()
             if there_is_a_fish:
@@ -56,7 +58,7 @@ def game():
                         user_action.add_fish_to_collection(character, fish)
                         check.level_up(character, complete_fish_collection)
                         check.final_conditions(character)
-                    print_or_scene.print_fish_collection(character)
+                    print_or_scene.print_fish_list(character)
     if achieved_goal:
         print(rgb(255, 255, 0) + "You made it to the end! Congratulations!" + constants.RESET)
     else:
