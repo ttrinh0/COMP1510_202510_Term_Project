@@ -139,8 +139,7 @@ def check_if_goal_attained(character):
     :return True: a Boolean with the value of True if the goal is attained
     :return False: a Boolean with the value of False if the direction is valid
     """
-    if (('Final Fishasy', 'The legendary fish... and now it\'s in your bucket.') in character["Fish Collection"].values()
-            and character["Stamina"] > 0):
+    if character["Level"] == 5 and character["Stamina"] > 0:
         return True
     else:
         return False
@@ -183,21 +182,21 @@ def level_up(character, complete_fish_collection):
     for fish in fish_numbers:
         if player_collection[fish] != collection_check[fish]:
             return False
-    if character["Level"] < 4:
-        character["Level"] += 1
-        character["Stamina"] += 1
-        character["Max Stamina"] += 1
-        character["Fishing Power"] += 1
-        if character["Level"] == 2:
-            character["Title"] = "Adept Fisher"
-        if character["Level"] == 3:
-            character["Title"] = "Expert Fisher"
-        if character["Level"] == 4:
-            character["Title"] = "Legendary Fisher"
-        print("Congratulations! You leveled up!\nYou are now level " + str(character["Level"]) + ", " +
-              character["Title"] + ".")
-    if character["Level"] == 4:
-        print("You did it!")
+    level += 1
+    character["Stamina"] += 1
+    character["Max Stamina"] += 1
+    character["Fishing Power"] += 1
+    if level == 2:
+        character["Title"] = "Adept Fisher"
+    elif level == 3:
+        character["Title"] = "Expert Fisher"
+    elif level == 4:
+        character["Title"] = "Legendary Fisher"
+    if level != 5:
+        print("Congratulations! You leveled up!\nYou are now level " + str(level) + ", " + character["Title"]
+              + ".")
+    if level == 5:
+        print("You did it! You caught it!")
     input(rgb(150, 195, 215) + "♦ Press enter to continue ♦" + constants.RESET)
     print_or_scene.print_area_scene(character)
     return True

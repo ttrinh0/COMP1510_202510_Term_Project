@@ -10,7 +10,7 @@ def create_game_parameters():
 
     :return:
     """
-    game_parameters = {"Input Time": {1: 3.0, 2: 2.5, 3: 2.0, 4: 1.0}, "Fish Reel": {1: 8, 2: 10, 3: 15, 4: 20},
+    game_parameters = {"Input Time": {1: 3.0, 2: 2.5, 3: 2.0, 4: 1.5}, "Fish Reel": {1: 8, 2: 10, 3: 15, 4: 20},
                        "Event Coordinates One": {(1, 1): "NPC", (4, 3): "NPC", (2, 4): "NPC"},
                        "Event Coordinates Two": {(1, 1): "NPC", (4, 3): "NPC", (2, 4): "NPC"},
                        "Event Coordinates Three": {(1, 1): "NPC", (4, 3): "NPC", (2, 4): "NPC"},

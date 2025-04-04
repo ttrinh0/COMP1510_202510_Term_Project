@@ -17,7 +17,7 @@ def game():
     rows = 5
     columns = 5
     game_parameters = setup.create_game_parameters()
-    board = setup.make_board(rows, columns)
+    board = setup.make_board(rows, columns, game_parameters)
     character = setup.make_character()
     complete_fish_collection = setup.make_fish_collection()
     achieved_goal = False
@@ -35,8 +35,6 @@ def game():
             valid_move = check.validate_move(board, character, choice)
             if valid_move:
                 user_action.move_character(character, choice)
-                check.check_for_flying_fish(character)
-                achieved_goal = check.check_if_goal_attained(character)
             else:
                 print(rgb(255, 175, 175) + "You can't move there! Pick another direction." + constants.RESET)
 
@@ -58,6 +56,7 @@ def game():
                         user_action.add_fish_to_collection(character, fish)
                         check.level_up(character, complete_fish_collection)
                         check.final_conditions(character)
+                        achieved_goal = check.check_if_goal_attained(character)
                     print_or_scene.print_fish_list(character)
     if achieved_goal:
         print(rgb(255, 255, 0) + "You made it to the end! Congratulations!" + constants.RESET)

@@ -122,7 +122,7 @@ def cycle_fish(character):
     :param character:
     :return:
     """
-    fish_list = [enumerate(fish for fish in character["Fish Collection"].values())]
+    fish_list = [fish for fish in character["Fish Collection"].values()]
     fish_generator = itertools.cycle(fish_list)
     user_message = rgb(0, 255, 255) + "Enter the number of a fish to view or q to go back.\n" + constants.RESET
     fish_start = user_action.get_response(user_message, 11, True)
@@ -375,6 +375,8 @@ def print_area_scene(character):
  ╚═════╝ ╚══════╝╚═╝   ╚═╝╚═╝     ╚═╝ ╚═════╝     ╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
 ⊹࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪˖
         """)
+    elif character["Level"] == 5:
+        print("\nYou go back home in triumph.")
 
 def print_end_scene(character):
     """
