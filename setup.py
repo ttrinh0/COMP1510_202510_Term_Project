@@ -5,12 +5,27 @@ import random
 from color50 import rgb, constants
 
 
-def make_board(rows, columns, level=1):
+def create_game_parameters():
+    """
+
+    :return:
+    """
+    game_parameters = {"Input Time": {1: 3.0, 2: 2.5, 3: 2.0, 4: 1.0}, "Fish Reel": {1: 8, 2: 10, 3: 15, 4: 20},
+                       "Event Coordinates One": {(1, 1): "NPC", (4, 3): "NPC", (2, 4): "NPC"},
+                       "Event Coordinates Two": {(1, 1): "NPC", (4, 3): "NPC", (2, 4): "NPC"},
+                       "Event Coordinates Three": {(1, 1): "NPC", (4, 3): "NPC", (2, 4): "NPC"},
+                       "Event Coordinates Final": {(1, 1): "NPC", (4, 3): "NPC", (2, 4): "NPC"}}
+
+    return game_parameters
+
+
+def make_board(rows, columns, game_parameters, level=1):
     """
     Return a dictionary that contains the coordinates and names of each spot on the game board.
 
     This function will create a game board with dimensions "rows" by "columns".
 
+    :param game_parameters:
     :param rows: a positive integer greater than zero
     :param columns: a positive integer greater than zero
     :param level: a positive integer between 1 and 4 inclusive, indicating player's level
@@ -26,17 +41,22 @@ def make_board(rows, columns, level=1):
     for number in range(rows):
         for element in range(columns):
             coordinates[(number, element)] = random.choice(room_description)
-    coordinates[(0, 0)] = ""  # if the start needs to have a specific name
-    coordinates[(rows - 1, columns - 1)] = ""  # if there's an end point
 
-    if level == 2:  # customization for level 2 map
-        pass
+    if level == 1:
+        for coordinate in game_parameters["Event Coordinates One"]:
+            coordinates[coordinate] = game_parameters["Event Coordinates One"][coordinate]
 
-    if level == 3:  # customization for level 3 map
-        pass
+    elif level == 2:  # customization for level 2 map
+        for coordinate in game_parameters["Event Coordinates Two"]:
+            coordinates[coordinate] = game_parameters["Event Coordinates Two"][coordinate]
 
-    if level == 4:  # customization for boss map
-        pass
+    elif level == 3:  # customization for level 3 map
+        for coordinate in game_parameters["Event Coordinates Three"]:
+            coordinates[coordinate] = game_parameters["Event Coordinates Three"][coordinate]
+
+    elif level == 4:  # customization for boss map
+        for coordinate in game_parameters["Event Coordinates Final"]:
+            coordinates[coordinate] = game_parameters["Event Coordinates Final"][coordinate]
 
     return coordinates
 
@@ -137,13 +157,3 @@ def make_fish_collection():  # REVISE FISH NAMES AND DESC
     final_fish = {11: ('Final Fishasy', 'The legendary fish... and now it\'s in your bucket.')}
     return fish_collection_area_one, fish_collection_area_two, fish_collection_area_three, final_fish
 
-
-def create_game_parameters():
-    """
-
-    :return:
-    """
-    game_parameters = {"Input Time": {1: 3.0, 2: 2.5, 3: 2.0, 4: 1.0}, "Fish Reel": {1: 8, 2: 10, 3: 15, 4: 20},
-                       "Event Coordinates One": 1}
-
-    return game_parameters

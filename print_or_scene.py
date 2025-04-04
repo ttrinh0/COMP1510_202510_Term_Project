@@ -100,7 +100,7 @@ def describe_current_location(board, character):
 
 def print_fish_list(character, collection=False):
     """
-
+    Print out
     :param character:
     :param collection:
     :return:
@@ -122,7 +122,7 @@ def cycle_fish(character):
     :param character:
     :return:
     """
-    fish_list = [fish for fish in character["Fish Collection"].values()]
+    fish_list = [enumerate(fish for fish in character["Fish Collection"].values())]
     fish_generator = itertools.cycle(fish_list)
     user_message = rgb(0, 255, 255) + "Enter the number of a fish to view or q to go back.\n" + constants.RESET
     fish_start = user_action.get_response(user_message, 11, True)
