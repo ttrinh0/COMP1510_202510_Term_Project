@@ -11,20 +11,21 @@ def create_game_parameters():
     :return:
     """
     game_parameters = {"Input Time": {1: 3.0, 2: 2.5, 3: 2.0, 4: 1.5}, "Fish Reel": {1: 8, 2: 10, 3: 15, 4: 20},
-                       "Event Coordinates One": {(1, 1): "NPC", (4, 3): "NPC", (2, 4): "NPC"},
-                       "Event Coordinates Two": {(1, 1): "NPC", (4, 3): "NPC", (2, 4): "NPC"},
-                       "Event Coordinates Three": {(1, 1): "NPC", (4, 3): "NPC", (2, 4): "NPC"},
-                       "Event Coordinates Final": {(1, 1): "NPC", (4, 3): "NPC", (2, 4): "NPC"}}
+                       "Event Coordinates One": {(0, 1): "Fisher1", (4, 3): "Fisher1", (2, 4): "Fisher1"},
+                       "Event Coordinates Two": {(1, 1): "Fisher2", (4, 4): "Fisher2", (3, 2): "Fisher2"},
+                       "Event Coordinates Three": {(1, 2): "Fisher3", (3, 0): "Fisher3", (4, 4): "Fisher3"},
+                       "Event Coordinates Final": {(2, 2): "Bubbling Spot"}}
 
     return game_parameters
 
 
-def make_board(rows, columns, game_parameters, level=1):
+def make_board(rows, columns):
     """
     Return a dictionary that contains the coordinates and names of each spot on the game board.
 
     This function will create a game board with dimensions "rows" by "columns".
 
+    :param character:
     :param game_parameters:
     :param rows: a positive integer greater than zero
     :param columns: a positive integer greater than zero
@@ -41,6 +42,20 @@ def make_board(rows, columns, game_parameters, level=1):
     for number in range(rows):
         for element in range(columns):
             coordinates[(number, element)] = random.choice(room_description)
+
+    return coordinates
+
+
+def add_on_board(game_parameters, coordinates, character):
+    """
+    Place NPCs and other visible objects onto the board depending on the player's level.
+
+    :param game_parameters:
+    :param coordinates:
+    :param character: a dictionary containing the player's information
+    :return:
+    """
+    level = character["Level"]
 
     if level == 1:
         for coordinate in game_parameters["Event Coordinates One"]:
@@ -59,16 +74,6 @@ def make_board(rows, columns, game_parameters, level=1):
             coordinates[coordinate] = game_parameters["Event Coordinates Final"][coordinate]
 
     return coordinates
-
-
-def add_on_board(character):
-    """
-    Place NPCs and other visible objects onto the board depending on the player's level.
-
-    :param character: a dictionary containing the player's information
-    :return:
-    """
-    pass
 
 
 def make_character():  # REDO DIALOGUE

@@ -10,7 +10,7 @@ from table2ascii import table2ascii, PresetStyle
 from color50 import rgb, constants
 
 
-def ascii_board(board, character):
+def ascii_board(board, character, game_parameters):
     """
     Print the game board using ascii.
 
@@ -30,8 +30,21 @@ def ascii_board(board, character):
         board_rows.append(board_spaces.copy())
         for element in range(columns):
             board_rows[number].append("  ")
-    board_rows[character["Y-coordinate"]][character["X-coordinate"]] = "⛵"
 
+    if character["Level"] == 1:
+        for coordinate in game_parameters["Event Coordinates One"]:
+            board_rows[coordinate[1]][coordinate[0]] = "⏅"
+    if character["Level"] == 2:
+        for coordinate in game_parameters["Event Coordinates Two"]:
+            board_rows[coordinate[1]][coordinate[0]] = "⏅"
+    if character["Level"] == 3:
+        for coordinate in game_parameters["Event Coordinates Three"]:
+            board_rows[coordinate[1]][coordinate[0]] = "⏅"
+    if character["Level"] == 4:
+        for coordinate in game_parameters["Event Coordinates Final"]:
+            board_rows[coordinate[1]][coordinate[0]] = "⏅"
+
+    board_rows[character["Y-coordinate"]][character["X-coordinate"]] = "⛵"
     output = table2ascii(
         body=board_rows,
         style=PresetStyle.ascii_box
