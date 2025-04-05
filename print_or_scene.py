@@ -32,16 +32,16 @@ def ascii_board(board, character, game_parameters):
             board_rows[number].append("  ")
 
     if character["Level"] == 1:
-        for coordinate in game_parameters["Event Coordinates One"]:
+        for coordinate in game_parameters["Level Map"]["Event Coordinates One"]:
             board_rows[coordinate[1]][coordinate[0]] = "⏅"
     if character["Level"] == 2:
-        for coordinate in game_parameters["Event Coordinates Two"]:
+        for coordinate in game_parameters["Level Map"]["Event Coordinates Two"]:
             board_rows[coordinate[1]][coordinate[0]] = "⏅"
     if character["Level"] == 3:
-        for coordinate in game_parameters["Event Coordinates Three"]:
+        for coordinate in game_parameters["Level Map"]["Event Coordinates Three"]:
             board_rows[coordinate[1]][coordinate[0]] = "⏅"
     if character["Level"] == 4:
-        for coordinate in game_parameters["Event Coordinates Final"]:
+        for coordinate in game_parameters["Level Map"]["Event Coordinates Final"]:
             board_rows[coordinate[1]][coordinate[0]] = "⏅"
 
     board_rows[character["Y-coordinate"]][character["X-coordinate"]] = "⛵"
@@ -76,39 +76,11 @@ def describe_current_location(board, character):
     """
     current_coordinates = (character["X-coordinate"], character["Y-coordinate"])
     location_description = board[current_coordinates]
-    message = "You are currently at " + str(current_coordinates) + ", " + location_description + "."
+    if type(location_description) == tuple:
+        message = rgb(240, 230, 150) + "You are currently at " + str(current_coordinates) + ". There's a fisher nearby." + constants.RESET
+    else:
+        message = rgb(240, 230, 150) + "You are currently at " + str(current_coordinates) + "." + constants.RESET
     print(message)
-
-
-# def print_fish_collection(character, collection=False):
-#     """
-#     Print the player's fish collection.
-#
-#     :param collection:
-#     :param character:
-#     """
-#     fish_list = sorted(character["Fish Collection"].items())
-#     print("\tFish Collection")
-#     print("-" * 23)
-#     for number, fish in enumerate(fish_list, 1):
-#         print(f"{number}: {fish[1][0]}")
-#     print("-" * 23)
-#     if not collection:
-#         input(rgb(125, 170, 190) + "♦ Press enter to continue ♦" + constants.RESET)
-#     else:
-#         user_message = rgb(0, 255, 255) + "Enter the number of a fish to view or q to go back.\n" + constants.RESET
-#         user_continue = False
-#         while not user_continue:
-#             user_input = user_action.get_response(user_message, 11, True)
-#             if user_input == "q":
-#                 user_continue = True
-#             else:
-#                 fish_name = character["Fish Collection"][int(user_input)][0]
-#                 if fish_name == "???":
-#                     fish_description = "You have not unlocked this fish yet!"
-#                 else:
-#                     fish_description = character["Fish Collection"][int(user_input)][1]
-#                 print(fish_name + ": " + fish_description)
 
 
 def print_fish_list(character, collection=False):
@@ -279,19 +251,45 @@ def print_fishing_demo():
             repeat = True
 
 
-def print_interact():
+def print_interact(character, game_parameters):
     """
 
     :return:
     """
-    regular_message_bank = {"The breeze is nice.",
-                            "You see other fishers fishing",
-                            "It's such a nice day today.",
-                            "You look into the water below you. It looks back are you"}
-    message = random.choice(list(regular_message_bank))
-    print(message)
+    coordinate = (character["X-coordinate"], character["Y-coordinate"])
+    level_maps = [level_map for level_map in game_parameters["Level Map"]]
+    level = character["Level"] - 1
+    current_map = level_maps[level]
+    if coordinate not in game_parameters["Level Map"][current_map]:
+        regular_message_bank = {"The breeze is nice.",
+                                "You see other fishers fishing",
+                                "It's such a nice day today.",
+                                "You look into the water below you. It looks back are you"}
+        message = random.choice(list(regular_message_bank))
+        print(message)
+
+    elif coordinate in game_parameters["Level Map"][current_map]:
+        print("You wave to the nearby fisher.")
+        # print(game_parameters["Level Map"][current_map][coordinate])
+        fisher_npc = game_parameters["Level Map"][current_map][coordinate][1]
+        print_fisher_npc(fisher_npc, character)
     input(rgb(125, 170, 190) + "♦ Press enter to continue ♦" + constants.RESET)
 
+
+def print_fisher_npc(fisher_npc, character):
+    """
+
+    :param fisher_npc:
+    :param character:
+    """
+    npc_has_talked = character["NPC Talk"][fisher_npc]
+    if fisher_npc == "Sally" and not npc_has_talked:
+        print("Sally waves back. You look hungry, take this.\nYou received an energy bar\n"
+              "[Stamina +1!]")
+        character["Stamina"] += 1
+        character["NPC Talk"][fisher_npc] = True
+    elif fisher_npc == "Sally" and npc_has_talked:
+        print("Sally says good luck.")
 
 def start_up():
     """

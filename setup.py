@@ -11,11 +11,12 @@ def create_game_parameters():
     :return:
     """
     game_parameters = {"Input Time": {1: 3.0, 2: 2.5, 3: 2.0, 4: 1.5}, "Fish Reel": {1: 8, 2: 10, 3: 15, 4: 20},
-                       "Event Coordinates One": {(0, 1): "Fisher1", (4, 3): "Fisher1", (2, 4): "Fisher1"},
-                       "Event Coordinates Two": {(1, 1): "Fisher2", (4, 4): "Fisher2", (3, 2): "Fisher2"},
-                       "Event Coordinates Three": {(1, 2): "Fisher3", (3, 0): "Fisher3", (4, 4): "Fisher3"},
-                       "Event Coordinates Final": {(2, 2): "Bubbling Spot"}}
-
+                       "Level Map": {
+                       "Event Coordinates One": {(0, 1): ("Fisher", "Sally"), (4, 3): ("Fisher", "Charles"),
+                                                 (2, 4): ("Fisher", "Rob")},
+                       "Event Coordinates Two": {(1, 1): ("Fisher", "Sharky"), (4, 4): ("Fisher", "Gilly"),
+                                                 (3, 2): ("Fisher", "Sandy")},
+                       "Event Coordinates Three": {(3, 0): ("Fisher", "Fish"), (4, 4): ("Fisher", "Aqua")}}}
     return game_parameters
 
 
@@ -25,11 +26,8 @@ def make_board(rows, columns):
 
     This function will create a game board with dimensions "rows" by "columns".
 
-    :param character:
-    :param game_parameters:
     :param rows: a positive integer greater than zero
     :param columns: a positive integer greater than zero
-    :param level: a positive integer between 1 and 4 inclusive, indicating player's level
     :precondition: both rows and columns must be a positive integer
     :precondition: either rows or columns must be greater than one
     :postcondition: a dictionary with keys that are tuples containing the coordinates of the board
@@ -42,7 +40,6 @@ def make_board(rows, columns):
     for number in range(rows):
         for element in range(columns):
             coordinates[(number, element)] = random.choice(room_description)
-
     return coordinates
 
 
@@ -58,20 +55,20 @@ def add_on_board(game_parameters, coordinates, character):
     level = character["Level"]
 
     if level == 1:
-        for coordinate in game_parameters["Event Coordinates One"]:
-            coordinates[coordinate] = game_parameters["Event Coordinates One"][coordinate]
+        for coordinate in game_parameters["Level Map"]["Event Coordinates One"]:
+            coordinates[coordinate] = game_parameters["Level Map"]["Event Coordinates One"][coordinate]
 
     elif level == 2:  # customization for level 2 map
-        for coordinate in game_parameters["Event Coordinates Two"]:
-            coordinates[coordinate] = game_parameters["Event Coordinates Two"][coordinate]
+        for coordinate in game_parameters["Level Map"]["Event Coordinates Two"]:
+            coordinates[coordinate] = game_parameters["Level Map"]["Event Coordinates Two"][coordinate]
 
     elif level == 3:  # customization for level 3 map
-        for coordinate in game_parameters["Event Coordinates Three"]:
-            coordinates[coordinate] = game_parameters["Event Coordinates Three"][coordinate]
+        for coordinate in game_parameters["Level Map"]["Event Coordinates Three"]:
+            coordinates[coordinate] = game_parameters["Level Map"]["Event Coordinates Three"][coordinate]
 
     elif level == 4:  # customization for boss map
-        for coordinate in game_parameters["Event Coordinates Final"]:
-            coordinates[coordinate] = game_parameters["Event Coordinates Final"][coordinate]
+        for coordinate in game_parameters["Level Map"]["Event Coordinates Final"]:
+            coordinates[coordinate] = game_parameters["Level Map"]["Event Coordinates Final"][coordinate]
 
     return coordinates
 
@@ -87,7 +84,8 @@ def make_character():  # REDO DIALOGUE
                          "Stamina": 1, "Max Stamina": 1, "Fishing Power": 1, "Fish Caught": 0, "Fish Limit": 0,
                          "Fish Collection": {1: ("???", "???"), 2: ("???", "???"), 3: ("???", "???"), 4: ("???", "???"),
                                              5: ("???", "???"), 6: ("???", "???"), 7: ("???", "???"), 8: ("???", "???"),
-                                             9: ("???", "???"), 10: ("???", "???"), 11: ("???", "???")}}
+                                             9: ("???", "???"), 10: ("???", "???"), 11: ("???", "???")},
+                         "NPC Talk": {"Sally": False, "Charles": False, "Rob": False, "Sharky": False, "Gilly": False, "Sandy": False, "Fish": False, "Aqua": False}}
     return character_profile
 
 

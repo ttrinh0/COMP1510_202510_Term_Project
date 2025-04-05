@@ -17,7 +17,7 @@ def game():
     rows = 5
     columns = 5
     game_parameters = setup.create_game_parameters()
-    board = setup.make_board(rows, columns, game_parameters)
+    board = setup.make_board(rows, columns)
     character = setup.make_character()
     complete_fish_collection = setup.make_fish_collection()
     achieved_goal = False
@@ -26,7 +26,7 @@ def game():
     print_or_scene.area_one_scene(character)
 
     while check.is_alive(character) and not achieved_goal:
-        print_or_scene.ascii_board(board, character)
+        print_or_scene.ascii_board(board, character, game_parameters)
         print_or_scene.describe_current_location(board, character)
         choice = user_action.get_user_choice()
         action = check.process_choice(choice)
@@ -39,7 +39,7 @@ def game():
                 print(rgb(255, 175, 175) + "You can't move there! Pick another direction." + constants.RESET)
 
         elif action == "Interact":
-            print_or_scene.print_interact()
+            print_or_scene.print_interact(character, game_parameters)
 
         elif action == "Profile":
             print_or_scene.print_player_info(character)
@@ -58,6 +58,11 @@ def game():
                         check.final_conditions(character)
                 achieved_goal = check.check_if_goal_attained(character)
                 print_or_scene.print_fish_list(character)
+
+    if achieved_goal:
+        print(rgb(255, 255, 0) + "You made it to the end! Congratulations!" + constants.RESET)
+    else:
+        print("Game Over.")
 
     if achieved_goal:
         print(rgb(255, 255, 0) + "You made it to the end! Congratulations!" + constants.RESET)

@@ -15,7 +15,7 @@ def get_user_choice():
     """
     choice = False
     while choice is False:
-        print("Enter a Command!\n"
+        print(rgb(150, 255, 230) + "Enter a Command!\n" + constants.RESET +
               "Movement:\t\tAction:\t\t\tCharacter:\n"
               "W - North\t\t1 - Fish\t\t3 - Character Profile\n"
               "A - West\t\t2 - Interact\t4 - Fish Collection\n"
