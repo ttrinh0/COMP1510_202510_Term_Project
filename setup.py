@@ -79,7 +79,7 @@ def make_character():  # REDO DIALOGUE
     :return: a dictionary containing character information
     """
     character_profile = {"X-coordinate": 0, "Y-coordinate": 0, "Level": 1, "Title": "Beginner Fisher", "Name": "",
-                         "Stamina": 1, "Max Stamina": 1, "Fishing Power": 1, "Fish Caught": 0,
+                         "Stamina": 1, "Max Stamina": 1, "Fishing Power": 1, "Fish Caught": 0, "Fish Limit": 0,
                          "Fish Collection": {1: ("???", "???"), 2: ("???", "???"), 3: ("???", "???"), 4: ("???", "???"),
                                              5: ("???", "???"), 6: ("???", "???"), 7: ("???", "???"), 8: ("???", "???"),
                                              9: ("???", "???"), 10: ("???", "???"), 11: ("???", "???")}}

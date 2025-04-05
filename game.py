@@ -13,7 +13,7 @@ def game():
     """
     Drive the game.
     """
-    print_or_scene.start_up()
+    # print_or_scene.start_up()
     rows = 5
     columns = 5
     game_parameters = setup.create_game_parameters()
@@ -48,7 +48,7 @@ def game():
             print_or_scene.print_fish_list(character, True)
 
         elif action == "Fish":
-            there_is_a_fish = check.check_for_fish()
+            there_is_a_fish = check.check_for_fish(character)
             if there_is_a_fish:
                 if user_action.fishing_game(character, game_parameters):
                     fish = check.check_fish_type(character, complete_fish_collection)

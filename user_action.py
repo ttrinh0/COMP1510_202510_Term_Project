@@ -135,7 +135,7 @@ def move_character(character, direction):
         character["X-coordinate"] += 1
     elif direction == "West":
         character["X-coordinate"] -= 1
-
+    character["Fish Limit"] = 0
 
 def add_fish_to_collection(character, fish):
     """

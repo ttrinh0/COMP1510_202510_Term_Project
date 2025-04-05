@@ -60,7 +60,7 @@ def validate_move(board, character, direction):
         return False
 
 
-def check_for_fish():
+def check_for_fish(character):
     """
     Check to see if a fish is on a space.
 
@@ -68,33 +68,25 @@ def check_for_fish():
     :return True: a Boolean with the value of True if there is a fish encounter
     :return False: a Boolean with the value of False if there is not a fish encounter
     """
-    enemy_encounter = random.randint(1, 3)
-    if enemy_encounter != 1:
-        return True
+    if character["Fish Limit"] <= 3:
+        character["Fish Limit"] += 1
+        enemy_encounter = random.randint(1, 3)
+        if enemy_encounter != 1:
+            return True
+        else:
+            print("You cast your rod.")
+            for _ in range(2):
+                print("...")
+                time.sleep(1)
+            print("Nothing's biting.")
+            time.sleep(1)
+            return False
     else:
         print("You cast your rod.")
         for _ in range(2):
             print("...")
             time.sleep(1)
-        print("Nothing's biting.")
-        time.sleep(1)
-        return False
-
-
-def check_for_flying_fish(character):
-    """
-    Check to see if a flying fish is on a space.
-
-    :postcondition: return True if there is a flying fish encounter, else return False
-    :return True: a Boolean with the value of True if there is a flying fish encounter
-    :return False: a Boolean with the value of False if there is not a flying fish encounter
-    """
-    enemy_encounter = random.randint(1, 10)
-    level = character["Level"]
-    if enemy_encounter == 1 and level == 3:
-        return True
-    else:
-        return False
+        print("Nothing's biting. It might be time to move to another spot.")
 
 
 def check_fish_type(character, complete_fish_collection):
