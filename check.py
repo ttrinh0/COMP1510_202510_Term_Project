@@ -3,6 +3,7 @@ Module of functions that do checks and validations.
 """
 import random
 import print_or_scene
+import setup
 from color50 import rgb, constants
 import time
 
@@ -160,9 +161,10 @@ def is_alive(character):
         return False
 
 
-def level_up(character, complete_fish_collection):
+def level_up(character, complete_fish_collection, game_parameters):
     """
 
+    :param game_parameters:
     :param character:
     :param complete_fish_collection:
     :return:
@@ -184,7 +186,8 @@ def level_up(character, complete_fish_collection):
     elif character["Level"] == 4:
         character["Title"] = "Legendary Fisher"
     if character["Level"] != 5:
-        print("Congratulations! You leveled up!\nYou are now level " + str(character["Level"]) + ", " + character["Title"]
+        print(
+            "Congratulations! You leveled up!\nYou are now level " + str(character["Level"]) + ", " + character["Title"]
               + ".")
     if character["Level"] == 5:
         print("You did it! You caught it!")

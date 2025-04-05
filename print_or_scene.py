@@ -42,7 +42,7 @@ def ascii_board(board, character, game_parameters):
             board_rows[coordinate[1]][coordinate[0]] = "⏅"
     if character["Level"] == 4:
         for coordinate in game_parameters["Level Map"]["Event Coordinates Final"]:
-            board_rows[coordinate[1]][coordinate[0]] = "⏅"
+            board_rows[coordinate[1]][coordinate[0]] = "✦"
 
     board_rows[character["Y-coordinate"]][character["X-coordinate"]] = "⛵"
     output = table2ascii(
@@ -76,6 +76,7 @@ def describe_current_location(board, character):
     """
     current_coordinates = (character["X-coordinate"], character["Y-coordinate"])
     location_description = board[current_coordinates]
+    print(location_description)
     if location_description[0] == "Fisher":
         message = (rgb(240, 230, 150) + "You are currently at " +
                    str(current_coordinates) + ". There's a fisher nearby." + constants.RESET)
@@ -300,13 +301,17 @@ def print_fisher_npc(fisher_npc, character):
 
     if fisher_npc == "Coin" and not npc_has_talked:
         print(
-            "You see a shiny coin on a rock. It's just in reach. You snatch it.\n"
-            "A little luck to catch the Final Fishasy.\n"
+            "You see a shiny coin on a rock. It's too far to reach, but you admire it from afar.\n"
+            "It must be a sign of good luck. You'll need it to catch the Final Fishasy.\n"
             "[Stamina +1!]\n"
             "[Fishing Power +1!]")
         if character["Stamina"] < character["Max Stamina"]:
             character["Stamina"] += 1
         character["Fishing Power"] += 1
+        character["NPC Talk"][fisher_npc] = True
+    elif fisher_npc == "Coin" and npc_has_talked:
+        print("The coin shines.")
+
 
 
 def start_up():
