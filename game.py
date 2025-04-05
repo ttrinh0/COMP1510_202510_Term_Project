@@ -56,8 +56,9 @@ def game():
                         user_action.add_fish_to_collection(character, fish)
                         check.level_up(character, complete_fish_collection)
                         check.final_conditions(character)
-                        achieved_goal = check.check_if_goal_attained(character)
-                    print_or_scene.print_fish_list(character)
+                achieved_goal = check.check_if_goal_attained(character)
+                print_or_scene.print_fish_list(character)
+
     if achieved_goal:
         print(rgb(255, 255, 0) + "You made it to the end! Congratulations!" + constants.RESET)
     else:

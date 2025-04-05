@@ -175,27 +175,26 @@ def level_up(character, complete_fish_collection):
     :param complete_fish_collection:
     :return:
     """
-    level = character["Level"]
-    collection_check = complete_fish_collection[level - 1]
+    collection_check = complete_fish_collection[character["Level"] - 1]
     player_collection = character["Fish Collection"]
     fish_numbers = list(collection_check)
     for fish in fish_numbers:
         if player_collection[fish] != collection_check[fish]:
             return False
-    level += 1
+    character["Level"] += 1
     character["Stamina"] += 1
     character["Max Stamina"] += 1
     character["Fishing Power"] += 1
-    if level == 2:
+    if character["Level"] == 2:
         character["Title"] = "Adept Fisher"
-    elif level == 3:
+    elif character["Level"] == 3:
         character["Title"] = "Expert Fisher"
-    elif level == 4:
+    elif character["Level"] == 4:
         character["Title"] = "Legendary Fisher"
-    if level != 5:
-        print("Congratulations! You leveled up!\nYou are now level " + str(level) + ", " + character["Title"]
+    if character["Level"] != 5:
+        print("Congratulations! You leveled up!\nYou are now level " + str(character["Level"]) + ", " + character["Title"]
               + ".")
-    if level == 5:
+    if character["Level"] == 5:
         print("You did it! You caught it!")
     input(rgb(150, 195, 215) + "♦ Press enter to continue ♦" + constants.RESET)
     print_or_scene.print_area_scene(character)
