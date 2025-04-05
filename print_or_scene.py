@@ -76,8 +76,12 @@ def describe_current_location(board, character):
     """
     current_coordinates = (character["X-coordinate"], character["Y-coordinate"])
     location_description = board[current_coordinates]
-    if type(location_description) == tuple:
-        message = rgb(240, 230, 150) + "You are currently at " + str(current_coordinates) + ". There's a fisher nearby." + constants.RESET
+    if location_description[0] == "Fisher":
+        message = (rgb(240, 230, 150) + "You are currently at " +
+                   str(current_coordinates) + ". There's a fisher nearby." + constants.RESET)
+    elif location_description[0] == "Coin":
+        message = (rgb(240, 230, 150) + "You are currently at " +
+                   str(current_coordinates) + ". There's something on that rock." + constants.RESET)
     else:
         message = rgb(240, 230, 150) + "You are currently at " + str(current_coordinates) + "." + constants.RESET
     print(message)
@@ -269,8 +273,9 @@ def print_interact(character, game_parameters):
         print(message)
 
     elif coordinate in game_parameters["Level Map"][current_map]:
-        print("You wave to the nearby fisher.")
-        # print(game_parameters["Level Map"][current_map][coordinate])
+        npc_type = game_parameters["Level Map"][current_map][coordinate][0]
+        if npc_type == "Fisher":
+            print("You wave to the nearby fisher.")
         fisher_npc = game_parameters["Level Map"][current_map][coordinate][1]
         print_fisher_npc(fisher_npc, character)
     input(rgb(125, 170, 190) + "♦ Press enter to continue ♦" + constants.RESET)
@@ -283,13 +288,26 @@ def print_fisher_npc(fisher_npc, character):
     :param character:
     """
     npc_has_talked = character["NPC Talk"][fisher_npc]
+
     if fisher_npc == "Sally" and not npc_has_talked:
         print("Sally waves back. You look hungry, take this.\nYou received an energy bar\n"
               "[Stamina +1!]")
-        character["Stamina"] += 1
+        if character["Stamina"] < character["Max Stamina"]:
+            character["Stamina"] += 1
         character["NPC Talk"][fisher_npc] = True
     elif fisher_npc == "Sally" and npc_has_talked:
         print("Sally says good luck.")
+
+    if fisher_npc == "Coin" and not npc_has_talked:
+        print(
+            "You see a shiny coin on a rock. It's just in reach. You snatch it.\n"
+            "A little luck to catch the Final Fishasy.\n"
+            "[Stamina +1!]\n"
+            "[Fishing Power +1!]")
+        if character["Stamina"] < character["Max Stamina"]:
+            character["Stamina"] += 1
+        character["Fishing Power"] += 1
+
 
 def start_up():
     """

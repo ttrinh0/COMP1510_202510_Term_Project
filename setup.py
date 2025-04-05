@@ -12,11 +12,12 @@ def create_game_parameters():
     """
     game_parameters = {"Input Time": {1: 3.0, 2: 2.5, 3: 2.0, 4: 1.5}, "Fish Reel": {1: 8, 2: 10, 3: 15, 4: 20},
                        "Level Map": {
-                       "Event Coordinates One": {(0, 1): ("Fisher", "Sally"), (4, 3): ("Fisher", "Charles"),
-                                                 (2, 4): ("Fisher", "Rob")},
-                       "Event Coordinates Two": {(1, 1): ("Fisher", "Sharky"), (4, 4): ("Fisher", "Gilly"),
-                                                 (3, 2): ("Fisher", "Sandy")},
-                       "Event Coordinates Three": {(3, 0): ("Fisher", "Fish"), (4, 4): ("Fisher", "Aqua")}}}
+                           "Event Coordinates One": {(0, 1): ("Fisher", "Sally"), (4, 3): ("Fisher", "Charles"),
+                                                     (2, 4): ("Fisher", "Rob")},
+                           "Event Coordinates Two": {(1, 1): ("Fisher", "Sharky"), (4, 4): ("Fisher", "Gilly"),
+                                                     (3, 2): ("Fisher", "Sandy")},
+                           "Event Coordinates Three": {(3, 0): ("Fisher", "Fish"), (4, 4): ("Fisher", "Aqua")},
+                           "Event Coordinates Final": {(2, 2): ("Coin", "Coin")}}}
     return game_parameters
 
 
@@ -36,7 +37,7 @@ def make_board(rows, columns):
     location
     """
     coordinates = {}
-    room_description = ["", ""]  # random generated square names/descriptions
+    room_description = [("", "")]  # random generated square names/descriptions
     for number in range(rows):
         for element in range(columns):
             coordinates[(number, element)] = random.choice(room_description)
@@ -85,7 +86,7 @@ def make_character():  # REDO DIALOGUE
                          "Fish Collection": {1: ("???", "???"), 2: ("???", "???"), 3: ("???", "???"), 4: ("???", "???"),
                                              5: ("???", "???"), 6: ("???", "???"), 7: ("???", "???"), 8: ("???", "???"),
                                              9: ("???", "???"), 10: ("???", "???"), 11: ("???", "???")},
-                         "NPC Talk": {"Sally": False, "Charles": False, "Rob": False, "Sharky": False, "Gilly": False, "Sandy": False, "Fish": False, "Aqua": False}}
+                         "NPC Talk": {"Sally": False, "Charles": False, "Rob": False, "Sharky": False, "Gilly": False, "Sandy": False, "Fish": False, "Aqua": False, "Coin": False}}
     return character_profile
 
 
