@@ -3,16 +3,25 @@ Module of functions that do checks and validations.
 """
 import random
 import print_or_scene
-import setup
 from color50 import rgb, constants
 import time
 
 
-def process_choice(choice):
+def process_choice(choice: str) -> str:
     """
+    Determine if the player entered a direction or another option.
 
+    :precondition: choice is a string
     :param choice:
-    :return:
+    :postcondition: returns "Movement" if the choice is one of the cardinal directions
+    :postcondition: returns choice if the choice is not one of the cardinal directions
+    :return: the string, "Movement", if the choice is one of the cardinal directions
+    :return choice: the string that is passed through the function if the choice is not one of the cardinal directions
+
+    >>> process_choice("North")
+    'Movement'
+    >>> process_choice("Fish")
+    'Fish'
     """
     if choice in {"North", "West", "South", "East"}:
         return "Movement"

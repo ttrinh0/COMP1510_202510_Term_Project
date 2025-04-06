@@ -11,8 +11,14 @@ def create_game_parameters():
     :postcondition: creates a dictionary containing the game's parameters
     :return game_parameters: a dictionary containing the game's parameters
 
-    >>> create_game_parameters()
-    {'Input Time': {1: 3.0, 2: 2.5, 3: 2.0, 4: 1.5}, 'Fish Reel': {1: 8, 2: 10, 3: 15, 4: 20}, 'Level Map': {'Event Coordinates One': {(0, 1): ('Fisher', 'Sally'), (4, 3): ('Fisher', 'Charles'), (2, 4): ('Fisher', 'Rob')}, 'Event Coordinates Two': {(1, 1): ('Fisher', 'Cornet'), (4, 4): ('Fisher', 'Gilly'), (3, 2): ('Fisher', 'Sandy')}, 'Event Coordinates Three': {(3, 0): ('Fisher', 'Emile'), (4, 4): ('Fisher', 'Aqua')}, 'Event Coordinates Final': {(2, 2): ('Coin', 'Coin')}}}
+    >>> game_parameters_test = create_game_parameters()
+    >>> game_parameters_test == {'Input Time': {1: 3.0, 2: 2.5, 3: 2.0, 4: 1.5},
+    ... 'Fish Reel': {1: 8, 2: 10, 3: 15, 4: 20}, 'Level Map': {'Event Coordinates One': {(0, 1): ('Fisher', 'Sally'),
+    ... (4, 3): ('Fisher', 'Charles'), (2, 4): ('Fisher', 'Rob')}, 'Event Coordinates Two':
+    ... {(1, 1): ('Fisher', 'Cornet'), (4, 4): ('Fisher', 'Gilly'), (3, 2): ('Fisher', 'Sandy')},
+    ... 'Event Coordinates Three': {(3, 0): ('Fisher', 'Emile'), (4, 4): ('Fisher', 'Aqua')},
+    ... 'Event Coordinates Final': {(2, 2): ('Coin', 'Coin')}}}
+    True
     """
     game_parameters = {"Input Time": {1: 3.0, 2: 2.5, 3: 2.0, 4: 1.5}, "Fish Reel": {1: 8, 2: 10, 3: 15, 4: 20},
                        "Level Map": {
@@ -71,7 +77,8 @@ def add_on_board(game_parameters: dict, coordinates: dict, character: dict):
     >>> character_test = {"Level": 1}
     >>> add_on_board(game_parameters_test, coordinates_test, character_test)
     {(0, 0): ('', ''), (0, 1): ('Fisher', 'Sally'), (0, 2): ('', ''), (0, 3): ('', ''), (0, 4): ('', '')}
-    >>> game_parameters_test = {"Level Map": {"Event Coordinates One": {(0, 1): ("Fisher", "Sally")}, "Event Coordinates Two": {(0, 2): ("Fisher", "Cornet"), (0, 4): ("Fisher", "Gilly")}}}
+    >>> game_parameters_test = {"Level Map": {"Event Coordinates One": {(0, 1): ("Fisher", "Sally")},
+    ... "Event Coordinates Two": {(0, 2): ("Fisher", "Cornet"), (0, 4): ("Fisher", "Gilly")}}}
     >>> coordinates_test = {(0, 0): ('', ''), (0, 1): ('', ''), (0, 2): ('', ''), (0, 3): ('', ''), (0, 4): ('', '')}
     >>> character_test = {"Level": 2}
     >>> add_on_board(game_parameters_test, coordinates_test, character_test)
@@ -103,11 +110,18 @@ def make_character():  # REDO DIALOGUE
     Return a dictionary containing a character's information.
 
     :postcondition: return a dictionary with keys: "Name", "Stamina", "Max Stamina", "Fishing Power", "X-coordinate",
-                                "Y-coordinate", "Title", "Fish Caught", "Fish Limit", "Fish Collection", and "NPC Talk"
+                                                    "Y-coordinate", "Title", "Fish Caught", "Fish Limit",
+                                                    "Fish Collection", and "NPC Talk"
     :return: a dictionary containing character information
 
-    >>> make_character()
-    {'X-coordinate': 0, 'Y-coordinate': 0, 'Level': 1, 'Title': 'Beginner Fisher', 'Name': '', 'Stamina': 1, 'Max Stamina': 1, 'Fishing Power': 1, 'Fish Caught': 0, 'Fish Limit': 0, 'Fish Collection': {1: ('???', '???'), 2: ('???', '???'), 3: ('???', '???'), 4: ('???', '???'), 5: ('???', '???'), 6: ('???', '???'), 7: ('???', '???'), 8: ('???', '???'), 9: ('???', '???'), 10: ('???', '???'), 11: ('???', '???')}, 'NPC Talk': {'Sally': False, 'Charles': False, 'Rob': False, 'Sharky': False, 'Gilly': False, 'Sandy': False, 'Fish': False, 'Aqua': False, 'Coin': False}}
+    >>> character_test = make_character()
+    >>> character_test == {'X-coordinate': 0, 'Y-coordinate': 0, 'Level': 1, 'Title': 'Beginner Fisher', 'Name': '',
+    ... 'Stamina': 1, 'Max Stamina': 1, 'Fishing Power': 1, 'Fish Caught': 0, 'Fish Limit': 0, 'Fish Collection':
+    ... {1: ('???', '???'), 2: ('???', '???'), 3: ('???', '???'), 4: ('???', '???'), 5: ('???', '???'),
+    ... 6: ('???', '???'), 7: ('???', '???'), 8: ('???', '???'), 9: ('???', '???'), 10: ('???', '???'),
+    ... 11: ('???', '???')}, 'NPC Talk': {'Sally': False, 'Charles': False, 'Rob': False, 'Sharky': False,
+    ... 'Gilly': False, 'Sandy': False, 'Fish': False, 'Aqua': False, 'Coin': False}}
+    True
     """
     character_profile = {"X-coordinate": 0, "Y-coordinate": 0, "Level": 1, "Title": "Beginner Fisher", "Name": "",
                          "Stamina": 1, "Max Stamina": 1, "Fishing Power": 1, "Fish Caught": 0, "Fish Limit": 0,
@@ -128,6 +142,8 @@ def get_name(character):
     :precondition: character has the key "Name"
     :postcondition: the "Name" key in character has a value of the inputted string
     :return name: a string of the player's inputted name
+
+    >>>
     """
     name = input(rgb(0, 255, 255) + "What's your name?: " + constants.RESET)
     character["Name"] = name

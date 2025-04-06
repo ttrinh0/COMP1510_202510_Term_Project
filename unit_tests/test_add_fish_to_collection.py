@@ -6,14 +6,15 @@ import user_action
 class Test(TestCase):
 
     def test_add_fish_to_collection_empty(self):
-        character_test = {'Fish Collection': {1: ("???", "???"), 2: ("???", "???"), 3: ("???", "???"),
+        character_test = {'Fish Collection': {1: ('Goldfish', 'BUY GOLD!'), 2: ("???", "???"), 3: ("???", "???"),
                                               4: ("???", "???"), 5: ("???", "???"), 6: ("???", "???"),
                                               7: ("???", "???"), 8: ("???", "???"), 9: ("???", "???"),
                                               10: ("???", "???"), 11: ("???", "???")}}
         fish_test = (2, ('Guppy', 'A tiny little fella. A little, little fish.'))
         user_action.add_fish_to_collection(character_test, fish_test)
         expected = character_test
-        actual = {'Fish Collection': {1: ("???", "???"), 2: ('Guppy', 'A tiny little fella. A little, little fish.'),
+        actual = {'Fish Collection': {1: ('Goldfish', 'BUY GOLD!'),
+                                      2: ('Guppy', 'A tiny little fella. A little, little fish.'),
                                       3: ("???", "???"), 4: ("???", "???"), 5: ("???", "???"), 6: ("???", "???"),
                                       7: ("???", "???"), 8: ("???", "???"), 9: ("???", "???"), 10: ("???", "???"),
                                       11: ("???", "???")}}
