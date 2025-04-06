@@ -164,10 +164,16 @@ def add_fish_to_collection(character, fish):
 
 def get_response(message: str, options: int, option_quit=False):
     """
+    Creates a selection input for the player and returns the number the player inputs.
 
-    :param message: a string
-    :param options: a positive integer
-    :param option_quit:
+    :param message: a string of the message that is asked or stated to the player
+    :param options: a positive integer of one or greater
+    :param option_quit: an optional Boolean of True or False
+    :precondition: message is a string
+    :precondition: options is a positive integer of one or greater
+    :precondition: if included, option_quit is a Boolean of True or False
+    :precondition: if option_quit not included, option_quit is False
+    :postcondition: the user's input is returned if it is valid, else they have to input again until it is
     :return user_input: a string containing the number that represents the player's choice
     """
     response = False
