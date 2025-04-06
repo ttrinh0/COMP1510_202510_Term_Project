@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-
 import check
+
 
 class Test(TestCase):
 

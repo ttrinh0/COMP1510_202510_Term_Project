@@ -3,6 +3,7 @@ Module of functions that do checks and validations.
 """
 import random
 import print_or_scene
+import setup
 from color50 import rgb, constants
 import time
 
@@ -29,7 +30,7 @@ def process_choice(choice: str) -> str:
         return choice
 
 
-def validate_move(board, character, direction):
+def validate_move(board: dict, character: dict, direction: str) -> bool:
     """
     Check the direction to see if it is a valid move.
 
@@ -45,13 +46,13 @@ def validate_move(board, character, direction):
     :return True: a Boolean with the value of True if the direction is valid
     :return False: a Boolean with the value of False if the direction is valid
 
-    >>> board_test = make_board(3, 3)
+    >>> board_test = setup.make_board(3, 3)
     >>> character_test = {"X-coordinate": 0, "Y-coordinate": 0, "Current HP": 5}
     >>> direction_test = "South"
     >>> validate_move(board_test, character_test, direction_test)
     True
 
-    >>> board_test = make_board(3, 3)
+    >>> board_test = setup.make_board(3, 3)
     >>> character_test = {"X-coordinate": 0, "Y-coordinate": 0, "Current HP": 5}
     >>> direction_test = "West"
     >>> validate_move(board_test, character_test, direction_test)
