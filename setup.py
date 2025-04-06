@@ -1,7 +1,6 @@
 """
 Module of functions that set up the game and initial character stats.
 """
-import random
 from color50 import rgb, constants
 
 
@@ -11,6 +10,7 @@ def create_game_parameters():
 
     :postcondition: creates a dictionary containing the game's parameters
     :return game_parameters: a dictionary containing the game's parameters
+
     >>> create_game_parameters()
     {'Input Time': {1: 3.0, 2: 2.5, 3: 2.0, 4: 1.5}, 'Fish Reel': {1: 8, 2: 10, 3: 15, 4: 20}, 'Level Map': {'Event Coordinates One': {(0, 1): ('Fisher', 'Sally'), (4, 3): ('Fisher', 'Charles'), (2, 4): ('Fisher', 'Rob')}, 'Event Coordinates Two': {(1, 1): ('Fisher', 'Cornet'), (4, 4): ('Fisher', 'Gilly'), (3, 2): ('Fisher', 'Sandy')}, 'Event Coordinates Three': {(3, 0): ('Fisher', 'Emile'), (4, 4): ('Fisher', 'Aqua')}, 'Event Coordinates Final': {(2, 2): ('Coin', 'Coin')}}}
     """
@@ -38,9 +38,12 @@ def make_board(rows: int, columns: int) -> dict:
     :postcondition: a dictionary with keys that are tuples containing the coordinates of the board
     :postcondition: a dictionary with values containing a string representing the name of a game location
     :return coordinates: a dictionary containing key-value pairs that represent the coordinate and name of the game
-    location
+                        location
+
     >>> make_board(1, 1)
     {(0, 0): ('', '')}
+    >>> make_board(1, 5)
+    {(0, 0): ('', ''), (0, 1): ('', ''), (0, 2): ('', ''), (0, 3): ('', ''), (0, 4): ('', '')}
     """
     coordinates = {}
     for number in range(rows):
@@ -53,10 +56,26 @@ def add_on_board(game_parameters: dict, coordinates: dict, character: dict):
     """
     Place NPCs and other visible objects onto the board depending on the player's level.
 
-    :param game_parameters:
-    :param coordinates:
+    :param game_parameters: a dictionary containing the game parameters
+    :param coordinates: a dictionary containing the coordinates of the gameboard
     :param character: a dictionary containing the player's information
-    :return:
+    :precondition: game_parameter is a dictionary with the key "Level Map" that contains a dictionary of dictionaries
+                    of the coordinates of each level map NPC
+    :precondition: coordinates is a dictionary containing the coordinates of the gameboard
+    :precondition: character is a dictionary that contains the player's level
+    :return coordinates: a dictionary containing the coordinates of the gameboard with values of tuples of the
+                        NPC/object type and the name where there are NPCs or objects
+
+    >>> game_parameters_test = {"Level Map": {"Event Coordinates One": {(0, 1): ("Fisher", "Sally")}}}
+    >>> coordinates_test = {(0, 0): ('', ''), (0, 1): ('', ''), (0, 2): ('', ''), (0, 3): ('', ''), (0, 4): ('', '')}
+    >>> character_test = {"Level": 1}
+    >>> add_on_board(game_parameters_test, coordinates_test, character_test)
+    {(0, 0): ('', ''), (0, 1): ('Fisher', 'Sally'), (0, 2): ('', ''), (0, 3): ('', ''), (0, 4): ('', '')}
+    >>> game_parameters_test = {"Level Map": {"Event Coordinates One": {(0, 1): ("Fisher", "Sally")}, "Event Coordinates Two": {(0, 2): ("Fisher", "Cornet"), (0, 4): ("Fisher", "Gilly")}}}
+    >>> coordinates_test = {(0, 0): ('', ''), (0, 1): ('', ''), (0, 2): ('', ''), (0, 3): ('', ''), (0, 4): ('', '')}
+    >>> character_test = {"Level": 2}
+    >>> add_on_board(game_parameters_test, coordinates_test, character_test)
+    {(0, 0): ('', ''), (0, 1): ('', ''), (0, 2): ('Fisher', 'Cornet'), (0, 3): ('', ''), (0, 4): ('Fisher', 'Gilly')}
     """
     level = character["Level"]
 
@@ -91,7 +110,8 @@ def make_character():  # REDO DIALOGUE
                          "Fish Collection": {1: ("???", "???"), 2: ("???", "???"), 3: ("???", "???"), 4: ("???", "???"),
                                              5: ("???", "???"), 6: ("???", "???"), 7: ("???", "???"), 8: ("???", "???"),
                                              9: ("???", "???"), 10: ("???", "???"), 11: ("???", "???")},
-                         "NPC Talk": {"Sally": False, "Charles": False, "Rob": False, "Sharky": False, "Gilly": False, "Sandy": False, "Fish": False, "Aqua": False, "Coin": False}}
+                         "NPC Talk": {"Sally": False, "Charles": False, "Rob": False, "Sharky": False, "Gilly": False,
+                                      "Sandy": False, "Fish": False, "Aqua": False, "Coin": False}}
     return character_profile
 
 
