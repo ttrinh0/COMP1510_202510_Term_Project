@@ -109,23 +109,25 @@ def move_character(character, direction):
     Change the character's coordinates depending on direction value.
 
     :param character: a dictionary containing the character information
-    :param direction: a string containing the direction the user wants to move
+    :param direction: a string containing the direction the player wants to move
     :precondition: character must be a dictionary
     :precondition: character must contain keys-value pairs of the coordinates
+    :precondition: character must contain a key of "Fish Limit"
     :precondition: direction must be a string with a value of either "East", "West", "South", "North"
-    :postcondition: changes the user coordinates depending on direction
+    :postcondition: changes the player's coordinates depending on direction
+    :postcondition: the key "Fish Limit" in the character dictionary has a value of zero
 
-    >>> character_test = {"X-coordinate": 0, "Y-coordinate": 0, "Current HP": 5}
+    >>> character_test = {"X-coordinate": 0, "Y-coordinate": 0, "Current HP": 5, "Fish Limit": 0}
     >>> direction_test = "South"
     >>> move_character(character_test, direction_test)
     >>> print(character_test)
-    {'X-coordinate': 0, 'Y-coordinate': 1, 'Current HP': 5}
+    {'X-coordinate': 0, 'Y-coordinate': 1, 'Current HP': 5, 'Fish Limit': 0}
 
-    >>> character_test = {"X-coordinate": 1, "Y-coordinate": 1, "Current HP": 5}
+    >>> character_test = {"X-coordinate": 1, "Y-coordinate": 1, "Current HP": 5, "Fish Limit": 1}
     >>> direction_test = "North"
     >>> move_character(character_test, direction_test)
     >>> print(character_test)
-    {'X-coordinate': 1, 'Y-coordinate': 0, 'Current HP': 5}
+    {'X-coordinate': 1, 'Y-coordinate': 0, 'Current HP': 5, 'Fish Limit': 0}
     """
     if direction == "North":
         character["Y-coordinate"] -= 1
@@ -137,13 +139,23 @@ def move_character(character, direction):
         character["X-coordinate"] -= 1
     character["Fish Limit"] = 0
 
+
 def add_fish_to_collection(character, fish):
     """
     Add fish into player collection.
 
-    :param character:
-    :param fish:
-    :return:
+    :param character: a dictionary containing the character information
+    :param fish: a tuple containing a fish's number and another tuple with its name and description
+    :precondition: fish is not in the "Fish Collection" dictionary
+    :precondition: character must contain the key "Fish Collection" with the value of a dictionary with
+    keys from 1 to 11 that have values that are tuples that either contain "???" or specific fish name and description
+    :postcondition: adds the fish the player caught to their fish collection
+
+    >>> character_test = {'Fish Collection': {1: ("???", "???"), 2: ("???", "???"), 3: ("???", "???"), 4: ("???", "???"), 5: ("???", "???"), 6: ("???", "???"), 7: ("???", "???"), 8: ("???", "???"), 9: ("???", "???"), 10: ("???", "???"), 11: ("???", "???")}}
+    >>> fish_test = (2, ('Guppy', 'A tiny little fella. A little, little fish.'))
+    >>> add_fish_to_collection(character_test, fish_test)
+    >>> print(character_test)
+    {'Fish Collection': {1: ('???', '???'), 2: ('Guppy', 'A tiny little fella. A little, little fish.'), 3: ('???', '???'), 4: ('???', '???'), 5: ('???', '???'), 6: ('???', '???'), 7: ('???', '???'), 8: ('???', '???'), 9: ('???', '???'), 10: ('???', '???'), 11: ('???', '???')}}
     """
     fish_number = fish[0]
     player_collection = character["Fish Collection"]
