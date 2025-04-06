@@ -53,7 +53,7 @@ def game():
                     fish = check.check_fish_type(character, complete_fish_collection)
                     if check.check_fish_in_collection(character, fish):
                         user_action.add_fish_to_collection(character, fish)
-                        level_up = check.level_up(character, complete_fish_collection, game_parameters)
+                        level_up = check.level_up(character, complete_fish_collection)
                         if level_up:
                             coordinates = setup.make_board(5, 5)
                             board = setup.add_on_board(game_parameters, coordinates, character)

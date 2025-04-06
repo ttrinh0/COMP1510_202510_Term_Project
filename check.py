@@ -71,15 +71,19 @@ def validate_move(board: dict, character: dict, direction: str) -> bool:
         return False
 
 
-def check_for_fish(character):
+def check_for_fish(character: dict) -> bool | None:
     """
     Check to see if a fish is on a space.
 
-    :postcondition: return True if there is a fish encounter, else return False
+    :param character: a dictionary containing the character information
+    :precondition: character is a dictionary with the key "Fish Limit"
+    :postcondition: prints "Nothing's biting. It might be time to move to another spot." if the key "Fish Limit"
+                    in character has a value of 3 or greater
+    :postcondition: prints "Nothing's biting." if "Fish Limit is less than 3 and there is not a fish encounter
+    :postcondition: return True if there is a fish encounter
     :return True: a Boolean with the value of True if there is a fish encounter
-    :return False: a Boolean with the value of False if there is not a fish encounter
     """
-    if character["Fish Limit"] <= 3:
+    if character["Fish Limit"] < 3:
         character["Fish Limit"] += 1
         enemy_encounter = random.randint(1, 3)
         if enemy_encounter != 1:
@@ -91,7 +95,6 @@ def check_for_fish(character):
                 time.sleep(1)
             print("Nothing's biting.")
             time.sleep(1)
-            return False
     else:
         print("You cast your rod.")
         for _ in range(2):
