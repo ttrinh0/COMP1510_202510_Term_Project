@@ -100,10 +100,14 @@ def add_on_board(game_parameters: dict, coordinates: dict, character: dict):
 
 def make_character():  # REDO DIALOGUE
     """
-    Return a dictionary containing a character's starting coordinates and HP.
+    Return a dictionary containing a character's information.
 
-    :postcondition: return a dictionary with keys: "Name", "Stamina", "Fishing Power", "X-coordinate", "Y-coordinate"
+    :postcondition: return a dictionary with keys: "Name", "Stamina", "Max Stamina", "Fishing Power", "X-coordinate",
+                                "Y-coordinate", "Title", "Fish Caught", "Fish Limit", "Fish Collection", and "NPC Talk"
     :return: a dictionary containing character information
+
+    >>> make_character()
+    {'X-coordinate': 0, 'Y-coordinate': 0, 'Level': 1, 'Title': 'Beginner Fisher', 'Name': '', 'Stamina': 1, 'Max Stamina': 1, 'Fishing Power': 1, 'Fish Caught': 0, 'Fish Limit': 0, 'Fish Collection': {1: ('???', '???'), 2: ('???', '???'), 3: ('???', '???'), 4: ('???', '???'), 5: ('???', '???'), 6: ('???', '???'), 7: ('???', '???'), 8: ('???', '???'), 9: ('???', '???'), 10: ('???', '???'), 11: ('???', '???')}, 'NPC Talk': {'Sally': False, 'Charles': False, 'Rob': False, 'Sharky': False, 'Gilly': False, 'Sandy': False, 'Fish': False, 'Aqua': False, 'Coin': False}}
     """
     character_profile = {"X-coordinate": 0, "Y-coordinate": 0, "Level": 1, "Title": "Beginner Fisher", "Name": "",
                          "Stamina": 1, "Max Stamina": 1, "Fishing Power": 1, "Fish Caught": 0, "Fish Limit": 0,
