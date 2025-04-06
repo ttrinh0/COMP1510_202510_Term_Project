@@ -34,21 +34,22 @@ def make_board(rows: int, columns: int) -> dict:
     :param rows: a positive integer greater than zero
     :param columns: a positive integer greater than zero
     :precondition: both rows and columns must be a positive integer
-    :precondition: either rows or columns must be greater than one
+    :precondition: both rows and columns must be greater than zero
     :postcondition: a dictionary with keys that are tuples containing the coordinates of the board
     :postcondition: a dictionary with values containing a string representing the name of a game location
     :return coordinates: a dictionary containing key-value pairs that represent the coordinate and name of the game
     location
+    >>> make_board(1, 1)
+    {(0, 0): ('', '')}
     """
     coordinates = {}
-    room_description = [("", "")]  # random generated square names/descriptions
     for number in range(rows):
         for element in range(columns):
-            coordinates[(number, element)] = random.choice(room_description)
+            coordinates[(number, element)] = ("", "")
     return coordinates
 
 
-def add_on_board(game_parameters: dict, coordinates, character):
+def add_on_board(game_parameters: dict, coordinates: dict, character: dict):
     """
     Place NPCs and other visible objects onto the board depending on the player's level.
 

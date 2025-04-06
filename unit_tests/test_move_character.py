@@ -4,6 +4,7 @@ import user_action
 
 
 class Test(TestCase):
+
     def test_move_character_south(self):
         character_test = {"X-coordinate": 0, "Y-coordinate": 0, "Current HP": 5, "Fish Limit": 0}
         direction_test = "South"
