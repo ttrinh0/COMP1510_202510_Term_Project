@@ -161,11 +161,13 @@ def is_alive(character):
         return False
 
 
-def level_up(character, complete_fish_collection, game_parameters):
+def level_up(character, complete_fish_collection):
     """
+    Increase the player's level and stats if the player has caught all the fish in an area.
 
-    :param game_parameters:
-    :param character:
+    At each level, the player's title will also change.
+
+    :param character: a dictionary containing the character information
     :param complete_fish_collection:
     :return:
     """
@@ -188,7 +190,7 @@ def level_up(character, complete_fish_collection, game_parameters):
     if character["Level"] != 5:
         print(
             "Congratulations! You leveled up!\nYou are now level " + str(character["Level"]) + ", " + character["Title"]
-              + ".")
+            + ".")
     if character["Level"] == 5:
         print("You did it! You caught it!")
     input(rgb(150, 195, 215) + "♦ Press enter to continue ♦" + constants.RESET)
