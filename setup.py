@@ -7,21 +7,25 @@ from color50 import rgb, constants
 
 def create_game_parameters():
     """
+    Create a dictionary containing the game's parameters.
 
-    :return:
+    :postcondition: creates a dictionary containing the game's parameters
+    :return game_parameters: a dictionary containing the game's parameters
+    >>> create_game_parameters()
+    {'Input Time': {1: 3.0, 2: 2.5, 3: 2.0, 4: 1.5}, 'Fish Reel': {1: 8, 2: 10, 3: 15, 4: 20}, 'Level Map': {'Event Coordinates One': {(0, 1): ('Fisher', 'Sally'), (4, 3): ('Fisher', 'Charles'), (2, 4): ('Fisher', 'Rob')}, 'Event Coordinates Two': {(1, 1): ('Fisher', 'Cornet'), (4, 4): ('Fisher', 'Gilly'), (3, 2): ('Fisher', 'Sandy')}, 'Event Coordinates Three': {(3, 0): ('Fisher', 'Emile'), (4, 4): ('Fisher', 'Aqua')}, 'Event Coordinates Final': {(2, 2): ('Coin', 'Coin')}}}
     """
     game_parameters = {"Input Time": {1: 3.0, 2: 2.5, 3: 2.0, 4: 1.5}, "Fish Reel": {1: 8, 2: 10, 3: 15, 4: 20},
                        "Level Map": {
                            "Event Coordinates One": {(0, 1): ("Fisher", "Sally"), (4, 3): ("Fisher", "Charles"),
                                                      (2, 4): ("Fisher", "Rob")},
-                           "Event Coordinates Two": {(1, 1): ("Fisher", "Sharky"), (4, 4): ("Fisher", "Gilly"),
+                           "Event Coordinates Two": {(1, 1): ("Fisher", "Cornet"), (4, 4): ("Fisher", "Gilly"),
                                                      (3, 2): ("Fisher", "Sandy")},
-                           "Event Coordinates Three": {(3, 0): ("Fisher", "Fish"), (4, 4): ("Fisher", "Aqua")},
+                           "Event Coordinates Three": {(3, 0): ("Fisher", "Emile"), (4, 4): ("Fisher", "Aqua")},
                            "Event Coordinates Final": {(2, 2): ("Coin", "Coin")}}}
     return game_parameters
 
 
-def make_board(rows, columns):
+def make_board(rows: int, columns: int) -> dict:
     """
     Return a dictionary that contains the coordinates and names of each spot on the game board.
 
@@ -44,7 +48,7 @@ def make_board(rows, columns):
     return coordinates
 
 
-def add_on_board(game_parameters, coordinates, character):
+def add_on_board(game_parameters: dict, coordinates, character):
     """
     Place NPCs and other visible objects onto the board depending on the player's level.
 

@@ -8,7 +8,7 @@
 | if-statement             | check.py - line 51           |
 | Membership Operator      |                              |
 | Random module            |                              |
-| Function annotation      |                              |
+| Function annotation      | setup.py - line 24           |
 | for-loop/while-loop      |                              |
 | itertools function       |                              |
 | f-strings                | print_or_scene.py - line 137 |

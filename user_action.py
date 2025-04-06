@@ -44,7 +44,7 @@ def get_user_choice():
     return choice
 
 
-def fishing_game(character, game_parameters):  # Have to add character stats
+def fishing_game(character: dict, game_parameters: dict):  # Have to add character stats
     """
     Execute a fishing mini-game.
 
@@ -104,7 +104,7 @@ def fishing_game(character, game_parameters):  # Have to add character stats
         return True
 
 
-def move_character(character, direction):
+def move_character(character: dict, direction: str):
     """
     Change the character's coordinates depending on direction value.
 
@@ -140,7 +140,7 @@ def move_character(character, direction):
     character["Fish Limit"] = 0
 
 
-def add_fish_to_collection(character, fish):
+def add_fish_to_collection(character: dict, fish: tuple):
     """
     Add fish into player collection.
 
