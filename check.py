@@ -261,11 +261,23 @@ def level_up(character: dict, complete_fish_collection: tuple) -> bool:
     return True
 
 
-def final_conditions(character):
+def final_conditions(character: dict) -> bool:
     """
+    Check if the character's level is 4.
 
-    :param character:
-    :return:
+    Reaching level 4 is the condition to go to the final area of the game.
+
+    :param character: a dictionary containing the character information
+    :precondition: character contains the key "Level"
+    :postcondition: returns false if the player is not level 4
+    :postcondition: returns true if the player is level 4
+    :return False: a Boolean with the value of True if the player is not level 4
+    :return True: a Boolean with the value of True if the player is level 4
+
+    >>> final_conditions({"Level": 1})
+    False
+    >>> final_conditions({"Level": 4})
+    True
     """
     if character["Level"] == 4:
         return True
