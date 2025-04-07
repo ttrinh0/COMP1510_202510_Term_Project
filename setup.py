@@ -128,8 +128,8 @@ def make_character() -> dict:  # REDO DIALOGUE
                          "Fish Collection": {1: ("???", "???"), 2: ("???", "???"), 3: ("???", "???"), 4: ("???", "???"),
                                              5: ("???", "???"), 6: ("???", "???"), 7: ("???", "???"), 8: ("???", "???"),
                                              9: ("???", "???"), 10: ("???", "???"), 11: ("???", "???")},
-                         "NPC Talk": {"Sally": False, "Charles": False, "Rob": False, "Sharky": False, "Gilly": False,
-                                      "Sandy": False, "Fish": False, "Aqua": False, "Coin": False}}
+                         "NPC Talk": {"Sally": False, "Charles": False, "Rob": False, "Cornet": False, "Gilly": False,
+                                      "Sandy": False, "Emile": False, "Aqua": False, "Coin": False}}
     return character_profile
 
 

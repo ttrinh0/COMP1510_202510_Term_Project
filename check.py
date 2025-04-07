@@ -111,8 +111,9 @@ def check_fish_type(character: dict, complete_fish_collection: tuple) -> tuple:
     :param complete_fish_collection: a tuple containing four dictionaries of the fish the player can catch in each area
     :precondition: character has the key "Level"
     :precondition: complete_fish_collection contains four dictionaries of the fish the player can catch in each area
-    :postcondition:
-    :return:
+    :postcondition: prints a statement telling the player which fish they caught and its description
+    :postcondition: randomly selects a fish tuple from the fish collection of the area the player is in and returns it
+    :return fish: a tuple that has a fish's number and another tuple containing the fish's name and description
     """
     level = character["Level"]
     fish_pool = list(complete_fish_collection[level - 1].items())
@@ -129,11 +130,31 @@ def check_fish_type(character: dict, complete_fish_collection: tuple) -> tuple:
     return fish
 
 
-def check_fish_in_collection(character, fish):
+def check_fish_in_collection(character: dict, fish: tuple) -> bool:
     """
     Check to see if fish caught is in the player's fish collection.
 
-    :return:
+    :param character: a dictionary containing the character information
+    :param fish: a tuple that has a fish's number and another tuple containing the fish's name and description
+    :precondition: character contains the key "Fish Collection"
+    :precondition: fish is a tuple that has a fish's number and another tuple containing the fish's name and description
+    :postcondition: returns True is the fish is not in the player's fish collection, else returns False
+    :return False: if the fish is in the player's fish collection
+    :return True: if the fish is not in the player's fish collection
+
+    >>> character_test = {"Fish Collection": {1: ("???", "???"), 2: ("???", "???"), 3: ("???", "???"), 4: ("???", "???"),
+    ...                                      5: ("???", "???"), 6: ("???", "???"), 7: ("???", "???"), 8: ("???", "???"),
+    ...                                      9: ("???", "???"), 10: ("???", "???"), 11: ("???", "???")}}
+    >>> fish_test = (1, ('Goldfish', 'BUY GOLD!'))
+    >>> check_fish_in_collection(character_test, fish_test)
+    True
+    >>> character_test = {"Fish Collection": {1: ('Goldfish', 'BUY GOLD!'), 2: ("???", "???"), 3: ("???", "???"),
+    ...                                       4: ("???", "???"), 5: ("???", "???"), 6: ("???", "???"),
+    ...                                       7: ("???", "???"), 8: ("???", "???"), 9: ("???", "???"),
+    ...                                       10: ("???", "???"), 11: ("???", "???")}}
+    >>> fish_test = (1, ('Goldfish', 'BUY GOLD!'))
+    >>> check_fish_in_collection(character_test, fish_test)
+    False
     """
     fish_number = fish[0]
     character_collection = character["Fish Collection"][fish_number]
