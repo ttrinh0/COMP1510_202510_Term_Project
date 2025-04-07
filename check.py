@@ -192,7 +192,7 @@ def check_if_goal_attained(character: dict) -> bool:
 
 def is_alive(character: dict) -> bool:
     """
-    Return a Boolean signifying whether the character's HP is greater than zero.
+    Return a Boolean signifying whether the character's stamina is greater than zero.
 
     :param character: a dictionary containing the character information
     :precondition: character contains a key called "Stamina" with an integer value of zero or greater
@@ -214,15 +214,25 @@ def is_alive(character: dict) -> bool:
         return False
 
 
-def level_up(character, complete_fish_collection):
+def level_up(character: dict, complete_fish_collection: tuple) -> bool:
     """
     Increase the player's level and stats if the player has caught all the fish in an area.
 
     At each level, the player's title will also change.
 
     :param character: a dictionary containing the character information
-    :param complete_fish_collection:
-    :return:
+    :param complete_fish_collection: a tuple containing four dictionaries of the fish the player can catch in each area
+    :precondition: character contains the keys "Level", "Stamina", "Max Stamina", "Fishing Power", "Title",
+                   and "Fish Collection"
+    :precondition: complete_fish_collection contains four dictionaries of the fish the player can catch in each area
+    :postcondition: the value of the keys in character, "Level", "Stamina", "Max Stamina", "Fishing Power"
+                    increase by one
+    :postcondition: the character's title changes according to the level the player is
+    :postcondition: prints a statement telling the player what level they are and what their new title is
+    :postcondition: returns false if the player has not collected all the fish in an area
+    :postcondition: returns true if the player has collected all the fish in an area
+    :return False: a Boolean with the value of True if the player has not collected all the fish in an area
+    :return True: a Boolean with the value of True if the player has collected all the fish in an area
     """
     collection_check = complete_fish_collection[character["Level"] - 1]
     player_collection = character["Fish Collection"]
