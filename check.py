@@ -164,25 +164,33 @@ def check_fish_in_collection(character: dict, fish: tuple) -> bool:
         return True
 
 
-def check_if_goal_attained(character):
+def check_if_goal_attained(character: dict) -> bool:
     """
     Check to see if the goal is attained.
 
-    The goal is attained when the character is at the end goal location and their HP is above zero.
+    The goal is attained when the character is level 5 and their stamina is above zero.
 
     :param character: a dictionary containing the character information
     :precondition: character must be a dictionary
-    :precondition: character must contain keys-value pairs of the coordinates and the current HP
+    :precondition: character must contain keys "Level" and "Stamina"
     :postcondition: return True if the goal is attained, else return False
     :return True: a Boolean with the value of True if the goal is attained
-    :return False: a Boolean with the value of False if the direction is valid
+    :return False: a Boolean with the value of False if the goal is not attained
+
+    >>> character_test = {"Level": 1, "Stamina": 5}
+    >>> check_if_goal_attained(character_test)
+    False
+    >>> character_test = {"Level": 5, "Stamina": 5}
+    >>> check_if_goal_attained(character_test)
+    True
     """
     if character["Level"] == 5 and character["Stamina"] > 0:
         return True
     else:
         return False
 
-def is_alive(character):
+
+def is_alive(character: dict) -> bool:
     """
     Return a Boolean signifying whether the character's HP is greater than zero.
 
@@ -192,11 +200,11 @@ def is_alive(character):
     :return True: a Boolean with the value of True if the character's "Stamina" is greater than 0
     :return False: a Boolean with the value of False if the character's "Stamina" is 0
 
-    >>> character_test = {"X-coordinate": 0, "Y-coordinate": 0, "Stamina": 5}
+    >>> character_test = {"Stamina": 5}
     >>> is_alive(character_test)
     True
 
-    >>> character_test = {"X-coordinate": 0, "Y-coordinate": 0, "Stamina": 0}
+    >>> character_test = {"Stamina": 0}
     >>> is_alive(character_test)
     False
     """
