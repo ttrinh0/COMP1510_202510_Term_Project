@@ -300,6 +300,7 @@ def print_interact(character: dict, game_parameters: dict) -> None:
 
 def print_fisher_npc(character: dict, fisher_npc: str) -> None:
     """
+    Print a specific message depending on which NPC is talked to.
 
     :param character: a dictionary containing the character information
     :param fisher_npc: a string containing the name of the npc/object
@@ -310,20 +311,110 @@ def print_fisher_npc(character: dict, fisher_npc: str) -> None:
     npc_has_talked = character["NPC Talk"][fisher_npc]
 
     if fisher_npc == "Sally" and not npc_has_talked:
-        print("Sally waves back. You look hungry, take this.\nYou received an energy bar\n"
-              "[Stamina +1!]")
+        print("The fisher waves back.")
+        print(rgb(240, 230, 150) + '"An unfamiliar face! How exciting. I\'m Sally. I love fishing, it\'s relaxing.\n'
+                                   'I really hope you enjoy your time here at Initium Pond!"\n' + constants.RESET)
+        print("The nice conversation left you in a good mood.")
+        print(rgb(0, 255, 0) + "[Max Stamina +1!]" + constants.RESET)
+        character["NPC Talk"][fisher_npc] = True
+    elif fisher_npc == "Sally" and npc_has_talked:
+        print("Sally: ", end="")
+        print(rgb(240, 230, 150) + '"Enjoy your time here, fisher!"' + constants.RESET)
+
+    if fisher_npc == "Charles" and not npc_has_talked:
+        print("The fisher lifts his head when he notices you. He waves sleepily.")
+        print(rgb(240, 230, 150) + '"Mhmhh, good day, fisher. Name\'s Charles. I swear I\'m not falling asleep, '
+                                   'it\'s just that no fish are biting right now...\n'
+                                   'Maybe I\'m scaring them away, staying in the same spot for so long..."'
+              + constants.RESET)
+        character["NPC Talk"][fisher_npc] = True
+    elif fisher_npc == "Charles" and npc_has_talked:
+        print("Sally: ", end="")
+        print("You hear Charles speaking under his breath.")
+        print(rgb(240, 230, 150) + '"...Maybe I should move to another spot... but I\'m tired..."' + constants.RESET)
+
+    if fisher_npc == "Rob" and not npc_has_talked:
+        print("A fisher is focused on his cast.")
+        print(rgb(240, 230, 150) + '"Aw man!"' + constants.RESET)
+        print("The fisher sadly reels his line to reveal an empty hook\n"
+              "He finally notices you.")
+        print(rgb(240, 230, 150) + '"Oh, hello! I\'m Rob... You didn\'t see that did you?\n'
+                                   'Well... um. Here take this."' + constants.RESET)
+        print("Rob throws you a very sparkly fish charm.")
+        print(rgb(240, 230, 150) + '"I think they\'re awesome."' + constants.RESET)
+        print(rgb(0, 255, 0) + "[Fishing Power +1!]" + constants.RESET)
+        character["Fishing Power"] += 1
+        character["NPC Talk"][fisher_npc] = True
+    elif fisher_npc == "Rob" and npc_has_talked:
+        print(rgb(240, 230, 150) + '"This one\'s the one..."' + constants.RESET)
+
+    if fisher_npc == "Cornet" and not npc_has_talked:
+        print("The fisher waves back enthusiastically. They seem to be doing great with their catches")
+        print(rgb(240, 230, 150) + '"Hiiiiiii! I\'m Cornet! Here, take this, hope it helps!"'
+              + constants.RESET)
+        print("Cornet throws a cool fish hook to you.")
+        print(rgb(0, 255, 0) + "[Fishing Power +1!]" + constants.RESET)
+        character["Fishing Power"] += 1
+        character["NPC Talk"][fisher_npc] = True
+    elif fisher_npc == "Cornet" and npc_has_talked:
+        print(rgb(240, 230, 150) + "You hear them humming a tune as they wait for a "
+                                   "fish to bite." + constants.RESET)
+
+    if fisher_npc == "Gilly" and not npc_has_talked:
+        print("The fisher also waves.\nShe doesn't say much, but she points at the name written on her boat, \"Gilly\","
+              " and then points to herself.\nYou take that to mean her name is Gilly. You stay beside her for a "
+              "while.\nIt's calming.")
+        print(rgb(0, 255, 0) + "[Stamina +1!]" + constants.RESET)
         if character["Stamina"] < character["Max Stamina"]:
             character["Stamina"] += 1
         character["NPC Talk"][fisher_npc] = True
-    elif fisher_npc == "Sally" and npc_has_talked:
-        print("Sally says good luck.")
+    elif fisher_npc == "Gilly" and npc_has_talked:
+        print("Gilly smiles at you.")
+
+    if fisher_npc == "Sandy" and not npc_has_talked:
+        print(rgb(240, 230, 150) + '"Hi there, friend. I\'m selling cool rocks. Limited time rocks. \n'
+                                   'Would you like to support me? No? We\'re at a river with tons of rocks?\n Well what'
+                                   ' if I throw in this bottle of water? Still no? '
+                                   'Darn. Well have this water bottle anyways, stay hydrated."')
+        print(rgb(0, 255, 0) + "[Stamina +1!]" + constants.RESET)
+        if character["Stamina"] < character["Max Stamina"]:
+            character["Stamina"] += 1
+        character["NPC Talk"][fisher_npc] = True
+    elif fisher_npc == "Sandy" and npc_has_talked:
+        print(rgb(240, 230, 150) + '"Man... no one wants my rocks"' + constants.RESET)
+
+    if fisher_npc == "Emile" and not npc_has_talked:
+        print("The fisher doesn't notice you, but the other man in the boat does. He waves politely.")
+        print(rgb(240, 230, 150) + '"Good day, fisher. Don\'t mind him, he\'s a bit shy. I\'m Emile, '
+                                   'the lovely man fishing is Rori.\nOh! You\'re trying to find the Final Fishasy?'
+                                   'I wish you the best of luck!"' + constants.RESET)
+        print("The nice conversation left you in a good mood.")
+        print(rgb(0, 255, 255) + "[Stamina +1!]" + constants.RESET)
+        if character["Stamina"] < character["Max Stamina"]:
+            character["Stamina"] += 1
+        character["NPC Talk"][fisher_npc] = True
+    elif fisher_npc == "Emile" and npc_has_talked:
+        print("You see Emile laughing with Rori.")
+
+    if fisher_npc == "Aqua" and not npc_has_talked:
+        print("The fisher smiles big.")
+        print(rgb(240, 230, 150) + '"Hehehe, I see your equipment. I see the fish. Final Fishasy right?'
+                                   'I\'m Aqua by the way.\nSeems like quite the challenge! Well, I\'ll let you '
+                                   'get on your way. But, here."' + constants.RESET)
+        print("She throws a granola bar your way.")
+        print(rgb(240, 230, 150) + '"Keep your strength up, right?"' + constants.RESET)
+        print(rgb(0, 255, 255) + "[Stamina +1!]" + constants.RESET)
+        if character["Stamina"] < character["Max Stamina"]:
+            character["Stamina"] += 1
+        character["NPC Talk"][fisher_npc] = True
+    elif fisher_npc == "Aqua" and npc_has_talked:
+        print("Aqua nods at you.")
 
     if fisher_npc == "Coin" and not npc_has_talked:
         print(
             "You see a shiny coin on a rock. It's too far to reach, but you admire it from afar.\n"
-            "It must be a sign of good luck. You'll need it to catch the Final Fishasy.\n"
-            "[Stamina +1!]\n"
-            "[Fishing Power +1!]")
+            "It must be a sign of good luck. You'll need it to catch the Final Fishasy.\n")
+        print(rgb(0, 255, 0) + "[Stamina +1!]\n[Fishing Power +1!]" + constants.RESET)
         if character["Stamina"] < character["Max Stamina"]:
             character["Stamina"] += 1
         character["Fishing Power"] += 1
@@ -390,7 +481,7 @@ def print_area_scene(character: dict) -> None:
 ⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖
 """)
     elif character["Level"] == 2:
-        print("\nYou go to the Medius River, like Marlin suggested.")
+        print("\nYou go to the Medius River")
         input(rgb(150, 195, 215) + "♦ Press enter to continue ♦" + constants.RESET)
         print("""
  ⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖
