@@ -44,7 +44,7 @@ def get_user_choice():
     return choice
 
 
-def fishing_game(character: dict, game_parameters: dict):  # Have to add character stats
+def fishing_game(character: dict, game_parameters: dict) -> bool | None:  # Have to add character stats
     """
     Execute a fishing mini-game.
 
