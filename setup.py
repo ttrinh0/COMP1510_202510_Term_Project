@@ -119,8 +119,8 @@ def make_character() -> dict:  # REDO DIALOGUE
     ... 'Stamina': 1, 'Max Stamina': 1, 'Fishing Power': 1, 'Fish Caught': 0, 'Fish Limit': 0, 'Fish Collection':
     ... {1: ('???', '???'), 2: ('???', '???'), 3: ('???', '???'), 4: ('???', '???'), 5: ('???', '???'),
     ... 6: ('???', '???'), 7: ('???', '???'), 8: ('???', '???'), 9: ('???', '???'), 10: ('???', '???'),
-    ... 11: ('???', '???')}, 'NPC Talk': {'Sally': False, 'Charles': False, 'Rob': False, 'Sharky': False,
-    ... 'Gilly': False, 'Sandy': False, 'Fish': False, 'Aqua': False, 'Coin': False}}
+    ... 11: ('???', '???')}, 'NPC Talk': {'Sally': False, 'Charles': False, 'Rob': False, 'Cornet': False,
+    ... 'Gilly': False, 'Sandy': False, 'Emile': False, 'Aqua': False, 'Coin': False}}
     True
     """
     character_profile = {"X-coordinate": 0, "Y-coordinate": 0, "Level": 1, "Title": "Beginner Fisher", "Name": "",

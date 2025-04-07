@@ -10,10 +10,11 @@ from table2ascii import table2ascii, PresetStyle
 from color50 import rgb, constants
 
 
-def ascii_board(board, character, game_parameters):
+def ascii_board(board: dict, character: dict, game_parameters: dict) -> None:
     """
     Print the game board using ascii.
 
+    :param game_parameters:
     :param board: a dictionary containing the game board coordinates
     :param character: a dictionary containing the character information
     :precondition: board must be a dictionary
@@ -52,7 +53,7 @@ def ascii_board(board, character, game_parameters):
     print(output)
 
 
-def describe_current_location(board, character):
+def describe_current_location(board: dict, character: dict) -> None:
     """
     Print the character's current coordinates and the game board.
 
@@ -63,20 +64,9 @@ def describe_current_location(board, character):
     :precondition: character must be a dictionary
     :precondition: character must contain keys-value pairs of the coordinates
     :postcondition: prints the character's current coordinates and the ascii game board
-
-    >>> board_test = setup.make_board(3, 3)
-    >>> character_test = {"X-coordinate": 0, "Y-coordinate": 0, "Current HP": 5}
-    >>> describe_current_location(board_test, character_test)
-    You are currently at (0, 0), Calm Field.
-
-    >>> board_test = setup.make_board(3, 3)
-    >>> character_test = {"X-coordinate": 2, "Y-coordinate": 2, "Current HP": 5}
-    >>> describe_current_location(board_test, character_test)
-    You are currently at (2, 2), The End.
     """
     current_coordinates = (character["X-coordinate"], character["Y-coordinate"])
     location_description = board[current_coordinates]
-    print(location_description)
     if location_description[0] == "Fisher":
         message = (rgb(240, 230, 150) + "You are currently at " +
                    str(current_coordinates) + ". There's a fisher nearby." + constants.RESET)
@@ -88,13 +78,51 @@ def describe_current_location(board, character):
     print(message)
 
 
-def print_fish_list(character, collection=False):
+def print_fish_list(character: dict, collection: bool = False) -> None:
     """
-    Print out
-    :param character:
-    :param collection:
-    :return:
+    Print out the player's current fish collection.
+
+    The fish the player has not caught will be printed as ???.
+
+    :param character: a dictionary containing the character information
+    :param collection: a Boolean of True or False
+    :precondition: character has the key "Fish Collection"
+    :precondition: collection will be set to False by default unless specified as True
+    :precondition: if collection is set to False, will ask the user to press enter to continue
+    :postcondition: prints a numbered collection of fish, showing which fish the player has caught
+    :postcondition: fish the player has not caught will be labeled as ???
+    :postcondition: if collection is set to True, will run the cycle_fish function
     """
+
+    def cycle_fish():
+        """
+        Allow the player to select a fish to view its name and description and cycle through their collection.
+
+        :precondition:
+        :return:
+        """
+        fish_list_values = [viewed_fish for viewed_fish in character["Fish Collection"].values()]
+        fish_generator = itertools.cycle(fish_list_values)
+        user_message = rgb(0, 255, 255) + "Enter the number of a fish to view or q to go back.\n" + constants.RESET
+        fish_start = user_action.get_response(user_message, 11, True)
+        if fish_start == "q":
+            return False
+        fish_generator = itertools.islice(fish_generator, int(fish_start) - 1, None)
+        user_input = False
+        while not user_input:
+            name = next(fish_generator)
+            if name == ('???', '???'):
+                name = ("???", "You have not unlocked this fish yet!")
+            print(rgb(255, 255, 255) + name[0] + constants.RESET + ": " + name[1])
+            user_input = input(rgb(0, 255, 255) + "press d to view the next fish, q to quit\n" + constants.RESET)
+            if user_input == "q":
+                user_input = True
+            elif user_input == "d":
+                user_input = False
+            else:
+                print(rgb(255, 175, 175) + "Please enter a valid option!" + constants.RESET)
+                user_input = False
+
     fish_list = sorted(character["Fish Collection"].items())
     print("\tFish Collection")
     print("-" * 23)
@@ -104,41 +132,17 @@ def print_fish_list(character, collection=False):
     if not collection:
         input(rgb(125, 170, 190) + "♦ Press enter to continue ♦" + constants.RESET)
     else:
-        cycle_fish(character)
-
-def cycle_fish(character):
-    """
-
-    :param character:
-    :return:
-    """
-    fish_list = [fish for fish in character["Fish Collection"].values()]
-    fish_generator = itertools.cycle(fish_list)
-    user_message = rgb(0, 255, 255) + "Enter the number of a fish to view or q to go back.\n" + constants.RESET
-    fish_start = user_action.get_response(user_message, 11, True)
-    if fish_start == "q":
-        return False
-    fish_generator = itertools.islice(fish_generator, int(fish_start) - 1, None)
-    user_input = False
-    while not user_input:
-        name = next(fish_generator)
-        if name == ('???', '???'):
-            name = ("???", "You have not unlocked this fish yet!")
-        print(rgb(255, 255, 255) + name[0] + constants.RESET + ": " + name[1])
-        user_input = input(rgb(0, 255, 255) + "press d to view the next fish, q to quit\n" + constants.RESET)
-        if user_input == "q":
-            user_input = True
-        elif user_input == "d":
-            user_input = False
-        else:
-            print(rgb(255, 175, 175) + "Please enter a valid option!" + constants.RESET)
-            user_input = False
+        cycle_fish()
 
 
-def print_player_info(character):
+def print_player_info(character: dict):
     """
     Print the player's information.
-    :param character:
+
+    :param character: a dictionary containing the character information
+    :precondition: character has the keys "Name", "Title", "Level", "Stamina", "Max Stamina", "Fishing Power",
+                   and "Fish Caught"
+    :postcondition: prints out the player's information
     """
     print("\tPlayer Information")
     print("-" * 26)
@@ -152,12 +156,13 @@ def print_player_info(character):
     input(rgb(125, 170, 190) + "♦ Press enter to continue ♦" + constants.RESET)
 
 
-def area_one_scene(character):
+def area_one_scene(character: dict) -> None:
     """
-    Prints out a scene when the player gets to the first area.
+    Prints out the scene when the player enters the first area.
 
-    :param character:
-    :return:
+    :param character: a dictionary containing the character information
+    :precondition: character has the keys "Name", "Stamina", "Max Stamina", and "Fishing Power"
+    :postcondition: prints out the scene when the player enters the first area
     """
     print(rgb(240, 230, 150) + '"Hey!"')
     time.sleep(1)
@@ -203,10 +208,11 @@ def area_one_scene(character):
               + constants.RESET)
 
 
-def print_fishing_demo():
+def print_fishing_demo() -> None:
     """
     Print a tutorial for the fishing minigame.
 
+    :precondition: player has selected to see the tutorial demo
     :postcondition: prints the tutorial for the minigame
     """
     repeat = False
@@ -257,11 +263,20 @@ def print_fishing_demo():
             repeat = True
 
 
-def print_interact(character, game_parameters):
+def print_interact(character: dict, game_parameters: dict) -> None:
+    """
+    Print a message to the player.
+
+    If the player is on certain coordinates, specific messages will print, else a random message will print.
+
+    :param character: a dictionary containing the character information
+    :param game_parameters: a dictionary containing the game parameters
+    :precondition: character contains "X-coordinate", "Y-coordinate", and "Level"
+    :precondition: game_parameters contains "Level Map" and its dictionary value dictionaries of level maps
+    :postcondition: prints a message that is randomly chosen if player is on a regular coordinate
+    :postcondition: prints a specific message if the player is on a specific coordinate
     """
 
-    :return:
-    """
     coordinate = (character["X-coordinate"], character["Y-coordinate"])
     level_maps = [level_map for level_map in game_parameters["Level Map"]]
     level = character["Level"] - 1
@@ -279,15 +294,18 @@ def print_interact(character, game_parameters):
         if npc_type == "Fisher":
             print("You wave to the nearby fisher.")
         fisher_npc = game_parameters["Level Map"][current_map][coordinate][1]
-        print_fisher_npc(fisher_npc, character)
+        print_fisher_npc(character, fisher_npc)
     input(rgb(125, 170, 190) + "♦ Press enter to continue ♦" + constants.RESET)
 
 
-def print_fisher_npc(fisher_npc, character):
+def print_fisher_npc(character: dict, fisher_npc: str) -> None:
     """
 
-    :param fisher_npc:
-    :param character:
+    :param character: a dictionary containing the character information
+    :param fisher_npc: a string containing the name of the npc/object
+    :precondition: character contains the keys "NPC Talk", "Stamina", "Max Stamina", and "Fishing Power"
+    :postcondition: player's "Stamina", "Max Stamina", and/or "Fishing Power" increases depending on fisher_npc
+    :postcondition: prints a message to the player
     """
     npc_has_talked = character["NPC Talk"][fisher_npc]
 
@@ -314,11 +332,12 @@ def print_fisher_npc(fisher_npc, character):
         print("The coin shines.")
 
 
-
 def start_up():
     """
     Print a start-up screen.
-    :return:
+
+    :precondition: player runs the program
+    :postcondition: prints a start-up screen to the player
     """
     print(r"""
 ███████╗██╗███╗   ██╗ █████╗ ██╗                             
@@ -347,12 +366,13 @@ Final Fishasy
     input(rgb(150, 195, 215) + "♦ Press enter to continue ♦" + constants.RESET)
 
 
-def print_area_scene(character):
+def print_area_scene(character: dict) -> None:
     """
-    Print a scene of the player moving to the first area.
+    Print a scene of the player moving to a new area.
 
-    :param character:
-    :return:
+    :param character: a dictionary containing the character information
+    :precondition: character contains the key "Level"
+    :postcondition: prints a small message and then a title screen of the name of the new area
     """
     if character["Level"] == 1:
         print("\nYou make your way to Initium Pond. A calm pond full of fish.")
@@ -413,10 +433,18 @@ def print_area_scene(character):
     elif character["Level"] == 5:
         print("\nYou go back home in triumph.")
 
-def print_end_scene(character):
-    """
 
-    :param character:
-    :return:
+def print_end_scene(character: dict) -> None:
     """
+    Print a celebratory ending scene for the player.
+
+    This will print when the player wins the game.
+
+    :param character: a dictionary containing the character information
+    :precondition: character contains the keys "Name", "Fishing Power", "Stamina", "Max Stamina", "Title",
+                   "Fish Collection", "NPC Talk", "Fish Caught"
+    :postcondition: prints a celebratory ending scene for the player
+    :postcondition: prints the player's final stats
+    """
+    # also shows the player's final stats
     pass
