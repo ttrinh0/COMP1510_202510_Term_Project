@@ -105,18 +105,27 @@ def check_for_fish(character: dict) -> bool | None:
 
 def check_fish_type(character: dict, complete_fish_collection: tuple) -> tuple:
     """
-    Return a fish randomly picked from the player's level pool.
+    Return a fish randomly picked from the specific area the player is in.
 
     :param character: a dictionary containing the character information
-    :param complete_fish_collection:
+    :param complete_fish_collection: a tuple containing four dictionaries of the fish the player can catch in each area
+    :precondition: character has the key "Level"
+    :precondition: complete_fish_collection contains four dictionaries of the fish the player can catch in each area
+    :postcondition:
     :return:
     """
     level = character["Level"]
     fish_pool = list(complete_fish_collection[level - 1].items())
     fish = random.choice(fish_pool)
     fish_name = fish[1][0]
-    print("You caught a(n) " + fish_name + "!")
-    print(fish[1][1])
+    print(rgb(200, 250, 255) + "You caught a(n) " + fish_name + "!")
+    print(rgb(100, 200, 255) + r"""      /`·.¸
+     /¸...¸`:·
+ ¸.·´  ¸   `·.¸.·´)
+: © ):´;      ¸  {
+ `·.¸ `·  ¸.·´\`·¸)
+     `\\´´\¸.·´ """)
+    print(rgb(200, 250, 255) + fish[1][1] + constants.RESET)
     return fish
 
 
@@ -157,16 +166,16 @@ def is_alive(character):
     Return a Boolean signifying whether the character's HP is greater than zero.
 
     :param character: a dictionary containing the character information
-    :precondition: character contains a key called "Current HP" with an integer value of zero or greater
-    :postcondition: returns True if the character's current HP is greater than 0, else returns False
-    :return True: a Boolean with the value of True if the character's "Current HP" is greater than 0
-    :return False: a Boolean with the value of False if the character's "Current HP" is 0
+    :precondition: character contains a key called "Stamina" with an integer value of zero or greater
+    :postcondition: returns True if the character's Stamina is greater than 0, else returns False
+    :return True: a Boolean with the value of True if the character's "Stamina" is greater than 0
+    :return False: a Boolean with the value of False if the character's "Stamina" is 0
 
-    >>> character_test = {"X-coordinate": 0, "Y-coordinate": 0, "Current HP": 5}
+    >>> character_test = {"X-coordinate": 0, "Y-coordinate": 0, "Stamina": 5}
     >>> is_alive(character_test)
     True
 
-    >>> character_test = {"X-coordinate": 0, "Y-coordinate": 0, "Current HP": 0}
+    >>> character_test = {"X-coordinate": 0, "Y-coordinate": 0, "Stamina": 0}
     >>> is_alive(character_test)
     False
     """

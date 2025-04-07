@@ -167,7 +167,7 @@ def add_fish_to_collection(character: dict, fish: tuple):
     player_collection[fish_number] = fish[1]
 
 
-def get_response(message: str, options: int, option_quit=False):
+def get_response(message: str, options: int, option_quit: bool = False) -> str | None:
     """
     Creates a selection input for the player and returns the number the player inputs.
 
