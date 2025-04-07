@@ -103,10 +103,12 @@ def check_for_fish(character: dict) -> bool | None:
         print("Nothing's biting. It might be time to move to another spot.")
 
 
-def check_fish_type(character, complete_fish_collection):
+def check_fish_type(character: dict, complete_fish_collection: tuple) -> tuple:
     """
     Return a fish randomly picked from the player's level pool.
 
+    :param character: a dictionary containing the character information
+    :param complete_fish_collection:
     :return:
     """
     level = character["Level"]
