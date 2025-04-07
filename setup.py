@@ -141,13 +141,9 @@ def get_name(character):
     :precondition: the player inputs a name (or any string/value)
     :precondition: character has the key "Name"
     :postcondition: the "Name" key in character has a value of the inputted string
-    :return name: a string of the player's inputted name
-
-    >>>
     """
     name = input(rgb(0, 255, 255) + "What's your name?: " + constants.RESET)
     character["Name"] = name
-    return name
 
 
 def choose_rod(character):

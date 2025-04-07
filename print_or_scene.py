@@ -171,7 +171,8 @@ def area_one_scene(character):
     time.sleep(1)
     print(rgb(240, 230, 150) + '\n"Bahahaha! You\'re new here, aren\'tcha."')
     print('"What\'s your name, newbie?"\n' + constants.RESET)
-    name = setup.get_name(character)
+    setup.get_name(character)
+    name = character["Name"]
     print(rgb(240, 230, 150) + f'\n"{name}? That\'s a fine name! They call me Marlin."')
     time.sleep(1)
     print('\n"Is that a new fishing rod? It\'s got that new rod smell."')
