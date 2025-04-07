@@ -4,7 +4,7 @@ Module of functions that set up the game and initial character stats.
 from color50 import rgb, constants
 
 
-def create_game_parameters():
+def create_game_parameters() -> dict:
     """
     Create a dictionary containing the game's parameters.
 
@@ -58,7 +58,7 @@ def make_board(rows: int, columns: int) -> dict:
     return coordinates
 
 
-def add_on_board(game_parameters: dict, coordinates: dict, character: dict):
+def add_on_board(game_parameters: dict, coordinates: dict, character: dict) -> dict:
     """
     Place NPCs and other visible objects onto the board depending on the player's level.
 
@@ -105,7 +105,7 @@ def add_on_board(game_parameters: dict, coordinates: dict, character: dict):
     return coordinates
 
 
-def make_character():  # REDO DIALOGUE
+def make_character() -> dict:  # REDO DIALOGUE
     """
     Return a dictionary containing a character's information.
 
@@ -133,7 +133,7 @@ def make_character():  # REDO DIALOGUE
     return character_profile
 
 
-def get_name(character):
+def get_name(character: dict):
     """
     Ask the player for their name.
 
@@ -146,12 +146,18 @@ def get_name(character):
     character["Name"] = name
 
 
-def choose_rod(character):
+def choose_rod(character: dict) -> str:
     """
     Ask the player which fishing rod they want to use.
 
-    :precondition: the player inputs 1 or 2
-    :postcondition:
+    :param character: a dictionary containing the character information
+    :precondition: character has the keys: "Stamina", "Max Stamina", and "Fishing Power"
+    :precondition: the player inputs something
+    :postcondition: if the player inputs "1", the "Stamina" and "Max Stamina" keys have a value of 6 and
+                    "Fishing Power" has a value of 4
+    :postcondition: if the player inputs "2", the "Stamina" and "Max Stamina" keys have a value of 4 and
+                    "Fishing Power" has a value of 6
+    :postcondition: if the player does not input "1", "2", the player is prompted to input a valid response
     :return rod: a string of either "Stamina Rod" or "Power Rod" depending on which the player picked
     """
     print(rgb(0, 255, 255) + "Which rod did you pick?: ")
