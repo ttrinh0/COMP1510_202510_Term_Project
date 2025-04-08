@@ -261,6 +261,31 @@ def level_up(character: dict, complete_fish_collection: tuple) -> bool:
     return True
 
 
+def check_npc_talk_count(character: dict) -> int:
+    """
+    Count the amount of unique NPCs the player has talked to.
+
+    :param character: a dictionary containing the character information
+    :precondition: character has the key "NPC Talk"
+    :postcondition: returns the amount of unique NPCs the player has talked to
+    :return npc_talked_count: an integer representing the amount of unique NPCs the player has talked to
+
+    >>> character_test = {"NPC Talk": {"Sally": False, "Charles": False, "Rob": False, "Cornet": False, "Gilly": False,
+    ...                                  "Sandy": False, "Emile": False, "Aqua": False, "Coin": False}}
+    >>> check_npc_talk_count(character_test)
+    0
+    >>> character_test = {"NPC Talk": {"Sally": True, "Charles": True, "Rob": True, "Cornet": True, "Gilly": True,
+    ...                                   "Sandy": False, "Emile": False, "Aqua": False, "Coin": False}}
+    >>> check_npc_talk_count(character_test)
+    5
+    """
+    npc_talked_count = 0
+    for npc in character["NPC Talk"].values():
+        if npc:
+            npc_talked_count += 1
+    return npc_talked_count
+
+
 def final_conditions(character: dict) -> bool:
     """
     Check if the character's level is 4.
