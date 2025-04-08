@@ -480,7 +480,9 @@ def print_area_scene(character: dict) -> None:
 ⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖
 """)
     elif character["Level"] == 2:
-        print("\nYou go to the Medius River")
+        print("\nYou're really getting a hang of fishing. After talking to some fishers, you come to the consensus\n "
+              "that you should head over to Medius River, another popular fishing spot.\nIt not as beginner friendly"
+              " but you think you can handle it.")
         input(rgb(150, 195, 215) + "♦ Press enter to continue ♦" + constants.RESET)
         print("""
  ⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖
@@ -494,7 +496,8 @@ def print_area_scene(character: dict) -> None:
  ⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖
 """)
     elif character["Level"] == 3:
-        print("\nYou take the trek to Ferefini Ocean.")
+        print("\nYou take the trek to Ferefini Ocean. You overheard some fishers at the river talking about how there\n"
+              "may be some information on where to find the Final Fishasy there.")
         input(rgb(150, 195, 215) + "♦ Press enter to continue ♦" + constants.RESET)
         print("""
   ⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖
@@ -508,7 +511,9 @@ def print_area_scene(character: dict) -> None:
   ⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖
     """)
     elif character["Level"] == 4:
-        print("\nThis is it. You go to Ultimo Lake. Home of the Final Fishasy")
+        print("\nIn catching your latest fish, another fisher approaches you. They tell you that they know where it "
+              "is.\nThe Final Fishasy. You don't have any other leads so you take your chances.\n"
+              "This is it. You go to Ultimo Lake. Home of the Final Fishasy")
         input(rgb(150, 195, 215) + "♦ Press enter to continue ♦" + constants.RESET)
         print("""
 ⊹࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪˖
@@ -521,7 +526,10 @@ def print_area_scene(character: dict) -> None:
 ⊹࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪˖
         """)
     elif character["Level"] == 5:
-        print("\nYou go back home in triumph.")
+        print("\nYou take a bit of time to catch your breath. Adrenaline surging through your body.\n"
+              "Was this real? Did you actually do it? You look at the fish in your hands. It's beautiful.\n"
+              "You take a moment to process your achievement before packing up.\n"
+              "You go back home in triumph.")
 
 
 def print_end_scene(character: dict) -> None:
@@ -536,5 +544,15 @@ def print_end_scene(character: dict) -> None:
     :postcondition: prints a celebratory ending scene for the player
     :postcondition: prints the player's final stats
     """
-    # also shows the player's final stats
-    pass
+    print("Framed above your living room couch, is Final Fishasy.\n")
+    print(rgb(255, 255, 0) + f"Congratulations, {character["Name"]}! You have won Final Fishasy!\n"
+          + constants.RESET)
+    print("-" * 26)
+    print("Final Stats:"
+          "\nTitle: " + character["Title"] +
+          "\nLevel: " + str(character["Level"]) +
+          "\nStamina: " + str(character["Stamina"]) + "/" + str(character["Max Stamina"]) +
+          "\nFishing Power: " + str(character["Fishing Power"]) +
+          "\nFish Caught: " + str(character["Fish Caught"]) +
+          "\nFishers Talked to: ")
+    print("-" * 26)

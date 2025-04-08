@@ -62,7 +62,7 @@ def game():
                 print_or_scene.print_fish_list(character)
 
     if achieved_goal:
-        print(rgb(255, 255, 0) + "You made it to the end! Congratulations!" + constants.RESET)
+        print_or_scene.print_end_scene(character)
     else:
         print("Game Over.")
 
