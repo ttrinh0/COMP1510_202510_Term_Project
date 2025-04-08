@@ -409,9 +409,9 @@ def print_interact(character: dict, game_parameters: dict) -> None:
     current_map = level_maps[level]
     if coordinate not in game_parameters["Level Map"][current_map]:
         regular_message_bank = {"The breeze feels nice against your face.",
-                                "The water washes against the side of your boat",
+                                "The water washes against the side of your boat.",
                                 "It's such a nice day today.",
-                                "You hear birds chirp around you"}
+                                "You hear birds chirp around you."}
         message = random.choice(list(regular_message_bank))
         print(message)
 
