@@ -98,8 +98,12 @@ def print_fish_list(character: dict, collection: bool = False) -> None:
         """
         Allow the player to select a fish to view its name and description and cycle through their collection.
 
-        :precondition:
-        :return:
+        :precondition: player is in the fish collection menu
+        :precondition: character has the key "Fish Collection"
+        :precondition: player inputs a key
+        :postcondition: prints the fish the player selects and prints the next fish in the collection every time the
+                        player inputs a key that's not q
+        :postcondition: exits the function when the player inputs q
         """
         fish_list_values = [viewed_fish for viewed_fish in character["Fish Collection"].values()]
         fish_generator = itertools.cycle(fish_list_values)
