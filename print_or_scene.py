@@ -354,8 +354,8 @@ def print_interact(character: dict, game_parameters: dict) -> None:
 
         if fisher_npc == "Sandy" and not npc_has_talked:
             print(rgb(240, 230, 150) + '"Hi there friend. I\'m selling cool rocks. Limited time rocks. \n'
-                                       'Would you like to support me? No? We\'re at a river with tons of rocks?\nWell what'
-                                       ' if I throw in this bottle of water? Still no? '
+                                       'Would you like to support me? No? We\'re at a river with tons of rocks?\nWell '
+                                       'what if I throw in this bottle of water? Still no? '
                                        'Darn. Well have this water bottle anyways, stay hydrated."\n')
             print(rgb(0, 255, 0) + "[Stamina +1!]\n" + constants.RESET)
             if character["Stamina"] < character["Max Stamina"]:
