@@ -14,7 +14,12 @@ A01451063
 ttrinh0
 
 ## Any important comments you'd like to make about your work:
-Insert any comments you have here
+Because of the use of time.sleep, some of the unit tests will take longer to process.
+
+## Final Fishasy
+Ever since you heard about the story of the legendary fish, the Final Fishasy, you wanted to be the one to catch it.
+Today is the day you start your journey. From beginner to pro, you will catch fish and become a better fisher until you're able to 
+catch the Final Fishasy.
 
 ---
 | Required Element         | File and Line Number         |

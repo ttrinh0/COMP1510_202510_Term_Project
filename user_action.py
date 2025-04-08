@@ -1,5 +1,5 @@
 """
-Module of functions that either take user input or change the player's stats
+Module of functions that either take user input or changes the player's stats
 """
 import time
 from color50 import rgb, constants

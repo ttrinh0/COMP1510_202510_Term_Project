@@ -21,8 +21,8 @@ def game():
     complete_fish_collection = setup.make_fish_collection()
     achieved_goal = False
 
-    # print_or_scene.print_area_scene(character)
-    # print_or_scene.area_one_scene(character)
+    print_or_scene.print_area_scene(character)
+    print_or_scene.area_one_scene(character)
 
     while check.is_alive(character) and not achieved_goal:
         print_or_scene.ascii_board(board, character, game_parameters)
@@ -73,7 +73,6 @@ def game():
         print("Game over.")
         print(rgb(150, 150, 150) + "Fishing is too hard. You're tired. You go home in defeat." + constants.RESET)
         print(rgb(120, 120, 120) + "Maybe you'll try again another time." + constants.RESET)
-
 
 
 def main():

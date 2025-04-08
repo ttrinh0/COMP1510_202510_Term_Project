@@ -1,6 +1,7 @@
 from unittest import TestCase
 import check
 
+
 class Test(TestCase):
 
     def test_check_npc_talk_count_none(self):

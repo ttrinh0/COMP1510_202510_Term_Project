@@ -77,9 +77,8 @@ class Test(TestCase):
         actual = "Collection"
         self.assertEqual(expected, actual)
 
-    @patch('builtins.input', side_effect="s")
-    @patch('builtins.input', side_effect="F")
-    def test_get_user_choice_one_incorrect(self, _, __):
+    @patch('builtins.input', side_effect=["F", "s"])
+    def test_get_user_choice_one_incorrect(self, _):
         expected = user_action.get_user_choice()
         actual = "South"
         self.assertEqual(expected, actual)
