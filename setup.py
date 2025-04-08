@@ -20,7 +20,7 @@ def create_game_parameters() -> dict:
     ... 'Event Coordinates Final': {(2, 2): ('Coin', 'Coin')}}}
     True
     """
-    game_parameters = {"Input Time": {1: 3.0, 2: 2.5, 3: 2.0, 4: 1.5}, "Fish Reel": {1: 9, 2: 12, 3: 15, 4: 20},
+    game_parameters = {"Input Time": {1: 3.0, 2: 2.5, 3: 2.0, 4: 1.5}, "Fish Reel": {1: 9, 2: 12, 3: 15, 4: 22},
                        "Level Map": {
                            "Event Coordinates One": {(0, 1): ("Fisher", "Sally"), (4, 3): ("Fisher", "Charles"),
                                                      (2, 4): ("Fisher", "Rob")},

@@ -114,13 +114,10 @@ def print_fish_list(character: dict, collection: bool = False) -> None:
             if name == ('???', '???'):
                 name = ("???", "You have not unlocked this fish yet!")
             print(rgb(255, 255, 255) + name[0] + constants.RESET + ": " + name[1])
-            user_input = input(rgb(0, 255, 255) + "press d to view the next fish, q to quit\n" + constants.RESET)
+            user_input = input(rgb(0, 255, 255) + "press any key to view the next fish, q to quit\n" + constants.RESET)
             if user_input == "q":
                 user_input = True
-            elif user_input == "d":
-                user_input = False
-            else:
-                print(rgb(255, 175, 175) + "Please enter a valid option!" + constants.RESET)
+            elif user_input != "q":
                 user_input = False
 
     fish_list = sorted(character["Fish Collection"].items())
@@ -336,8 +333,8 @@ def print_fisher_npc(character: dict, fisher_npc: str) -> None:
         print(rgb(240, 230, 150) + '"Aw man!"' + constants.RESET)
         print("The fisher sadly reels his line to reveal an empty hook.\n"
               "He finally notices you.")
-        print(rgb(240, 230, 150) + '"Oh, hello! I\'m Rob... You didn\'t see that did you?\n'
-                                   'Well... um. Here take this."' + constants.RESET)
+        print(rgb(240, 230, 150) + '"Oh, hello! I\'m Rob... You didn\'t see that did you?'
+                                   ' Well... um. Here take this."' + constants.RESET)
         print("Rob throws you a very sparkly fish charm.")
         print(rgb(240, 230, 150) + '"I think they\'re awesome."\n' + constants.RESET)
         print(rgb(0, 255, 0) + "[Fishing Power +1!]\n" + constants.RESET)
@@ -480,8 +477,8 @@ def print_area_scene(character: dict) -> None:
 ⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖⊹ ࣪ ﹏𓊝﹏𓂁﹏⊹ ࣪ ˖
 """)
     elif character["Level"] == 2:
-        print("\nYou're really getting a hang of fishing. After talking to some fishers, you come to the consensus\n "
-              "that you should head over to Medius River, another popular fishing spot.\nIt not as beginner friendly"
+        print("\nYou're really getting a hang of fishing. After talking to some fishers, you come to the consensus\n"
+              "that you should head over to Medius River, another popular fishing spot.\nIt not as beginner friendly,"
               " but you think you can handle it.")
         input(rgb(150, 195, 215) + "♦ Press enter to continue ♦" + constants.RESET)
         print("""
@@ -529,22 +526,24 @@ def print_area_scene(character: dict) -> None:
         print("\nYou take a bit of time to catch your breath. Adrenaline surging through your body.\n"
               "Was this real? Did you actually do it? You look at the fish in your hands. It's beautiful.\n"
               "You take a moment to process your achievement before packing up.\n"
-              "You go back home in triumph.")
+              "You go back home in triumph.\n")
 
 
-def print_end_scene(character: dict) -> None:
+def print_end_scene(character: dict, npc_talked: int) -> None:
     """
     Print a celebratory ending scene for the player.
 
     This will print when the player wins the game.
 
     :param character: a dictionary containing the character information
+    :param npc_talked: an integer representing the amount of unique NPCs the player has talked/interacted with
     :precondition: character contains the keys "Name", "Fishing Power", "Stamina", "Max Stamina", "Title",
                    "Fish Collection", "NPC Talk", "Fish Caught"
+    :precondition: npc_talked is an integer
     :postcondition: prints a celebratory ending scene for the player
     :postcondition: prints the player's final stats
     """
-    print("Framed above your living room couch, is Final Fishasy.\n")
+    print("\nFramed above your living room couch, is Final Fishasy.\n")
     print(rgb(255, 255, 0) + f"Congratulations, {character["Name"]}! You have won Final Fishasy!\n"
           + constants.RESET)
     print("-" * 26)
@@ -554,5 +553,13 @@ def print_end_scene(character: dict) -> None:
           "\nStamina: " + str(character["Stamina"]) + "/" + str(character["Max Stamina"]) +
           "\nFishing Power: " + str(character["Fishing Power"]) +
           "\nFish Caught: " + str(character["Fish Caught"]) +
-          "\nFishers Talked to: ")
+          "\nFishers Talked to: " + str(npc_talked))
     print("-" * 26)
+    print(rgb(0, 200, 255) + """
+██╗   ██╗ ██████╗ ██╗   ██╗    ██╗    ██╗██╗███╗   ██╗██╗
+╚██╗ ██╔╝██╔═══██╗██║   ██║    ██║    ██║██║████╗  ██║██║
+ ╚████╔╝ ██║   ██║██║   ██║    ██║ █╗ ██║██║██╔██╗ ██║██║
+  ╚██╔╝  ██║   ██║██║   ██║    ██║███╗██║██║██║╚██╗██║╚═╝
+   ██║   ╚██████╔╝╚██████╔╝    ╚███╔███╔╝██║██║ ╚████║██╗
+   ╚═╝    ╚═════╝  ╚═════╝      ╚══╝╚══╝ ╚═╝╚═╝  ╚═══╝╚═╝
+""" + constants.RESET)
