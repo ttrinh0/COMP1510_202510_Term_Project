@@ -164,17 +164,17 @@ def choose_rod(character: dict) -> str:
     rod = False
     while rod is False:
         rod = input("\t1 - Stamina Rod\n\t2 - Power Rod\n" + constants.RESET)
-        if rod == 1:
+        if rod == "1":
             rod = "Stamina Rod"
             character["Stamina"] = 6
             character["Max Stamina"] = 6
             character["Fishing Power"] = 4
-        elif rod == 2:
+        elif rod == "2":
             rod = "Power Rod"
             character["Stamina"] = 4
             character["Max Stamina"] = 4
             character["Fishing Power"] = 6
-        elif rod != 1 or rod != 2:
+        elif rod != "1" or rod != "2":
             print(rgb(240, 230, 150) + '"Sorry, I didn\'t quite catch that!"')
             print(rgb(255, 175, 175) + '(Please enter 1 or 2 to select your fishing rod)' + constants.RESET)
             rod = False
