@@ -22,36 +22,19 @@ Today is the day you start your journey. From beginner to pro, you will catch fi
 catch the Final Fishasy.
 
 ---
-| Required Element         | File and Line Number         |
-|--------------------------|------------------------------|
-| Immutable data structure |                              |
-| Mutable data structure   |                              |
-| Exceptions               |                              |
-| List comprehension       | user_action.py - line 161    |
-| Range function           |                              |
-| if-statement             | check.py - line 51           |
-| Membership Operator      |                              |
-| Random module            |                              |
-| Function annotation      | setup.py - line 24           |
-| for-loop/while-loop      |                              |
-| itertools function       |                              |
-| f-strings                | print_or_scene.py - line 137 |
 
 | Required Elements                 | Code Location                |
 |-----------------------------------|------------------------------|
-| Immutable data structures         | n/a                          |
-| Mutable data structures           | n/a                          |
-| Exceptions and exception handling | n/a                          |
-| Minimized scope                   | n/a                          |
-| Decomposition                     | n/a                          |
-| Simple flat code                  | n/a                          |
+| Immutable data structures         | setup.py - line 206          |
+| Mutable data structures           | check.py - line 243          |
+| Simple flat code                  | user_action.py - line 132    |
 | Comprehensions                    | user_action.py - line 161    |
 | if-statements                     | check.py - line 51           |
-| Repetition                        | n/a                          |
-| Membership operator               | n/a                          |
-| Range function                    | n/a                          |
-| Itertools                         | n/a                          |
-| Random module                     | n/a                          |
+| Repetition                        | print_or_scene.py - line 130 |
+| Membership operator               | check.py - line 27           |
+| Range function                    | user_action.py - line 185    |
+| Itertools                         | print_or_scene.py - line 109 |
+| Random module                     | check.py - line 88           |
 | Function annotations              | setup.py - line 24           |
-| Doctests and unit tests           | /unit_tests                  |
+| Doctests and unit tests           | test_get_response.py         |
 | Proper string formatting          | print_or_scene.py - line 137 |
