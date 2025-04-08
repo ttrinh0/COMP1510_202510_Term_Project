@@ -272,21 +272,147 @@ def print_interact(character: dict, game_parameters: dict) -> None:
 
     :param character: a dictionary containing the character information
     :param game_parameters: a dictionary containing the game parameters
-    :precondition: character contains "X-coordinate", "Y-coordinate", and "Level"
+    :precondition: character contains "X-coordinate", "Y-coordinate", "NPC Talk", and "Level"
     :precondition: game_parameters contains "Level Map" and its dictionary value dictionaries of level maps
     :postcondition: prints a message that is randomly chosen if player is on a regular coordinate
     :postcondition: prints a specific message if the player is on a specific coordinate
     """
+
+    def print_fisher_npc() -> None:
+        """
+        Print a specific message depending on which NPC is talked to.
+
+        :precondition: player selects "Interact" on a space with an NPC
+        :postcondition: player's "Stamina", "Max Stamina", and/or "Fishing Power" increases depending on fisher_npc
+        :postcondition: prints a message to the player
+        """
+        npc_has_talked = character["NPC Talk"][fisher_npc]
+
+        if fisher_npc == "Sally" and not npc_has_talked:
+            print("The fisher waves.")
+            print(
+                rgb(240, 230, 150) + '"An unfamiliar face! How exciting. I\'m Sally. I love fishing, it\'s relaxing.\n'
+                                     'I really hope you enjoy your time here at Initium Pond!"' + constants.RESET)
+            print("The nice conversation left you in a good mood.\n")
+            print(rgb(0, 255, 0) + "[Max Stamina +1!]\n" + constants.RESET)
+            character["NPC Talk"][fisher_npc] = True
+            character["Max Stamina"] += 1
+            character["Stamina"] += 1
+        elif fisher_npc == "Sally" and npc_has_talked:
+            print(rgb(240, 230, 150) + '"Enjoy your time here, fisher!"\n' + constants.RESET)
+
+        if fisher_npc == "Charles" and not npc_has_talked:
+            print("The fisher lifts his head when he notices you. He waves sleepily.")
+            print(rgb(240, 230, 150) + '"Mhmhh, good day, fisher. Name\'s Charles. I swear I\'m not falling asleep, '
+                                       'it\'s just that no fish are biting right now...\n'
+                                       'Maybe I\'m scaring them away, staying in the same spot for so long..."\n'
+                  + constants.RESET)
+            character["NPC Talk"][fisher_npc] = True
+        elif fisher_npc == "Charles" and npc_has_talked:
+            print("You hear Charles speaking under his breath.")
+            print(rgb(240, 230,
+                      150) + '"...Maybe I should move to another spot... but I\'m tired..."\n' + constants.RESET)
+
+        if fisher_npc == "Rob" and not npc_has_talked:
+            print("The fisher is focused on his cast.")
+            print(rgb(240, 230, 150) + '"Aw man!"' + constants.RESET)
+            print("The fisher sadly reels his line to reveal an empty hook.\n"
+                  "He finally notices you.")
+            print(rgb(240, 230, 150) + '"Oh, hello! I\'m Rob... You didn\'t see that did you?'
+                                       ' Well... um. Here take this."' + constants.RESET)
+            print("Rob throws you a very sparkly fish charm.")
+            print(rgb(240, 230, 150) + '"I think they\'re awesome."\n' + constants.RESET)
+            print(rgb(0, 255, 0) + "[Fishing Power +1!]\n" + constants.RESET)
+            character["Fishing Power"] += 1
+            character["NPC Talk"][fisher_npc] = True
+        elif fisher_npc == "Rob" and npc_has_talked:
+            print(rgb(240, 230, 150) + '"This one\'s the one..."\n' + constants.RESET)
+
+        if fisher_npc == "Cornet" and not npc_has_talked:
+            print("The fisher waves enthusiastically. They seem to be doing great with their catches")
+            print(rgb(240, 230, 150) + '"Hiiiiiii! I\'m Cornet! Here, take this, hope it helps!"'
+                  + constants.RESET)
+            print("Cornet throws a cool fish hook to you.")
+            print(rgb(240, 230, 150) + '"I got a bunch of them at a really good deal!"\n'
+                  + constants.RESET)
+            print(rgb(0, 255, 0) + "[Fishing Power +1!]\n" + constants.RESET)
+            character["Fishing Power"] += 1
+            character["NPC Talk"][fisher_npc] = True
+        elif fisher_npc == "Cornet" and npc_has_talked:
+            print("You hear them humming a tune as they wait for a fish to bite.\n")
+
+        if fisher_npc == "Gilly" and not npc_has_talked:
+            print("The fisher waves.\nShe doesn't say much, but she points at the name written on her boat, \"Gilly\","
+                  " and then points to herself.\nYou take that to mean her name is Gilly. You stay beside her for a "
+                  "while.\nIt's calming.\n")
+            print(rgb(0, 255, 0) + "[Stamina +1!]\n" + constants.RESET)
+            if character["Stamina"] < character["Max Stamina"]:
+                character["Stamina"] += 1
+            character["NPC Talk"][fisher_npc] = True
+        elif fisher_npc == "Gilly" and npc_has_talked:
+            print("Gilly smiles at you.\n")
+
+        if fisher_npc == "Sandy" and not npc_has_talked:
+            print(rgb(240, 230, 150) + '"Hi there friend. I\'m selling cool rocks. Limited time rocks. \n'
+                                       'Would you like to support me? No? We\'re at a river with tons of rocks?\nWell what'
+                                       ' if I throw in this bottle of water? Still no? '
+                                       'Darn. Well have this water bottle anyways, stay hydrated."\n')
+            print(rgb(0, 255, 0) + "[Stamina +1!]\n" + constants.RESET)
+            if character["Stamina"] < character["Max Stamina"]:
+                character["Stamina"] += 1
+            character["NPC Talk"][fisher_npc] = True
+        elif fisher_npc == "Sandy" and npc_has_talked:
+            print(rgb(240, 230, 150) + '"Man... no one wants my rocks"\n' + constants.RESET)
+
+        if fisher_npc == "Emile" and not npc_has_talked:
+            print("The fisher doesn't notice you, but the other man in the boat does. He waves politely.")
+            print(rgb(240, 230, 150) + '"Good day, fisher. Don\'t mind him, he\'s a bit shy. I\'m Emile. '
+                                       'The lovely man fishing is Rori.\nOh! You\'re trying to find the Final Fishasy? '
+                                       'I wish you the best of luck!"' + constants.RESET)
+            print("The nice conversation left you in a good mood.\n")
+            print(rgb(0, 255, 0) + "[Stamina +1!]\n" + constants.RESET)
+            if character["Stamina"] < character["Max Stamina"]:
+                character["Stamina"] += 1
+            character["NPC Talk"][fisher_npc] = True
+        elif fisher_npc == "Emile" and npc_has_talked:
+            print("You see Emile laughing with Rori.\n")
+
+        if fisher_npc == "Aqua" and not npc_has_talked:
+            print("The fisher smiles big.")
+            print(rgb(240, 230, 150) + '"Hehehe, I see your equipment. I see the fish. Final Fishasy right?'
+                                       ' I\'m Aqua by the way.\nSeems like quite the challenge! Well, I\'ll let you '
+                                       'go on your way. But, here."' + constants.RESET)
+            print("She throws a granola bar your way.")
+            print(rgb(240, 230, 150) + '"Gotta keep your strength up, right?"\n' + constants.RESET)
+            print(rgb(0, 255, 0) + "[Stamina +1!]\n" + constants.RESET)
+            if character["Stamina"] < character["Max Stamina"]:
+                character["Stamina"] += 1
+            character["NPC Talk"][fisher_npc] = True
+        elif fisher_npc == "Aqua" and npc_has_talked:
+            print("Aqua nods at you, still grinning big.\n")
+
+        if fisher_npc == "Coin" and not npc_has_talked:
+            print(
+                "You see a shiny coin on a rock. It's too far to reach, but you admire it from afar.\n"
+                "It must be a sign of good luck. You'll need it to catch the Final Fishasy.\n")
+            print(rgb(0, 255, 0) + "[Stamina +1!]\n[Fishing Power +1!]\n" + constants.RESET)
+            if character["Stamina"] < character["Max Stamina"]:
+                character["Stamina"] += 1
+            character["Fishing Power"] += 1
+            character["NPC Talk"][fisher_npc] = True
+        elif fisher_npc == "Coin" and npc_has_talked:
+            print("The coin shines.\n")
 
     coordinate = (character["X-coordinate"], character["Y-coordinate"])
     level_maps = [level_map for level_map in game_parameters["Level Map"]]
     level = character["Level"] - 1
     current_map = level_maps[level]
     if coordinate not in game_parameters["Level Map"][current_map]:
-        regular_message_bank = {"The breeze is nice.",
-                                "You see other fishers fishing",
+        regular_message_bank = {"The breeze feels nice against your face.",
+                                "The water washes against the side of your boat",
                                 "It's such a nice day today.",
-                                "You look into the water below you. It looks back are you"}
+                                "You hear birds chirp around you",
+                                ""}
         message = random.choice(list(regular_message_bank))
         print(message)
 
@@ -295,132 +421,8 @@ def print_interact(character: dict, game_parameters: dict) -> None:
         if npc_type == "Fisher":
             print("You look towards the nearby fisher.\n")
         fisher_npc = game_parameters["Level Map"][current_map][coordinate][1]
-        print_fisher_npc(character, fisher_npc)
+        print_fisher_npc()
     input(rgb(125, 170, 190) + "♦ Press enter to continue ♦" + constants.RESET)
-
-
-def print_fisher_npc(character: dict, fisher_npc: str) -> None:
-    """
-    Print a specific message depending on which NPC is talked to.
-
-    :param character: a dictionary containing the character information
-    :param fisher_npc: a string containing the name of the npc/object
-    :precondition: character contains the keys "NPC Talk", "Stamina", "Max Stamina", and "Fishing Power"
-    :postcondition: player's "Stamina", "Max Stamina", and/or "Fishing Power" increases depending on fisher_npc
-    :postcondition: prints a message to the player
-    """
-    npc_has_talked = character["NPC Talk"][fisher_npc]
-
-    if fisher_npc == "Sally" and not npc_has_talked:
-        print("The fisher waves.")
-        print(rgb(240, 230, 150) + '"An unfamiliar face! How exciting. I\'m Sally. I love fishing, it\'s relaxing.\n'
-                                   'I really hope you enjoy your time here at Initium Pond!"' + constants.RESET)
-        print("The nice conversation left you in a good mood.\n")
-        print(rgb(0, 255, 0) + "[Max Stamina +1!]\n" + constants.RESET)
-        character["NPC Talk"][fisher_npc] = True
-    elif fisher_npc == "Sally" and npc_has_talked:
-        print(rgb(240, 230, 150) + '"Enjoy your time here, fisher!"\n' + constants.RESET)
-
-    if fisher_npc == "Charles" and not npc_has_talked:
-        print("The fisher lifts his head when he notices you. He waves sleepily.")
-        print(rgb(240, 230, 150) + '"Mhmhh, good day, fisher. Name\'s Charles. I swear I\'m not falling asleep, '
-                                   'it\'s just that no fish are biting right now...\n'
-                                   'Maybe I\'m scaring them away, staying in the same spot for so long..."\n'
-              + constants.RESET)
-        character["NPC Talk"][fisher_npc] = True
-    elif fisher_npc == "Charles" and npc_has_talked:
-        print("You hear Charles speaking under his breath.")
-        print(rgb(240, 230, 150) + '"...Maybe I should move to another spot... but I\'m tired..."\n' + constants.RESET)
-
-    if fisher_npc == "Rob" and not npc_has_talked:
-        print("The fisher is focused on his cast.")
-        print(rgb(240, 230, 150) + '"Aw man!"' + constants.RESET)
-        print("The fisher sadly reels his line to reveal an empty hook.\n"
-              "He finally notices you.")
-        print(rgb(240, 230, 150) + '"Oh, hello! I\'m Rob... You didn\'t see that did you?'
-                                   ' Well... um. Here take this."' + constants.RESET)
-        print("Rob throws you a very sparkly fish charm.")
-        print(rgb(240, 230, 150) + '"I think they\'re awesome."\n' + constants.RESET)
-        print(rgb(0, 255, 0) + "[Fishing Power +1!]\n" + constants.RESET)
-        character["Fishing Power"] += 1
-        character["NPC Talk"][fisher_npc] = True
-    elif fisher_npc == "Rob" and npc_has_talked:
-        print(rgb(240, 230, 150) + '"This one\'s the one..."\n' + constants.RESET)
-
-    if fisher_npc == "Cornet" and not npc_has_talked:
-        print("The fisher waves enthusiastically. They seem to be doing great with their catches")
-        print(rgb(240, 230, 150) + '"Hiiiiiii! I\'m Cornet! Here, take this, hope it helps!"'
-              + constants.RESET)
-        print("Cornet throws a cool fish hook to you.")
-        print(rgb(240, 230, 150) + '"I got a bunch of them at a really good deal!"\n'
-              + constants.RESET)
-        print(rgb(0, 255, 0) + "[Fishing Power +1!]\n" + constants.RESET)
-        character["Fishing Power"] += 1
-        character["NPC Talk"][fisher_npc] = True
-    elif fisher_npc == "Cornet" and npc_has_talked:
-        print("You hear them humming a tune as they wait for a fish to bite.\n")
-
-    if fisher_npc == "Gilly" and not npc_has_talked:
-        print("The fisher waves.\nShe doesn't say much, but she points at the name written on her boat, \"Gilly\","
-              " and then points to herself.\nYou take that to mean her name is Gilly. You stay beside her for a "
-              "while.\nIt's calming.\n")
-        print(rgb(0, 255, 0) + "[Stamina +1!]\n" + constants.RESET)
-        if character["Stamina"] < character["Max Stamina"]:
-            character["Stamina"] += 1
-        character["NPC Talk"][fisher_npc] = True
-    elif fisher_npc == "Gilly" and npc_has_talked:
-        print("Gilly smiles at you.\n")
-
-    if fisher_npc == "Sandy" and not npc_has_talked:
-        print(rgb(240, 230, 150) + '"Hi there friend. I\'m selling cool rocks. Limited time rocks. \n'
-                                   'Would you like to support me? No? We\'re at a river with tons of rocks?\nWell what'
-                                   ' if I throw in this bottle of water? Still no? '
-                                   'Darn. Well have this water bottle anyways, stay hydrated."\n')
-        print(rgb(0, 255, 0) + "[Stamina +1!]\n" + constants.RESET)
-        if character["Stamina"] < character["Max Stamina"]:
-            character["Stamina"] += 1
-        character["NPC Talk"][fisher_npc] = True
-    elif fisher_npc == "Sandy" and npc_has_talked:
-        print(rgb(240, 230, 150) + '"Man... no one wants my rocks"\n' + constants.RESET)
-
-    if fisher_npc == "Emile" and not npc_has_talked:
-        print("The fisher doesn't notice you, but the other man in the boat does. He waves politely.")
-        print(rgb(240, 230, 150) + '"Good day, fisher. Don\'t mind him, he\'s a bit shy. I\'m Emile. '
-                                   'The lovely man fishing is Rori.\nOh! You\'re trying to find the Final Fishasy? '
-                                   'I wish you the best of luck!"' + constants.RESET)
-        print("The nice conversation left you in a good mood.\n")
-        print(rgb(0, 255, 0) + "[Stamina +1!]\n" + constants.RESET)
-        if character["Stamina"] < character["Max Stamina"]:
-            character["Stamina"] += 1
-        character["NPC Talk"][fisher_npc] = True
-    elif fisher_npc == "Emile" and npc_has_talked:
-        print("You see Emile laughing with Rori.\n")
-
-    if fisher_npc == "Aqua" and not npc_has_talked:
-        print("The fisher smiles big.")
-        print(rgb(240, 230, 150) + '"Hehehe, I see your equipment. I see the fish. Final Fishasy right?'
-                                   ' I\'m Aqua by the way.\nSeems like quite the challenge! Well, I\'ll let you '
-                                   'go on your way. But, here."' + constants.RESET)
-        print("She throws a granola bar your way.")
-        print(rgb(240, 230, 150) + '"Gotta keep your strength up, right?"\n' + constants.RESET)
-        print(rgb(0, 255, 0) + "[Stamina +1!]\n" + constants.RESET)
-        if character["Stamina"] < character["Max Stamina"]:
-            character["Stamina"] += 1
-        character["NPC Talk"][fisher_npc] = True
-    elif fisher_npc == "Aqua" and npc_has_talked:
-        print("Aqua nods at you, still grinning big.\n")
-
-    if fisher_npc == "Coin" and not npc_has_talked:
-        print(
-            "You see a shiny coin on a rock. It's too far to reach, but you admire it from afar.\n"
-            "It must be a sign of good luck. You'll need it to catch the Final Fishasy.\n")
-        print(rgb(0, 255, 0) + "[Stamina +1!]\n[Fishing Power +1!]\n" + constants.RESET)
-        if character["Stamina"] < character["Max Stamina"]:
-            character["Stamina"] += 1
-        character["Fishing Power"] += 1
-        character["NPC Talk"][fisher_npc] = True
-    elif fisher_npc == "Coin" and npc_has_talked:
-        print("The coin shines.\n")
 
 
 def start_up():
